@@ -252,7 +252,7 @@
             <h1 style="display: none">CISCN Little_evil</h1>
             
             <div class="markdown-body">
-              <h1 id="CISCN-little-evil"><a href="#CISCN-little-evil" class="headerlink" title="CISCN little_evil"></a>CISCN little_evil</h1><p>比赛的时候差一点点出，非常可惜。</p>
+              <h1 id="CISCN-little-evil"><a href="#CISCN-little-evil" class="headerlink" title="CISCN little_evil"></a>CISCN little_evil</h1><p>比赛的时候差一点点出，非常可惜</p>
 <p>第一次做 ruby 的逆向题，学到很多东西。这道题总体来说，要进行两种不同策略的反混淆，最后还有一层是类似于 brainfuck 的 vm，需要写 <code>decompiler</code></p>
 <p>题目: <a href="/2021/05/16/CISCN-Little-evil/little_evil" title="littile_evil">littile_evil</a></p>
 <h2 id="提取-out-rb"><a href="#提取-out-rb" class="headerlink" title="提取 out.rb"></a>提取 out.rb</h2><p>题目的 elf 文件是典型的 ruby 解释器。问题是源码在哪里？ 最开始，我以为是内存加载，分析源码过程中发现是用 Ruby packer 打包的 ruby 程序。Ruby packer 会把源程序相关的打包成 squashfs 文件系统并塞进 ruby 解释器。ruby packer 用了一个内存虚拟文件系统 <code>__enclose_io_memfs__</code></p>
