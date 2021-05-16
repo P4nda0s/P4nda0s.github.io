@@ -1,0 +1,542 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Golang underlying data representaion - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Golang underlying data representaion">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-14 13:09" pubdate>
+        April 14, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Golang underlying data representaion</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Golang-underlying-data-representaion"><a href="#Golang-underlying-data-representaion" class="headerlink" title="Golang underlying data representaion"></a>Golang underlying data representaion</h1><p>有些沙雕出题人就是喜欢用 go 来恶心人，做个总结</p>
+<p>简单记录一下 Golang 各种数据类型的存储形式、参数传递、返回值传递等等</p>
+<p>本文的数据均在 64位 环境下得出.</p>
+<p>为了方便观察代码，关掉编译优化</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs vim">-gcflags <span class="hljs-string">&quot;-N -l&quot;</span><br><br><span class="hljs-keyword">go</span> build -<span class="hljs-keyword">o</span> hw.<span class="hljs-keyword">exe</span> -gcflags <span class="hljs-string">&quot;-N -l&quot;</span> HelloWorld.<span class="hljs-keyword">go</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>记住最重要的一点，无论是 x86 还是 x86-64， 都采用栈传递参数，类似 stdcall</p>
+<p>返回值传递不通过 eax/rax 等寄存器，也是通过栈。位置是最后一个参数之上。例如最后一个参数的地址是 <code>rsp + 0x8</code>, 则:</p>
+<ul>
+<li>第一个返回值： rsp + 0x10</li>
+<li>第二个返回值:   rsp + 0x18</li>
+<li>。。。。。。</li>
+</ul>
+<p>返回值（一个或多个）</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">testfunc</span><span class="hljs-params">(a <span class="hljs-keyword">int</span>)</span> <span class="hljs-params">(i,j <span class="hljs-keyword">int</span>)</span></span>  &#123;<br>	i = a + <span class="hljs-number">1</span><br>	j = a + <span class="hljs-number">2</span><br>	<span class="hljs-keyword">return</span><br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> a, b <span class="hljs-keyword">int</span><br>	a, b = testfunc(<span class="hljs-number">123</span>)<br>	a = a + <span class="hljs-number">1</span><br>	b = b + <span class="hljs-number">2</span><br>	fmt.Println(a, b)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>调用代码如下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">mov     qword ptr [rsp], 123   ; 参数<br>call    main_testfunc<br>mov     rax, [rsp+8]          ; 返回值1<br>mov     rcx, [rsp+10h]        ; 返回值2<br></code></pre></td></tr></table></figure>
+
+
+<h4 id="方法调用"><a href="#方法调用" class="headerlink" title="方法调用"></a>方法调用</h4><p>方法还有一个额外的参数，可以理解为 this</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">/* 定义结构体 */</span><br><span class="hljs-keyword">type</span> Circle <span class="hljs-keyword">struct</span> &#123;<br>	radius <span class="hljs-keyword">float64</span><br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>	<span class="hljs-keyword">var</span> c1 Circle<br>	c1.radius = <span class="hljs-number">10.00</span><br>	fmt.Println(<span class="hljs-string">&quot;area is: &quot;</span>, c1.getArea(<span class="hljs-number">10</span>))<br>&#125;<br><br><span class="hljs-comment">//该 method 属于 Circle 类型对象中的方法</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(c Circle)</span> <span class="hljs-title">getArea</span><span class="hljs-params">(cnt <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">float64</span></span> &#123;<br>	<span class="hljs-comment">//c.radius 即为 Circle 类型对象中的属性</span><br>	<span class="hljs-keyword">return</span> <span class="hljs-number">3.14</span> * c.radius * c.radius * <span class="hljs-keyword">float64</span>(cnt)<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">movsd   qword ptr [rsp], xmm0  ;  Circle struct <br>mov     qword ptr [rsp+8], 0Ah ; 10<br>call    main_Circle_getArea<br>movsd   xmm0, qword ptr [rsp+10h] ; 获取返回值<br></code></pre></td></tr></table></figure>
+<p>可以看出 this 相当于第一个参数。</p>
+<h2 id="字符串"><a href="#字符串" class="headerlink" title="字符串"></a>字符串</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">var</span> stringTest = <span class="hljs-string">&quot;flag&#123;&#125;&quot;</span><br></code></pre></td></tr></table></figure>
+<p>内存格式</p>
+<figure class="highlight arduino"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs arduino"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">String</span>&#123;</span><br>	<span class="hljs-keyword">char</span> * strPtr;<br>	int64 <span class="hljs-built_in">size</span>;<br>&#125;<br><br>debug060:<span class="hljs-number">000000</span>C0000D9F40 dq offset aFlagListenobje               ; <span class="hljs-string">&quot;flag&#123;&#125;&quot;</span><br>debug060:<span class="hljs-number">000000</span>C0000D9F48 dq <span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Slice-切片"><a href="#Slice-切片" class="headerlink" title="Slice 切片"></a>Slice 切片</h2><h3 id="make"><a href="#make" class="headerlink" title="make"></a>make</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">slice1 := <span class="hljs-built_in">make</span>([]<span class="hljs-keyword">int</span>, <span class="hljs-built_in">len</span>)<br></code></pre></td></tr></table></figure>
+<p>make 函数是一个 builtin 函数，貌似由编译器处理？ </p>
+<p>slice 结构</p>
+<figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nginx"><span class="hljs-attribute">struct</span> slice &#123;<br>	<span class="hljs-attribute">dq</span>    dataPtr;<br>	<span class="hljs-attribute">dq</span>	  len;<br>	<span class="hljs-attribute">dq</span>	  cap;<br>&#125;<br></code></pre></td></tr></table></figure>
+<img src="/2021/04/14/Golang-underlying-data-representaion/image-20210414151420839.png" srcset="/img/loading.gif" class="" title="image-20210414151420839">
+
+
+
+<p>slice 结构构造代码由编译器生成，相当于内联 inline make 函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm">go:<br>slice1 :&#x3D; make([]int, len)<br><br>asm:<br>call    runtime_makeslice<br>mov     [rsp+28h], rdx &#x2F;&#x2F; rdx &#x3D; makeslice 创建的数组基地址<br>mov     [rsp+30h], rax &#x2F;&#x2F; rax &#x3D; len<br>mov     [rsp+38h], rcx &#x2F;&#x2F; rcx &#x3D; cap<br></code></pre></td></tr></table></figure>
+<p>make 最底层调用 runtime_makeslice 分配 Array</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-comment">// runtime_makeslice</span><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">makeslice</span><span class="hljs-params">(et *_type, <span class="hljs-built_in">len</span>, <span class="hljs-built_in">cap</span> <span class="hljs-keyword">int</span>)</span> <span class="hljs-title">unsafe</span>.<span class="hljs-title">Pointer</span></span> &#123;<br>	mem, overflow := math.MulUintptr(et.size, <span class="hljs-keyword">uintptr</span>(<span class="hljs-built_in">cap</span>))<br>	<span class="hljs-keyword">if</span> overflow || mem &gt; maxAlloc || <span class="hljs-built_in">len</span> &lt; <span class="hljs-number">0</span> || <span class="hljs-built_in">len</span> &gt; <span class="hljs-built_in">cap</span> &#123;<br>		<span class="hljs-comment">// <span class="hljs-doctag">NOTE:</span> Produce a &#x27;len out of range&#x27; error instead of a</span><br>		<span class="hljs-comment">// &#x27;cap out of range&#x27; error when someone does make([]T, bignumber).</span><br>		<span class="hljs-comment">// &#x27;cap out of range&#x27; is true too, but since the cap is only being</span><br>		<span class="hljs-comment">// supplied implicitly, saying len is clearer.</span><br>		<span class="hljs-comment">// See golang.org/issue/4085.</span><br>		mem, overflow := math.MulUintptr(et.size, <span class="hljs-keyword">uintptr</span>(<span class="hljs-built_in">len</span>))<br>		<span class="hljs-keyword">if</span> overflow || mem &gt; maxAlloc || <span class="hljs-built_in">len</span> &lt; <span class="hljs-number">0</span> &#123;<br>			panicmakeslicelen()<br>		&#125;<br>		panicmakeslicecap()<br>	&#125;<br><br>	<span class="hljs-keyword">return</span> mallocgc(mem, et, <span class="hljs-literal">true</span>)<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>makeslice 返回的是一个指向实际数据的指针（不含管理slice的结构体）相当于  <code>malloc(sizeof(Type) * len)</code></p>
+<p>在访问slice中元素时，一般会检测下标是否小于len, 如果越界则调用<code>runtime_panicIndex</code></p>
+<h3 id="append-copy"><a href="#append-copy" class="headerlink" title="append / copy"></a>append / copy</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">slice1 = <span class="hljs-built_in">append</span>(slice1, <span class="hljs-number">123</span>)<br></code></pre></td></tr></table></figure>
+<p>append 的时候会检测目标 slice1.len + 1 与 slice1.cap 的大小关系</p>
+<p>若 slice1.len + 1 &gt; slice1.cap 则调用 runtime_growslice 扩容</p>
+<p>copy 就是复制一个新的切片</p>
+<h3 id="切片截取"><a href="#切片截取" class="headerlink" title="切片截取"></a>切片截取</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go">myvar := slice1[<span class="hljs-number">1</span>:<span class="hljs-number">20</span>]<br></code></pre></td></tr></table></figure>
+<p>myvar 的数据结构是新一个新的切片 struct.<br>myvar.dataPtr = &amp;slice1.dataPtr[1]<br>myvar.len = 20 - 1<br>myvar.cap = slice1.cap - 1<br>dataPtr 相当于传的一个引用</p>
+<h2 id="range"><a href="#range" class="headerlink" title="range"></a>range</h2><p>略，不会调用新函数，逻辑比较简单，佷容易理解</p>
+<h2 id="map"><a href="#map" class="headerlink" title="map"></a>map</h2><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>runtime_mapassign_*</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">mapassign</span><span class="hljs-params">(t *maptype, h *hmap, key unsafe.Pointer)</span> <span class="hljs-title">unsafe</span>.<span class="hljs-title">Pointer</span></span>&#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>3个参数，第三个参数是key的指针，rsp + 0x8 * 2， 返回值是 key 对应的数据指针.</p>
+<h3 id="访问"><a href="#访问" class="headerlink" title="访问"></a>访问</h3><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">mapaccess1</span><span class="hljs-params">(t *maptype, h *hmap, key unsafe.Pointer)</span> <span class="hljs-title">unsafe</span>.<span class="hljs-title">Pointer</span></span> &#123;&#125;<br></code></pre></td></tr></table></figure>
+<p>和赋值同理，区别是这个不会为不存在的 key 创建 key pair.</p>
+<h2 id="并发"><a href="#并发" class="headerlink" title="并发"></a>并发</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">package</span> main<br><br><span class="hljs-keyword">import</span> (<br>        <span class="hljs-string">&quot;fmt&quot;</span><br>        <span class="hljs-string">&quot;time&quot;</span><br>)<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">say</span><span class="hljs-params">(s <span class="hljs-keyword">string</span>)</span></span> &#123;<br>        <span class="hljs-keyword">for</span> i := <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">5</span>; i++ &#123;<br>                time.Sleep(<span class="hljs-number">100</span> * time.Millisecond)<br>                fmt.Println(s)<br>        &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span> &#123;<br>        <span class="hljs-keyword">go</span> say(<span class="hljs-string">&quot;world&quot;</span>)<br>        say(<span class="hljs-string">&quot;hello&quot;</span>)<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs asm">call    runtime_newproc<br><br>rsp&#x3D;&gt;000000C00010FF58<br><br>debug062:000000C00010FF58 dq 10h    ; rsp here<br>debug062:000000C00010FF60 dq offset off_515DD0      ;pointer to main_say<br>debug062:000000C00010FF68 dq offset aWorld                        ; &quot;world&quot;  这里开始就是参数了<br>debug062:000000C00010FF70 dq 5<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="其它"><a href="#其它" class="headerlink" title="其它"></a>其它</h2><ul>
+<li>convXXX 类似 assert 的功能，逆向时忽略即可</li>
+</ul>
+<p>目前就这么多，以后遇到再补吧。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] <a target="_blank" rel="noopener" href="https://www.runoob.com/go/go-slice.html">https://www.runoob.com/go/go-slice.html</a> “Go 语言切片(Slice)”</p>
+<p>[2] <a target="_blank" rel="noopener" href="https://golang.org/src/runtime/slice.go">https://golang.org/src/runtime/slice.go</a> “<a target="_blank" rel="noopener" href="https://golang.org/src">src</a>/<a target="_blank" rel="noopener" href="https://golang.org/src/runtime">runtime</a>/slice.go”</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PL-Reverse/">PL_Reverse</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">红明谷杯2021:Reverse</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/12/SSE-Instructions/">
+                        <span class="hidden-mobile">SSE Instructions</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

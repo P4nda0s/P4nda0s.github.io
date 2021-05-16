@@ -1,0 +1,569 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>o-llvm: Control Flow Flattening - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="o-llvm: Control Flow Flattening">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-15 13:04" pubdate>
+        March 15, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.7k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      36
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">o-llvm: Control Flow Flattening</h1>
+            
+            <div class="markdown-body">
+              <h1 id="o-llvm-分析：-控制流平坦化源码分析"><a href="#o-llvm-分析：-控制流平坦化源码分析" class="headerlink" title="o-llvm 分析： 控制流平坦化源码分析"></a>o-llvm 分析： 控制流平坦化源码分析</h1><p>这是本人关于 o-llvm 分析系列文章的第一篇文章，网上已经有很多关于 o-llvm 相关的分析文章了，我写这一系列的文章只是为了督促我仔细分析 o-llvm 的每一个角落，并加深记忆。</p>
+<p>o-llvm 与 llvm 什么关系？ 这个可能是很多菜鸡搞不清楚的问题，我曾经也搞不清楚，一直以为“混淆” 是 llvm 自带的功能，殊不知，ollvm 只是一个基于 llvm 框架实现的插件，llvm 是一套前后端完善的编译框架。</p>
+<p>本篇文章分析的代码相对路径为</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs awk">lib<span class="hljs-regexp">/Transforms/</span>Obfuscation/Flattening.cpp<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="FunctionPass"><a href="#FunctionPass" class="headerlink" title="FunctionPass"></a>FunctionPass</h2><p>o-llvm 基于 llvm pass 模块实现，llvm pass 可以理解成 llvm 的插件，o-llvm 的控制流平坦化实现是基于 <code>FunctionPass</code> ，llvm 会对目标程序中的每一个函数调用 <code>FunctionPass</code>。为什么基于 FunctionPass 来实现控制流平坦化呢？因为 o-llvm 控制流平坦化最小粒度是函数，即以函数为单位展开混淆。<code>FunctionPass</code> 有机会处理目标代码的每一个函数。</p>
+<p>关于 pass 的编写，我会另外开一篇文章来记录，这篇文章就简单的提一下 FunctionPass 的编写。</p>
+<p>编写 FunctionPass 需要继承 <code>FunctionPass</code>类并实现 <code>runOnFunction</code> 函数，如下代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">namespace</span> &#123;<br>    <span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">DummyPass</span> :</span> <span class="hljs-keyword">public</span> FunctionPass &#123;<br>        <span class="hljs-keyword">public</span>:<br>            <span class="hljs-keyword">static</span> <span class="hljs-keyword">char</span> ID;<br>            DummyPass() : FunctionPass(ID) &#123;&#125;<br>            <span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-keyword">bool</span> <span class="hljs-title">runOnFunction</span><span class="hljs-params">(Function &amp;F)</span> <span class="hljs-keyword">override</span></span>;<br>    &#125;;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">DummyPass::runOnFunction</span><span class="hljs-params">(Function &amp;F)</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>; <span class="hljs-comment">// We did not alter the IR</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<p>注册 FunctionPass</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Register the pass with llvm, so that we can call it with dummypass</span><br><span class="hljs-keyword">char</span> DummyPass::ID = <span class="hljs-number">0</span>;<br><span class="hljs-function"><span class="hljs-keyword">static</span> RegisterPass&lt;DummyPass&gt; <span class="hljs-title">X</span><span class="hljs-params">(<span class="hljs-string">&quot;dummypass&quot;</span>, <span class="hljs-string">&quot;Example LLVM pass printing each function it visits&quot;</span>)</span></span>;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="Flattening-runOnFunction"><a href="#Flattening-runOnFunction" class="headerlink" title="Flattening::runOnFunction"></a>Flattening::runOnFunction</h2><p>Function pass 注册后，llvm 会对每一个函数调用 <code>runOnFunction</code>, llvm 中用 <code>llvm::Function</code> 类代表函数，函数单位内的所有信息都可以通过该类的实例来获取，例如基本块。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Flattening::runOnFunction</span><span class="hljs-params">(Function &amp;F)</span> </span>&#123;<br>  Function *tmp = &amp;F;<br>  <span class="hljs-comment">// Do we obfuscate</span><br>  <span class="hljs-keyword">if</span> (toObfuscate(flag, tmp, <span class="hljs-string">&quot;fla&quot;</span>)) &#123; <span class="hljs-comment">// toObfuscate 判断该函数是否要fla</span><br>    <span class="hljs-keyword">if</span> (flatten(tmp)) &#123;<br>      ++Flattened;<br>    &#125;<br>  &#125;<br>  <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>上面这段代码主要调用了 <code>toObfuscate</code> 和 <code>flatten</code>，前者用于判断是否需要对当前处理的函数混淆，后者是控制流平坦化的主要逻辑。</p>
+<h3 id="toObfuscate-判断是否混淆"><a href="#toObfuscate-判断是否混淆" class="headerlink" title="toObfuscate 判断是否混淆"></a>toObfuscate 判断是否混淆</h3><p><code>toObfuscate</code> 判断当前操作的函数是否要进行某种混淆（fla, sub, bcf）</p>
+<p>o-llvm 开启混淆有两种方法：</p>
+<pre><code>1. 命令行参数指定全局混淆
+2. Functions-annotations 指定局部混淆</code></pre>
+<p>局部混淆 annotations  修饰方法例子如下：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">func</span><span class="hljs-params">()</span> __<span class="hljs-title">attribute</span><span class="hljs-params">((__annotate__((<span class="hljs-string">&quot;fla&quot;</span>))))</span></span>;<br></code></pre></td></tr></table></figure>
+<p>llvm 中用 <code>readAnnotate(f)</code> 来获取函数的 <code>annotations </code></p>
+<p><code>toObfuscate</code> 先判断 annotations 标志，再判断全局标记。</p>
+<h2 id="flatten-函数"><a href="#flatten-函数" class="headerlink" title="flatten 函数"></a>flatten 函数</h2><p>flatten 函数的代码量比较大，因此我按照逻辑顺序拆开代码分析。</p>
+<h3 id="1-将原函数的-SwitchInst-语句转换成-If"><a href="#1-将原函数的-SwitchInst-语句转换成-If" class="headerlink" title="1: 将原函数的 SwitchInst 语句转换成 If"></a>1: 将原函数的 SwitchInst 语句转换成 If</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Lower switch</span><br>FunctionPass *lower = createLowerSwitchPass();<br>lower-&gt;runOnFunction(*f);<br></code></pre></td></tr></table></figure>
+<p>createLowerSwitchPass 也是一个 FunctionPass，它的功能是将指定 function 中的 <code>SwitchInst</code> 转换成 if 。</p>
+<p>为什么要把原始代码中的 switch 转换成 if 呢？ 这是为了实现多次混淆，每次混淆都能增加大量的基本块。</p>
+<h3 id="2-保存原始函数的基本块列表"><a href="#2-保存原始函数的基本块列表" class="headerlink" title="2:  保存原始函数的基本块列表"></a>2:  保存原始函数的基本块列表</h3><figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs lisp">// Save all original BB<br>for (<span class="hljs-name">Function</span>:<span class="hljs-symbol">:iterator</span> i = f-&gt;begin()<span class="hljs-comment">; i != f-&gt;end(); ++i) &#123;</span><br>  BasicBlock *tmp = &amp;*i<span class="hljs-comment">;</span><br>  origBB.push_back(<span class="hljs-name">tmp</span>)<span class="hljs-comment">;</span><br><br>  BasicBlock *bb = &amp;*i<span class="hljs-comment">; </span><br>  if (<span class="hljs-name">isa&lt;InvokeInst&gt;</span>(<span class="hljs-name">bb-&gt;getTerminator</span>())) &#123;<br>    return false<span class="hljs-comment">;</span><br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>这段代码中我比较疑惑的是如果当前处理的函数中有一个基本块以 Invoke 指令结尾，那么该函数无法混淆。</p>
+<h3 id="3-处理函数入口基本块"><a href="#3-处理函数入口基本块" class="headerlink" title="3: 处理函数入口基本块"></a>3: 处理函数入口基本块</h3><p>函数入口基本块，即函数的第一个基本块，这个基本块比较特殊。控制流平坦化，需要添加一个类似 while - switch 的结构，入口基本块需要特殊处理，使控制流进入 while 循环体。</p>
+<p>入口基本块的结尾指令不能是条件跳转，如果是条件跳转指令，需要拆分将其拆分成两个基本块。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Remove first BB</span><br>origBB.erase(origBB.begin());<br><br><span class="hljs-comment">// Get a pointer on the first BB</span><br>Function::iterator tmp = f-&gt;begin();  <span class="hljs-comment">//++tmp;</span><br><br>BasicBlock *insert = &amp;*tmp;<br><br><span class="hljs-comment">// If main begin with an if</span><br>BranchInst *br = <span class="hljs-literal">NULL</span>;<br><span class="hljs-keyword">if</span> (isa&lt;BranchInst&gt;(insert-&gt;getTerminator())) &#123;<br>  br = cast&lt;BranchInst&gt;(insert-&gt;getTerminator());<br>&#125;<br><br><span class="hljs-keyword">if</span> ((br != <span class="hljs-literal">NULL</span> &amp;&amp; br-&gt;isConditional()) ||<br>    insert-&gt;getTerminator()-&gt;getNumSuccessors() &gt; <span class="hljs-number">1</span>) &#123;<br>  BasicBlock::iterator i = insert-&gt;end(); <span class="hljs-comment">// BasicBlock::iterator 遍历指令的</span><br> --i;<br><br>  <span class="hljs-keyword">if</span> (insert-&gt;size() &gt; <span class="hljs-number">1</span>) &#123;<br>    --i;<br>  &#125;<br><br>  BasicBlock *tmpBB = insert-&gt;splitBasicBlock(i, <span class="hljs-string">&quot;first&quot;</span>); <span class="hljs-comment">// 拆分成两个基本块，方便后面处理</span><br>  origBB.insert(origBB.begin(), tmpBB); <br>&#125; <br><br><span class="hljs-comment">// Remove jump</span><br>insert-&gt;getTerminator()-&gt;eraseFromParent();<span class="hljs-comment">// 删除最后一条指令</span><br><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="4-创建-switch-变量"><a href="#4-创建-switch-变量" class="headerlink" title="4: 创建 switch 变量"></a>4: 创建 switch 变量</h3><p>o-llvm 利用 while - switch 重新组合原始基本块，switch 需要 switch var，o-llvm 中的 switch var 是基本块的随机数编号，o-llvm 为每一个基本块用随机数编号。重新组合基本块和类似模式如下:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">while</span>(<span class="hljs-literal">true</span>) &#123;<br>	<span class="hljs-keyword">switch</span>(var)<br>	<span class="hljs-keyword">case</span> <span class="hljs-number">0x8123123</span>:<br>		BB1;<br>		<span class="hljs-keyword">break</span>;<br>	<span class="hljs-keyword">case</span> <span class="hljs-number">0x8799882</span>:<br>		BB2;<br>		<span class="hljs-keyword">break</span>;<br>	.......<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>创建 switchVar 变量</p>
+<figure class="highlight lisp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs lisp">// Create switch variable and set as it<br>switchVar =<br>    new AllocaInst(<span class="hljs-name">Type</span>:<span class="hljs-symbol">:getInt32Ty</span>(<span class="hljs-name">f-&gt;getContext</span>()), <span class="hljs-number">0</span>, <span class="hljs-string">&quot;switchVar&quot;</span>, insert)<span class="hljs-comment">; // 在first BB插入switchVar</span><br>new StoreInst(<br>    ConstantInt:<span class="hljs-symbol">:get</span>(<span class="hljs-name">Type</span>:<span class="hljs-symbol">:getInt32Ty</span>(<span class="hljs-name">f-&gt;getContext</span>()),<br>                     llvm:<span class="hljs-symbol">:cryptoutils-&gt;scramble32</span>(<span class="hljs-number">0</span>, scrambling_key)),<br>    switchVar, insert)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+<p><code>AllocaInst</code> 在栈中分配变量， <code>ConstantInt::get</code> 获取指定类型的常量数据，用于给分配的变量赋初值。</p>
+<p><code>insert</code> 是插入目标函数第一个基本块，下同。</p>
+<h3 id="5-创建主循环"><a href="#5-创建主循环" class="headerlink" title="5: 创建主循环"></a>5: 创建主循环</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Create main loop</span><br>loopEntry = BasicBlock::Create(f-&gt;getContext(), <span class="hljs-string">&quot;loopEntry&quot;</span>, f, insert);<br>loopEnd = BasicBlock::Create(f-&gt;getContext(), <span class="hljs-string">&quot;loopEnd&quot;</span>, f, insert);<br></code></pre></td></tr></table></figure>
+<p><code>BasicBlock::Create</code> 会在 <code>insert</code> 之前插入基本块，若不指定 insert，则默认插入到函数的尾部，我们想要的实际效果是：</p>
+<p>insert -&gt; loopEntry，然而当前基本块的关系是 loopEntry -&gt; insert, 因此要调整两者的位置。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 调整 insert 与 loopEntry 之间的关系</span><br>insert-&gt;moveBefore(loopEntry);<br>BranchInst::Create(loopEntry, insert); <span class="hljs-comment">// insert -&gt; loopEntry</span><br>BranchInst::Create(loopEntry, loopEnd); <span class="hljs-comment">// loopEnd -&gt; loopEntry</span><br></code></pre></td></tr></table></figure>
+
+
+<h3 id="6-创建-switch"><a href="#6-创建-switch" class="headerlink" title="6: 创建 switch"></a>6: 创建 switch</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// load switchVar 变量</span><br>load = <span class="hljs-keyword">new</span> LoadInst(switchVar, <span class="hljs-string">&quot;switchVar&quot;</span>, loopEntry);<br><br><span class="hljs-comment">// 创建 switch default 基本块， default -&gt; loopEnd </span><br>BasicBlock *swDefault =<br>    BasicBlock::Create(f-&gt;getContext(), <span class="hljs-string">&quot;switchDefault&quot;</span>, f, loopEnd);<br>BranchInst::Create(loopEnd, swDefault);<br><br><span class="hljs-comment">// 创建 SwitchInst 指令</span><br>switchI = SwitchInst::Create(&amp;*f-&gt;begin(), swDefault, <span class="hljs-number">0</span>, loopEntry);<br><br><span class="hljs-comment">// 设置 SwitchVar 变量</span><br>switchI-&gt;setCondition(load);<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="7-将原始基本块放入-switch"><a href="#7-将原始基本块放入-switch" class="headerlink" title="7: 将原始基本块放入 switch"></a>7: 将原始基本块放入 switch</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Put all BB in the switch</span><br><span class="hljs-keyword">for</span> (<span class="hljs-built_in">vector</span>&lt;BasicBlock *&gt;::iterator b = origBB.begin(); b != origBB.end();<br>     ++b) &#123;<br>  BasicBlock *i = *b;<br>  ConstantInt *numCase = <span class="hljs-literal">NULL</span>;<br><br>  <span class="hljs-comment">// Move the BB inside the switch (only visual, no code logic)</span><br>  i-&gt;moveBefore(loopEnd);<br><br>  <span class="hljs-comment">// Add case to switch</span><br>  numCase = cast&lt;ConstantInt&gt;(ConstantInt::get(<br>      switchI-&gt;getCondition()-&gt;getType(),<br>      llvm::cryptoutils-&gt;scramble32(switchI-&gt;getNumCases(), scrambling_key)));<br>  switchI-&gt;addCase(numCase, i);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>到目前为止，基本块只是放入到了 switch 里面，还需要进一步处理。</p>
+<p>这段代码可以理解成获取随机数，不会重复</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::cryptoutils-&gt;scramble32(switchI-&gt;getNumCases(), scrambling_key)<br></code></pre></td></tr></table></figure>
+
+
+<p>从这段代码来看，switch var 是在添加 case 的时候生成的，整个代码中都没有维护 switch var 与 基本块关系的变量，这是因为 o-llvm 利用 llvm 本身来维护switch var 值与基本块的对应关系。<code>SwitchInst.findCaseDest</code> 函数可以获取 Switch 中指定基本块的 case 常量。</p>
+<h3 id="8-重新修正基本块之间的关系"><a href="#8-重新修正基本块之间的关系" class="headerlink" title="8: 重新修正基本块之间的关系"></a>8: 重新修正基本块之间的关系</h3><p>上一步，o-llvm 将 <code>oriBB</code>里面的所有基本块都添加到 switch 中，并为每一个基本块生成 case 对应的值，接下来就是调整基本块之间的关系。</p>
+<p>主要有3类基本块:</p>
+<ol>
+<li>无条件跳转结尾</li>
+<li>有条件跳转结尾</li>
+<li>RET 指令结尾</li>
+</ol>
+<p>我们分别来看这 3 类处理的过程，这段代码是循环中抽离出来的，<code>i</code> 代表当前修正的基本块。</p>
+<h4 id="1-无条件跳转结尾的基本块"><a href="#1-无条件跳转结尾的基本块" class="headerlink" title="1. 无条件跳转结尾的基本块"></a>1. 无条件跳转结尾的基本块</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// If it&#x27;s a non-conditional jump</span><br><span class="hljs-keyword">if</span> (i-&gt;getTerminator()-&gt;getNumSuccessors() == <span class="hljs-number">1</span>) &#123; <span class="hljs-comment">// 后继基本块数量为 1</span><br>  <span class="hljs-comment">// 获取后继基本块，并删除跳转跳转指令</span><br>  BasicBlock *succ = i-&gt;getTerminator()-&gt;getSuccessor(<span class="hljs-number">0</span>);<br>  i-&gt;getTerminator()-&gt;eraseFromParent(); <span class="hljs-comment">// 删除结尾跳转指令</span><br><br>  <span class="hljs-comment">// 获取后继基本块对应的 case 值</span><br>  numCase = switchI-&gt;findCaseDest(succ);<br><br>  <span class="hljs-comment">// 如果没有找到后继基本块对应的 case 值，default </span><br>  <span class="hljs-keyword">if</span> (numCase == <span class="hljs-literal">NULL</span>) &#123;<br>    numCase = cast&lt;ConstantInt&gt;(<br>        ConstantInt::get(switchI-&gt;getCondition()-&gt;getType(),<br>                         llvm::cryptoutils-&gt;scramble32(<br>                             switchI-&gt;getNumCases() - <span class="hljs-number">1</span>, scrambling_key)));<span class="hljs-comment">// 获取 default 的 case 值</span><br>  &#125;<br>  <span class="hljs-comment">// 更新 switchVar 的值，变跳转到 loopEnd</span><br>  <span class="hljs-keyword">new</span> StoreInst(numCase, load-&gt;getPointerOperand(), i);<br>  BranchInst::Create(loopEnd, i); <span class="hljs-comment">// 跳转到loopEnd</span><br>  <span class="hljs-keyword">continue</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="2-有条件跳转结尾"><a href="#2-有条件跳转结尾" class="headerlink" title="2. 有条件跳转结尾"></a>2. 有条件跳转结尾</h4><p>对于一个条件跳转的基本块，一般两个后继。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// If it&#x27;s a conditional jump</span><br><span class="hljs-keyword">if</span> (i-&gt;getTerminator()-&gt;getNumSuccessors() == <span class="hljs-number">2</span>) &#123;<br>    <span class="hljs-comment">// 分别获取两个后继的 case 值</span><br>    ConstantInt *numCaseTrue =<br>        switchI-&gt;findCaseDest(i-&gt;getTerminator()-&gt;getSuccessor(<span class="hljs-number">0</span>));<br>    ConstantInt *numCaseFalse =<br>        switchI-&gt;findCaseDest(i-&gt;getTerminator()-&gt;getSuccessor(<span class="hljs-number">1</span>));<br><br>    <span class="hljs-comment">// 后继是否为 default case</span><br>    <span class="hljs-keyword">if</span> (numCaseTrue == <span class="hljs-literal">NULL</span>) &#123;<br>        numCaseTrue = cast&lt;ConstantInt&gt;(<br>            ConstantInt::get(switchI-&gt;getCondition()-&gt;getType(),<br>                             llvm::cryptoutils-&gt;scramble32(<br>                                 switchI-&gt;getNumCases() - <span class="hljs-number">1</span>, scrambling_key)));<br>    &#125;<br><br>    <span class="hljs-keyword">if</span> (numCaseFalse == <span class="hljs-literal">NULL</span>) &#123;<br>        numCaseFalse = cast&lt;ConstantInt&gt;(<br>            ConstantInt::get(switchI-&gt;getCondition()-&gt;getType(),<br>                             llvm::cryptoutils-&gt;scramble32(<br>                                 switchI-&gt;getNumCases() - <span class="hljs-number">1</span>, scrambling_key)));<br>    &#125;<br><br>    <span class="hljs-comment">// 创建 SelectInst</span><br>    BranchInst *br = cast&lt;BranchInst&gt;(i-&gt;getTerminator());<br>    SelectInst *sel =<br>        SelectInst::Create(br-&gt;getCondition(), numCaseTrue, numCaseFalse, <span class="hljs-string">&quot;&quot;</span>,<br>                           i-&gt;getTerminator());<br><br>    <span class="hljs-comment">// 删除 terminator （结尾跳转指令）</span><br>    i-&gt;getTerminator()-&gt;eraseFromParent();<br><br>    <span class="hljs-comment">// 更新 switchVar 的值，变跳转到 loopEnd</span><br>    <span class="hljs-keyword">new</span> StoreInst(sel, load-&gt;getPointerOperand(), i);<br>    BranchInst::Create(loopEnd, i);<br>    <span class="hljs-keyword">continue</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h4 id="3-RET-指令结尾"><a href="#3-RET-指令结尾" class="headerlink" title="3. RET 指令结尾"></a>3. RET 指令结尾</h4><p>这个就比较简单了，RET 指令不需要重新回到 loop，所以不用做任何处理</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Ret BB</span><br><span class="hljs-keyword">if</span> (i-&gt;getTerminator()-&gt;getNumSuccessors() == <span class="hljs-number">0</span>) &#123;<br><span class="hljs-keyword">continue</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h3 id="9-修复-stack"><a href="#9-修复-stack" class="headerlink" title="9: 修复 stack"></a>9: 修复 stack</h3><p>o-llvm 控制流平坦化的最后一步是 <code>fixStack(Function *f)</code> 这一步是处理局部变量分配问题。</p>
+<p>主要处理两类变量:</p>
+<pre><code>1. PHI Node
+2. 非入口基本块中分配的局部变量</code></pre>
+<p>对于 PHI Node，fixStack 直接简单的粗暴的调用 <code>DemotePHIToStack</code> 将 PHI Node 变量 Entry 中分配</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">DemotePHIToStack(tmpPhi.at(i), f-&gt;begin()-&gt;getTerminator());<br></code></pre></td></tr></table></figure>
+
+
+<p>对于非 Entry 基本块中申请的局部变量，若该变量在其它基本块中还有使用的话，需要将该变量提到 Entry 中分配</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">DemoteRegToStack(*tmpReg.at(i), f-&gt;begin()-&gt;getTerminator());<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>o-llvm 控制流平坦化的原理非常简单，只是简单的将原始基本块插入到 switch 结构中，并删除原始基本块之间的跳转指令。然而实际案例中，为何还原 o-llvm 控制流平坦化如此困难？</p>
+<p>要回答这个问题，我们首先来回到 <code>flatten</code> 的第一步，将 switch 转换成二分if。该过程主要是通过调用 llvm 里面的一个 FunctionPass 来实现。</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">// Lower switch</span><br>FunctionPass *lower = createLowerSwitchPass();<br>lower-&gt;runOnFunction(*f);<br></code></pre></td></tr></table></figure>
+<p><code>LowerSwitchPass</code> 将 switch 指令转换成等价的 if 实现，这极大的增加基本块的数量，当下一次对这个函数混淆的时候，将产生更多的 case。</p>
+<p>重复对某个函数执行 <code>flatten</code> ，基本块的数量将越来越多，其中大量的基本块都是为实现二分 if 而存在，这使得识别原始基本块十分困难。</p>
+<p>最后，flatten 执行完后，可能还有其它的优化 pass 对混淆过的函数进行处理，进一步打乱一些固定的特征模式。</p>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://llvm.org/docs/WritingAnLLVMPass.html#writing-an-llvm-pass-basiccode">https://llvm.org/docs/WritingAnLLVMPass.html#writing-an-llvm-pass-basiccode</a></p>
+<p><a target="_blank" rel="noopener" href="https://osterlund.xyz/posts/2017-11-28-LLVM-pass.html">https://osterlund.xyz/posts/2017-11-28-LLVM-pass.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.zhihu.com/question/49642237">https://www.zhihu.com/question/49642237</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/obfuscator/">obfuscator</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/obfuscator/">obfuscator</a>
+                    
+                      <a class="hover-with-bg" href="/tags/llvm/">llvm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/16/EasyRunning/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">EasyRunning</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/03/04/Decaf-codegen-based-on-LLVM/">
+                        <span class="hidden-mobile">Decaf codegen based on LLVM</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

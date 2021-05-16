@@ -1,0 +1,499 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>红明谷杯2021:Reverse - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="红明谷杯2021:Reverse">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-15 13:05" pubdate>
+        April 15, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      483 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      7
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">红明谷杯2021:Reverse</h1>
+            
+            <div class="markdown-body">
+              <h1 id="红明谷杯2021-Reverse"><a href="#红明谷杯2021-Reverse" class="headerlink" title="红明谷杯2021:Reverse"></a>红明谷杯2021:Reverse</h1><h2 id="g0"><a href="#g0" class="headerlink" title="g0"></a>g0</h2><p>golang 逆向题</p>
+<h3 id="1-flag-长度-：-0x14"><a href="#1-flag-长度-：-0x14" class="headerlink" title="1. flag 长度 ： 0x14"></a>1. flag 长度 ： 0x14</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">call    fmt_Fscanf<br>mov     rax, [rsp+0A8h]<br>mov     rcx, [rax]<br>cmp     qword ptr [rax+8], 14h<br></code></pre></td></tr></table></figure>
+<p>数据变化  null -&gt; AABBCCDDEEFFGGHHIIJJ</p>
+<h3 id="2-Flag-乱序"><a href="#2-Flag-乱序" class="headerlink" title="2. Flag 乱序"></a>2. Flag 乱序</h3><p>测试输入：AABBCCDDEEFFGGHHIIJJ<br>乱序输出：CDDEEHIIJJFFGGHAABBC<br>还原时，对照位置还原即可。<br>数据变化: AABBCCDDEEFFGGHHIIJJ -&gt; CDDEEHIIJJFFGGHAABBC</p>
+<h3 id="3-调用-main-Encode-对乱序结果编码"><a href="#3-调用-main-Encode-对乱序结果编码" class="headerlink" title="3. 调用 main_Encode 对乱序结果编码"></a>3. 调用 main_Encode 对乱序结果编码</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">.text:00000000004CD3A5 mov     [rsp+0E0h+var_E0], rax ; slice.data<br>.text:00000000004CD3A9 mov     [rsp+0E0h+var_D8], rcx ; slice.len<br>.text:00000000004CD3AE mov     [rsp+0E0h+var_D0], rdx ; slice.cap<br>.text:00000000004CD3B3 call    main_Encode<br></code></pre></td></tr></table></figure>
+<p>由调用时参数推断 main_Encode 传入的参数是 []string, 即 golang 的 slice 切片类型。<br>数据变化: CDDEEHIIJJFFGGHAABBC -&gt; jKbWKuiRNZVR9xFNfdv41ptrx85</p>
+<h3 id="4-比较"><a href="#4-比较" class="headerlink" title="4. 比较"></a>4. 比较</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs asm">.text:00000000004CD58D mov     [rsp+58h+var_50], rcx<br>.text:00000000004CD592 mov     [rsp+58h+var_48], rax<br>.text:00000000004CD597 call    runtime_memequal<br></code></pre></td></tr></table></figure>
+<p>数据变化: 2GVdudkYo2CBXoQii7gfpkjTc4gT 与 jKbWKuiRNZVR9xFNfdv41ptrx85 比较</p>
+<p>-&gt; 2GVdudkYo2CBXoQii7gfpkjTc4gT 反推输入。</p>
+<h3 id="5-main-Encode-流程"><a href="#5-main-Encode-流程" class="headerlink" title="5. main_Encode 流程"></a>5. main_Encode 流程</h3><h4 id="5-1-math-big-nat-setBytes"><a href="#5-1-math-big-nat-setBytes" class="headerlink" title="5.1 math_big_nat_setBytes"></a>5.1 math_big_nat_setBytes</h4><p>将输入字符串作为大整数（大端序，可以写个go测试）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs asm">call    math_big_nat_setBytes<br></code></pre></td></tr></table></figure>
+<p>x = math_big_nat_setBytes(intputflag)</p>
+<h4 id="5-2-循环"><a href="#5-2-循环" class="headerlink" title="5.2 循环"></a>5.2 循环</h4><p>循环条件： math_big__ptr_Int_Cmp(x, 0) 即 x &gt; 0 才循环</p>
+<p>循环体流程：<br>调用 math_big__ptr_Int_DivMod </p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-function"><span class="hljs-keyword">func</span> <span class="hljs-params">(z *Int)</span> <span class="hljs-title">DivMod</span><span class="hljs-params">(x, y, m *Int)</span> <span class="hljs-params">(*Int, *Int)</span></span> <br></code></pre></td></tr></table></figure>
+<p>4个参数，在call math_big__ptr_Int_DivMod 程序点，栈数据如下:<br>rsp -&gt; z<br>rsp + 0x8 -&gt; x<br>rsp + 0x10 -&gt; y<br>rsp + 0x18 -&gt; m</p>
+<p>rsp + 0x20 -&gt; 返回值1: x div y<br>rsp + 0x28 -&gt; 返回值2: x mod y</p>
+<p>z,x,y,m 的类型都是指向 Int 结构体的指针 *Int<br>Int 结构体定义如下</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs go"><span class="hljs-keyword">type</span> Int <span class="hljs-keyword">struct</span> &#123;<br>	neg <span class="hljs-keyword">bool</span> <span class="hljs-comment">// sign</span><br>	abs nat  <span class="hljs-comment">// absolute value of the integer</span><br>&#125;<br><span class="hljs-keyword">type</span> nat []Word<br></code></pre></td></tr></table></figure>
+<p>64位 golang 中 Word 代表的是一个64位整数， nat 就是整数的切片数组。</p>
+<p>这些定义对寻找数据很有帮助!</p>
+<p>循环代码类似:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python">x = flag<br>table = <span class="hljs-string">&#x27;12Nrst6CDquvG7BefghJKLMEFHPQZabRSTUVmyzno89ApwxWXYcdkij345&#x27;</span><br>result = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">while</span> x &gt; <span class="hljs-number">0</span>:<br>	result = result + table[x % <span class="hljs-number">58</span>]<br>	x = x // <span class="hljs-number">58</span><br></code></pre></td></tr></table></figure>
+<p>应该是 base58 编码换表，根据正向过程手写逆向过程如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs python">target = <span class="hljs-string">&#x27;2GVdudkYo2CBXoQii7gfpkjTc4gT&#x27;</span><br>table = <span class="hljs-string">&#x27;12Nrst6CDquvG7BefghJKLMEFHPQZabRSTUVmyzno89ApwxWXYcdkij345&#x27;</span><br>c = <span class="hljs-number">0</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> target:<br>    idx = table.find(i)<br>    c = c * <span class="hljs-number">58</span><br>    c = c + idx<br>print(c)<br><span class="hljs-built_in">hex</span>(c) ...再转 ASCII<br></code></pre></td></tr></table></figure>
+<p>We1CT2345}Fc0m_flag 换顺序得到 flag{We1CTFc0m_2345}</p>
+<h2 id="gogogo"><a href="#gogogo" class="headerlink" title="gogogo"></a>gogogo</h2><p>TODO…….</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] “<a target="_blank" rel="noopener" href="https://golang.org/src/math/big/int.go&quot;">https://golang.org/src/math/big/int.go&quot;</a><br>[2] “<a target="_blank" rel="noopener" href="https://golang.org/src/math/big/nat.go&quot;">https://golang.org/src/math/big/nat.go&quot;</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/golang/">golang</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/23/Cluster-notes/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Cluster notes</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/14/Golang-underlying-data-representaion/">
+                        <span class="hidden-mobile">Golang underlying data representaion</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,611 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>SSE Instructions - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SSE Instructions">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-12 00:46" pubdate>
+        April 12, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SSE Instructions</h1>
+            
+            <div class="markdown-body">
+              <h1 id="SSE-Instructions"><a href="#SSE-Instructions" class="headerlink" title="SSE Instructions"></a>SSE Instructions</h1><p>记录一些 SSE 指令集最基础的东西，经常容易忘。</p>
+<p>一些比较混的概念 SSE、MMX、XMM、SIMD</p>
+<p>SIMD:  Single instruction, multiple data 就是一条指令处理一组数据，描述指令集性质的一个缩写。</p>
+<p>SSE 是 SIMD 指令集，支持同时处理多组数据（整数/浮点），属于 SIMD 指令集。 SSE 进一步升级还有SSE2,SSE3……</p>
+<p>MMX 也是 SIMD 指令集，只不过是以前 IA32 的 SIMD 解决方案，缺点是占用 FPU 寄存器，浮点和 SIMD 不能同时处理，SSE 引入了 XMM 寄存器解决了这个问题。</p>
+<p>SIMD 指令集主要用于多媒体操作吧，比如信号/图像处理，这些处理涉及到大量的矩阵运算。简单说，矩阵基本运算用 for 循环实现真的太拉垮。一般线性代数库就会用平台 SIMD 指令集优化计算算法，这也是为什么 ml 里面的各种公式最好要向量化实现。</p>
+<h2 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h2><p>SSE 最基本的寄存器: XMM0 - XMM7： 128 bit registers</p>
+<p>AMD64 (x86-64) / IA64: XMM8 - XMM15</p>
+<h2 id="SSE-指令"><a href="#SSE-指令" class="headerlink" title="SSE 指令"></a>SSE 指令</h2><p>指令速查网站:<a target="_blank" rel="noopener" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/">https://software.intel.com/sites/landingpage/IntrinsicsGuide/</a></p>
+<p>本文记录的指令有SSE，SSE2，SSE3</p>
+<p>SSE 指令运算有两种类型 <code>packed</code>和<code>scalar</code></p>
+<p>packed 多组数据一起运算</p>
+<p>scalar 只有一组数据运算(标量运算)（低64/32位）</p>
+<h3 id="Floating-point-instructions"><a href="#Floating-point-instructions" class="headerlink" title="Floating-point instructions"></a>Floating-point instructions</h3><p>内存 Load / Store</p>
+<ul>
+<li>Scalar – <code>MOVSS</code></li>
+<li>Packed – <code>MOVAPS, MOVUPS, MOVLPS, MOVHPS, MOVLHPS, MOVHLPS, MOVMSKPS</code></li>
+<li>MOVAPS，MOVUPS <ul>
+<li>区别：前者要求内存地址 16 字节对齐，后者不需要对齐。</li>
+<li>共同：Load 完整 128 bit</li>
+</ul>
+</li>
+<li><code>movhps</code> - to/from the higher part of <code>xmm</code> register.</li>
+<li><code>movlps</code> - to/from the lower part of <code>xmm</code>.</li>
+<li><code>movhlps</code> - from higher part of source register to lower part of destination register.</li>
+<li><code>movlhps</code> - from lower part of source register to higher part of destination register.</li>
+</ul>
+<p>运算</p>
+<ul>
+<li>Scalar – <code>ADDSS, SUBSS, MULSS, DIVSS, RCPSS, SQRTSS, MAXSS, MINSS, RSQRTSS</code></li>
+<li>Packed – <code>ADDPS, SUBPS, MULPS, DIVPS, RCPPS, SQRTPS, MAXPS, MINPS, RSQRTPS</code></li>
+</ul>
+<p>比较</p>
+<ul>
+<li>Scalar – <code>CMPSS, COMISS, UCOMISS</code></li>
+<li>Packed – <code>CMPPS</code></li>
+</ul>
+<p>数据改组(shuffle/unpacking)</p>
+<ul>
+<li>Packed – <code>SHUFPS, UNPCKHPS, UNPCKLPS</code></li>
+</ul>
+<p>shuffle 机翻译出来就是改组，我也不知道翻译对不对。shuffle 将 XMM 寄存器中元素的顺序改变或者混和两个寄存器的值。</p>
+<p>shufps 指令有 3 个操作数（2个XMM寄存器，8bit的掩码)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c">shufps xmm, xmm, imm8<br></code></pre></td></tr></table></figure>
+<p>目的寄存器的前两个元素(低64bit)可以被覆盖成目的寄存器的任意两个元素。</p>
+<p>目的寄存器的第三四元素(高32bit)可以被源寄存器任意两个元素。</p>
+<p>imm8 掩码作用是控制元素的选择，掩码分成 4 组长度为2bit的数据 00 | 00 | 00 | 00，分别控制元素来源的选择。</p>
+<p>00 - src[31:0]</p>
+<p>01 - src[63:32]</p>
+<p>10 - src[95:64]</p>
+<p>11 - src[127:96]</p>
+<p>src 可以是目的寄存器和源寄存器, 取决于目的寄存器中重组的位置。</p>
+<p>intel 给的伪代码很清晰</p>
+<figure class="highlight inform7"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs inform7">DEFINE SELECT4(src, control) &#123;<br>	CASE(control<span class="hljs-comment">[1:0]</span>) <span class="hljs-keyword">OF</span><br>	0:	tmp<span class="hljs-comment">[31:0]</span> := src<span class="hljs-comment">[31:0]</span><br>	1:	tmp<span class="hljs-comment">[31:0]</span> := src<span class="hljs-comment">[63:32]</span><br>	2:	tmp<span class="hljs-comment">[31:0]</span> := src<span class="hljs-comment">[95:64]</span><br>	3:	tmp<span class="hljs-comment">[31:0]</span> := src<span class="hljs-comment">[127:96]</span><br>	ESAC<br>	RETURN tmp<span class="hljs-comment">[31:0]</span><br>&#125;<br>dst<span class="hljs-comment">[31:0]</span> := SELECT4(a<span class="hljs-comment">[127:0]</span>, imm8<span class="hljs-comment">[1:0]</span>)<br>dst<span class="hljs-comment">[63:32]</span> := SELECT4(a<span class="hljs-comment">[127:0]</span>, imm8<span class="hljs-comment">[3:2]</span>)<br>dst<span class="hljs-comment">[95:64]</span> := SELECT4(b<span class="hljs-comment">[127:0]</span>, imm8<span class="hljs-comment">[5:4]</span>)<br>dst<span class="hljs-comment">[127:96]</span> := SELECT4(b<span class="hljs-comment">[127:0]</span>, imm8<span class="hljs-comment">[7:6]</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<p>数据类型转换</p>
+<p>整数转浮点，浮点转整数</p>
+<ul>
+<li>Scalar – <code>CVTSI2SS, CVTSS2SI, CVTTSS2SI</code>, <code>cvtsi2sd</code>,<code>cvtsd2si</code>,<code>cvttsd2si</code></li>
+<li>Packed – <code>CVTPI2PS, CVTPS2PI, CVTTPS2PI</code></li>
+</ul>
+<ul>
+<li>Integer to float/doubles<ul>
+<li>cvtsi2ss, cvtsi2sd</li>
+</ul>
+</li>
+<li>floats/doubles to integers<ul>
+<li><code>cvtss2si</code> convert 32-bit float to integer, round up/down</li>
+<li><code>cvttss2si</code> convert 32-bit float to integer, truncate result</li>
+<li><code>cvtsd2si</code>  convert 64-bit double to integer, round</li>
+<li><code>cvttsd2si</code> convert 64-bit double to integer, truncate</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>Convert between floats and doubles</p>
+<ul>
+<li><code>cvtss2sd</code> convert 32-bit float to 64-bit double</li>
+<li><code>cvtsd2ss</code> convert 64-bit float to 32-bit float</li>
+</ul>
+</li>
+</ul>
+<p>先说一下命名，例如 <code>CVTSI2SS</code></p>
+<p>CVT + SI + 2 + SS：</p>
+<ul>
+<li>SI: Scalar Integer</li>
+<li>SS: Scalar Single Folat point</li>
+<li>整数转单精度浮点</li>
+</ul>
+<p><code>CVTSS2SI</code> CVT + SS + 2 + SI 即单精度浮点转整数</p>
+<p><code>CVTTSS2SI</code> CVTT + SS + 2 + SI 也是单精度浮点转整数 （Truncation）</p>
+<p>总结一下:</p>
+<ul>
+<li>SS:  标量，单精度浮点</li>
+<li>SI:  标量，整数</li>
+<li>SD: 标量，双精度浮点</li>
+<li>PS: 向量，单精度浮点</li>
+<li>PI：向量，整数</li>
+<li>PD: 向量，双精度</li>
+<li>US: unisgned 无符号</li>
+</ul>
+<p><code>cvt</code> 与 <code>cvtt</code> 有什么区别呢？</p>
+<p> <code>cvt</code> 转换浮点时就近舍去浮点（四舍五入），<code>cvtt</code> 直接舍掉小数点后的数字保留整数部分（c/c++ 默认）</p>
+<p><code>CVTPI2PS</code> CVT + PI + 2 + PS:</p>
+<ul>
+<li>PI： Packed Integer</li>
+<li>PS：  packed Single Float</li>
+</ul>
+<p>逻辑运算</p>
+<ul>
+<li>Packed – <code>ANDPS, ORPS, XORPS, ANDNPS</code></li>
+</ul>
+<p><code>ANDPS</code>: AND + Packed + Single</p>
+<h3 id="Integer-instructions"><a href="#Integer-instructions" class="headerlink" title="Integer instructions"></a>Integer instructions</h3><p>Arithmetic</p>
+<ul>
+<li><code>PADDB</code>, <code>PADDW</code>, <code>PADDD</code>,<code>PADDQ</code>, <code>PADDSB</code>，<code>PADDSB</code></li>
+<li><code>PMULHUW, PSADBW, PAVGB, PAVGW, PMAXUB, PMINUB, PMAXSW, PMINSW</code></li>
+</ul>
+<p><code>PADDSB</code> ：Add packed signed byte integers with saturation</p>
+<p>saturation 是运算比较特殊运行，可以运算将结果限制在某个区间内。</p>
+<p>Data movement</p>
+<ul>
+<li><code>PEXTRW, PINSRW</code></li>
+</ul>
+<p>Other</p>
+<ul>
+<li><code>PMOVMSKB, PSHUFW</code></li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p>[1] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions">https://en.wikipedia.org/wiki/Streaming_SIMD_Extensions</a> “Streaming SIMD Extensions”</p>
+<p>[2] <a target="_blank" rel="noopener" href="https://blog.csdn.net/arau_sh/article/details/6161871">https://blog.csdn.net/arau_sh/article/details/6161871</a> “MMX 和SSE指令集的区别是什么”</p>
+<p>[3] <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/16218665/simd-and-difference-between-packed-and-scalar-double-precision">https://stackoverflow.com/questions/16218665/simd-and-difference-between-packed-and-scalar-double-precision</a> “SIMD and difference between packed and scalar double precision”</p>
+<p>[4] <a target="_blank" rel="noopener" href="https://students.mimuw.edu.pl/~zbyszek/asm/en/instrukcje-sse.html">https://students.mimuw.edu.pl/~zbyszek/asm/en/instrukcje-sse.html</a> “SSE Instructions (Streaming SIMD Extensions)”</p>
+<p>[5] <a target="_blank" rel="noopener" href="https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_shuffle_ps&amp;expand=5197">https://software.intel.com/sites/landingpage/IntrinsicsGuide/#text=_mm_shuffle_ps&amp;expand=5197</a> “Intrinsics Guide”</p>
+<p>[6] <a target="_blank" rel="noopener" href="https://blog.csdn.net/zp288105109a/article/details/100008264">https://blog.csdn.net/zp288105109a/article/details/100008264</a> “[汇编]汇编学习笔记（4）：SHUFPS（洗牌）指令”</p>
+<p>[6] <a target="_blank" rel="noopener" href="https://www.cs.uaf.edu/2012/fall/cs301/lecture/10_26_asm_float.html">https://www.cs.uaf.edu/2012/fall/cs301/lecture/10_26_asm_float.html</a> “CS301: Floating Point in x86 Assembly”</p>
+<p>[7] <a target="_blank" rel="noopener" href="https://montcs.bloomu.edu/Presentations/Old/240/16.floating-point-SSE.pdf">https://montcs.bloomu.edu/Presentations/Old/240/16.floating-point-SSE.pdf</a> “Introduction to Scalar FloatingPoint Operations via SSE”</p>
+<p>[8] <a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/X86_instruction_listings#SSE2_instructions">https://en.wikipedia.org/wiki/X86_instruction_listings#SSE2_instructions</a> “x86 instruction listings” </p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/Asm/">Asm</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/x86/">x86</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/04/14/Golang-underlying-data-representaion/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Golang underlying data representaion</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/06/LLVM-Liveness-Analysis/">
+                        <span class="hidden-mobile">LLVM Liveness Analysis</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,617 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Lexical Analysis - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Lexical Analysis">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2020-12-31 00:49" pubdate>
+        December 31, 2020 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.5k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Lexical Analysis</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Lexical-Analysis"><a href="#Lexical-Analysis" class="headerlink" title="Lexical Analysis"></a>Lexical Analysis</h1><h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>我最近在学习 SFU 的 Compiler 课程。由于疫情缘故， SFU 的 Compiler 课程在线上进行，才让我有机会白嫖到这门课程。 这门课程理论与实践结合，课程作业提供了详细的文档、测试程序以及 testcase。</p>
+<p>课程主页地址<br><a target="_blank" rel="noopener" href="http://anoopsarkar.github.io/compilers-class/syllabus.html">http://anoopsarkar.github.io/compilers-class/syllabus.html</a></p>
+<h2 id="Lexical-analysis"><a href="#Lexical-analysis" class="headerlink" title="Lexical analysis"></a>Lexical analysis</h2><p>Lexical analysis （词法分析）是编译的第一个阶段，输入字符串流，输出等价的 Token 列表。关键字、标识符、数字常量、字符串常量等等都是一个 Token。部分 Token 还需要附加值属性才能完整表示。比如一个表示数字的 Token 还应该有对应的值属性。</p>
+<img src="/2020/12/31/lexical/image-20210101234908658.png" srcset="/img/loading.gif" class="" title="image-20210101234908658">
+
+<p>正则表达式能很好地胜任 Token 识别工作，日常开发任务中经常使用正则表达式识别手机号、数字、邮箱等等。编译则利用正则表达式识别 Token。</p>
+<h3 id="词法分析器如何使用正则表达式识别-Token？"><a href="#词法分析器如何使用正则表达式识别-Token？" class="headerlink" title="词法分析器如何使用正则表达式识别 Token？"></a>词法分析器如何使用正则表达式识别 Token？</h3><ol>
+<li><p>每一个 Token 都对应一个正则表达式， 最终将所有 Token 的正则表达式组合起来构成一个能识别所有 Token 的正则表达式。</p>
+</li>
+<li><p>匹配字符串长度最长的 Token</p>
+</li>
+<li><p>相同字符串匹配长度的 Token，匹配优先级高的 Token</p>
+</li>
+<li><p>加入错误处理机制，比如提示错误</p>
+</li>
+</ol>
+<h2 id="Finite-state-automata"><a href="#Finite-state-automata" class="headerlink" title="Finite state automata"></a>Finite state automata</h2><p>正则表达式背后的原理是有限状态自动机(FA)，利用 FA 理论可以实现正则表达式。学习 FA 可以深入理解词法分析的工作原理。</p>
+<p>FA 有两种:</p>
+<ol>
+<li>确定有限状态自动机 Deterministic (DFA)</li>
+<li>非确定有限状态自动机 Non-deterministic (NFA)</li>
+</ol>
+<h3 id="FA-的基本结构"><a href="#FA-的基本结构" class="headerlink" title="FA 的基本结构"></a>FA 的基本结构</h3><ol>
+<li>输入字符表</li>
+<li>有限状态集合</li>
+<li>转移函数</li>
+<li>开始状态</li>
+<li>结束状态</li>
+</ol>
+<h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>双圆圈为结束状态</p>
+<img src="/2020/12/31/lexical/image-20210102001316806.png" srcset="/img/loading.gif" class="" title="image-20210102001316806">
+
+<img src="/2020/12/31/lexical/image-20210102001328480.png" srcset="/img/loading.gif" class="" title="image-20210102001328480">
+
+<img src="/2020/12/31/lexical/image-20210102001401036.png" srcset="/img/loading.gif" class="" title="image-20210102001401036">
+
+<h3 id="特殊的-ε-move"><a href="#特殊的-ε-move" class="headerlink" title="特殊的 ε-move"></a>特殊的 ε-move</h3><img src="/2020/12/31/lexical/image-20210102001546935.png" srcset="/img/loading.gif" class="" title="image-20210102001546935">
+
+
+<h2 id="DFA-amp-NFA"><a href="#DFA-amp-NFA" class="headerlink" title="DFA &amp; NFA"></a>DFA &amp; NFA</h2><p>确定有限状态自动机 Deterministic (DFA)<br>遵循两个原则:</p>
+<ol>
+<li>每个一个状态的每一个输入只有一个对应的转移状态</li>
+<li>没有  ε-move</li>
+</ol>
+<img src="/2020/12/31/lexical/image-20210102002252030.png" srcset="/img/loading.gif" class="" title="image-20210102002252030">
+
+<p>NFA 则支持多个状态转移和ε-move</p>
+<img src="/2020/12/31/lexical/image-20210102002356893.png" srcset="/img/loading.gif" class="" title="image-20210102002356893">
+
+<p>NFA 构造方便，而 DFA 编程方便，效率高。因此，一般操作如下<br>正则 pattern -&gt; NFA -&gt; DFA</p>
+<h2 id="NFA-转-DFA-方法：子集构造法"><a href="#NFA-转-DFA-方法：子集构造法" class="headerlink" title="NFA 转 DFA 方法：子集构造法"></a>NFA 转 DFA 方法：子集构造法</h2><img src="/2020/12/31/lexical/image-20210102003051864.png" srcset="/img/loading.gif" class="" title="image-20210102003051864">
+
+<h2 id="正则表达式转-NFA"><a href="#正则表达式转-NFA" class="headerlink" title="正则表达式转 NFA"></a>正则表达式转 NFA</h2><p>方法：Thompson’s construction<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Thompson%27s_construction">https://en.wikipedia.org/wiki/Thompson%27s_construction</a></p>
+<img src="/2020/12/31/lexical/image-20210102004051943.png" srcset="/img/loading.gif" class="" title="image-20210102004051943">
+
+<img src="/2020/12/31/lexical/image-20210102004101129.png" srcset="/img/loading.gif" class="" title="image-20210102004101129">
+
+<img src="/2020/12/31/lexical/image-20210102004108754.png" srcset="/img/loading.gif" class="" title="image-20210102004108754">
+
+<img src="/2020/12/31/lexical/image-20210102004118447.png" srcset="/img/loading.gif" class="" title="image-20210102004118447">
+
+<img src="/2020/12/31/lexical/image-20210102004129896.png" srcset="/img/loading.gif" class="" title="image-20210102004129896">
+
+<img src="/2020/12/31/lexical/image-20210102004203432.png" srcset="/img/loading.gif" class="" title="image-20210102004203432">
+
+<img src="/2020/12/31/lexical/image-20210102004224259.png" srcset="/img/loading.gif" class="" title="image-20210102004224259">
+
+
+
+
+
+
+<h2 id="词法分析器使用-DFA"><a href="#词法分析器使用-DFA" class="headerlink" title="词法分析器使用 DFA"></a>词法分析器使用 DFA</h2><ul>
+<li>每一个 Token 通过正则表达式 $r_i$ 定义</li>
+<li>合并所有 $r_i$ 为一个更大表达式  $R = (r_1 | r_2 | … | r_n)$</li>
+<li>将 R 转换成 NFA，DFA，最后优化</li>
+</ul>
+<img src="/2020/12/31/lexical/image-20210102004532585.png" srcset="/img/loading.gif" class="" title="image-20210102004532585">
+
+<h2 id="编写-Decaf-语言词法分析器"><a href="#编写-Decaf-语言词法分析器" class="headerlink" title="编写 Decaf 语言词法分析器"></a>编写 Decaf 语言词法分析器</h2><p>decaf 语言是为学习这门课程设计的语言，具体信息 PDF 如下</p>
+<a href="/2020/12/31/lexical/Decaf.pdf" title="Decaf.pdf">Decaf.pdf</a>
+
+<p>课程要求使用 lex 实现 decaf 的词法分析器， lex 是一个用于生成词法分析器代码的程序。</p>
+<p>lex 源文件 -&gt; lex -&gt; 词法分析器C语言代码 -&gt; gcc/clang -&gt; 词法分析器</p>
+<h3 id="lex-简单写法"><a href="#lex-简单写法" class="headerlink" title="lex 简单写法"></a>lex 简单写法</h3><ol>
+<li>嵌入 C 语言代码<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs cpp">%&#123; .... C语言代码...  %&#125;<br><br>例如:<br>%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NUMBER     256</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IDENTIFIER 257</span><br>%&#125;<br></code></pre></td></tr></table></figure></li>
+<li>使用正则表达式定义 Token 并为每个 Token 添加处理代码</li>
+</ol>
+<p>定义正则表达式的别名， 在 lex 的最顶层定义，例如定义一个用于识别数字的正则表达式别名 num</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs awk"><span class="hljs-regexp">/* regexp definitions */</span><br>num [<span class="hljs-number">0</span>-<span class="hljs-number">9</span>]+<br></code></pre></td></tr></table></figure>
+
+
+<ol start="3">
+<li>使用正则表达式定义 Token 并添加处理代码</li>
+</ol>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs mel">%%<br>正则表达式 &#123;匹配处理代码，例如返回该 Token 对应的 Token 常量&#125;<br>%%<br><br>例如：<br>%%<br>&#123;num&#125;                 &#123; <span class="hljs-keyword">return</span> NUMBER; &#125;<br>[a-zA-Z][a-zA-Z0<span class="hljs-number">-9</span>]*  &#123; <span class="hljs-keyword">return</span> IDENTIFIER; &#125;<br>\n                    <span class="hljs-comment">/* silently ignore */</span><br>.                     &#123; <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; &#125;<br>%%<br></code></pre></td></tr></table></figure>
+<p>lex 将每次接收一个 Token 都就会执行对应 token {} 中的代码，并将返回值作为 yylex() 的返回值。 yylex 从输入流解析一个 token。</p>
+<ol start="4">
+<li>完整例子</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs c">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> NUMBER     256</span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IDENTIFIER 257</span><br>%&#125;<br><br><span class="hljs-comment">/* regexp definitions */</span><br>num [<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+<br><br>%%<br><br>&#123;num&#125;                 &#123; <span class="hljs-keyword">return</span> NUMBER; &#125;<br>[a-zA-Z][a-zA-Z0<span class="hljs-number">-9</span>]*  &#123; <span class="hljs-keyword">return</span> IDENTIFIER; &#125;<br>\n                    <span class="hljs-comment">/* silently ignore */</span><br>.                     &#123; <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; &#125;<br>%%<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> token;<br>  <span class="hljs-keyword">while</span> ((token = yylex())) &#123;<br>    <span class="hljs-keyword">switch</span> (token) &#123;<br>      <span class="hljs-keyword">case</span> NUMBER: <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;NUMBER: %s, LENGTH:%d\n&quot;</span>, yytext, (<span class="hljs-keyword">int</span>)yyleng); <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">case</span> IDENTIFIER: <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;IDENTIFIER: %s, LENGTH:%d\n&quot;</span>, yytext, (<span class="hljs-keyword">int</span>)yyleng); <span class="hljs-keyword">break</span>;<br>      <span class="hljs-keyword">default</span>: <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: %s not recognized\n&quot;</span>, yytext);<br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">exit</span>(<span class="hljs-number">0</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="Decaf-Token-定义"><a href="#Decaf-Token-定义" class="headerlink" title="Decaf Token 定义"></a>Decaf Token 定义</h3><figure class="highlight csharp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><code class="hljs csharp">T_AND            &amp;&amp;<br>T_ASSIGN         =<br>T_BOOLTYPE       <span class="hljs-built_in">bool</span><br>T_BREAK          <span class="hljs-keyword">break</span><br><span class="hljs-function">T_CHARCONSTANT   <span class="hljs-title">char_lit</span> (<span class="hljs-params">see section <span class="hljs-keyword">on</span> Character literals</span>)</span><br><span class="hljs-function">T_COMMA          ,</span><br><span class="hljs-function">T_COMMENT        comment</span><br><span class="hljs-function">T_CONTINUE       <span class="hljs-keyword">continue</span></span><br><span class="hljs-function">T_DIV            /</span><br><span class="hljs-function">T_DOT            .</span><br><span class="hljs-function">T_ELSE           <span class="hljs-keyword">else</span></span><br><span class="hljs-function">T_EQ</span>             ==<br>T_EXTERN         <span class="hljs-keyword">extern</span><br>T_FALSE          <span class="hljs-literal">false</span><br>T_FOR            <span class="hljs-keyword">for</span><br>T_FUNC           func<br>T_GEQ            &gt;=<br>T_GT             &gt;<br><span class="hljs-function">T_ID             <span class="hljs-title">identifier</span> (<span class="hljs-params">see section <span class="hljs-keyword">on</span> Identifiers</span>)</span><br><span class="hljs-function">T_IF             <span class="hljs-keyword">if</span></span><br><span class="hljs-function">T_INTCONSTANT    <span class="hljs-title">int_lit</span> (<span class="hljs-params">see section <span class="hljs-keyword">on</span> Integer literals</span>)</span><br><span class="hljs-function">T_INTTYPE        <span class="hljs-built_in">int</span></span><br><span class="hljs-function">T_LCB</span>            &#123;<br>T_LEFTSHIFT      &lt;&lt;<br>T_LEQ            &lt;=<br>T_LPAREN         (<br>T_LSB            [<br>T_LT             &lt;<br>T_MINUS          -<br>T_MOD            %<br>T_MULT           *<br>T_NEQ            !=<br>T_NOT            !<br>T_NULL           <span class="hljs-literal">null</span><br>T_OR             ||<br>T_PACKAGE        package<br>T_PLUS           +<br>T_RCB            &#125;<br>T_RETURN         <span class="hljs-keyword">return</span><br>T_RIGHTSHIFT     &gt;&gt;<br>T_RPAREN         )<br>T_RSB            ]<br>T_SEMICOLON      ;<br><span class="hljs-function">T_STRINGCONSTANT <span class="hljs-title">string_lit</span> (<span class="hljs-params">see section <span class="hljs-keyword">on</span> String literals</span>)</span><br><span class="hljs-function">T_STRINGTYPE     <span class="hljs-built_in">string</span></span><br><span class="hljs-function">T_TRUE           <span class="hljs-literal">true</span></span><br><span class="hljs-function">T_VAR            <span class="hljs-keyword">var</span></span><br><span class="hljs-function">T_VOID           <span class="hljs-keyword">void</span></span><br><span class="hljs-function">T_WHILE          <span class="hljs-keyword">while</span></span><br><span class="hljs-function">T_WHITESPACE     <span class="hljs-title">whitespace</span> (<span class="hljs-params">see section <span class="hljs-keyword">on</span> Whitespace</span>)</span><br></code></pre></td></tr></table></figure>
+<h3 id="decaflex-lex-实现"><a href="#decaflex-lex-实现" class="headerlink" title="decaflex.lex  实现"></a>decaflex.lex  实现</h3><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br></pre></td><td class="code"><pre><code class="hljs cpp">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;iostream&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><span class="hljs-class"><span class="hljs-keyword">enum</span> &#123;</span>T_N_TOKEN,T_FUNC, T_INT, T_PACKAGE, T_LCB, T_RCB, T_LPAREN, T_RPAREN, T_ID, <br>      T_WHITESPACE, T_WHITESPACE_N, T_AND, T_ASSIGN, T_BOOLTYPE, T_BREAK, <br>      T_COMMA, T_CHARCONSTANT, T_COMMENT, T_CONTINUE, T_DIV, T_DOT, T_ELSE, <br>      T_EQ, T_EXTERN, T_FALSE, T_FOR, T_GEQ, T_GT, T_IF, T_INTCONSTANT, <br>      T_INTTYPE, T_LEFTSHIFT, T_LEQ, T_LSB, T_LT, T_MINUS, T_MOD, T_MULT,<br>      T_NEQ, T_NOT, T_NULL, T_OR, T_PLUS, T_RIGHTSHIFT, T_RSB, T_SEMICOLON, <br>      T_STRINGCONSTANT, T_STRINGTYPE, T_TRUE, T_VAR, T_VOID, T_WHILE, T_RETURN<br>      &#125;;<br><br><span class="hljs-function"><span class="hljs-built_in">string</span> &amp; <span class="hljs-title">covert_newline</span><span class="hljs-params">(<span class="hljs-built_in">string</span> &amp; s)</span></span>&#123; <span class="hljs-comment">// 用来对换行转义为 \n</span><br>    <span class="hljs-built_in">string</span> tmp = <span class="hljs-string">&quot;&quot;</span>;<br>    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; s.size(); i++)<br>      <span class="hljs-keyword">if</span>(s[i] == <span class="hljs-string">&#x27;\n&#x27;</span>)<br>        tmp += <span class="hljs-string">&quot;\\n&quot;</span>;<br>      <span class="hljs-keyword">else</span><br>        tmp += s[i];<br>    s = tmp;<br>    <span class="hljs-keyword">return</span> s;<br>&#125;<br><br>%&#125;<br><br>%%<br>  <span class="hljs-comment">/*</span><br><span class="hljs-comment">    Pattern definitions for all tokens</span><br><span class="hljs-comment">  */</span><br>func                       &#123; <span class="hljs-keyword">return</span> T_FUNC; &#125;<br><span class="hljs-keyword">return</span>                     &#123; <span class="hljs-keyword">return</span> T_RETURN; &#125;<br><span class="hljs-keyword">while</span>                      &#123; <span class="hljs-keyword">return</span> T_WHILE; &#125;<br><span class="hljs-keyword">void</span>                       &#123; <span class="hljs-keyword">return</span> T_VOID; &#125;<br>var                        &#123; <span class="hljs-keyword">return</span> T_VAR; &#125;<br><span class="hljs-built_in">string</span>                     &#123; <span class="hljs-keyword">return</span> T_STRINGTYPE; &#125;<br><span class="hljs-literal">true</span>                       &#123; <span class="hljs-keyword">return</span> T_TRUE; &#125;<br>null                       &#123; <span class="hljs-keyword">return</span> T_NULL; &#125;<br><span class="hljs-keyword">int</span>                        &#123; <span class="hljs-keyword">return</span> T_INTTYPE; &#125;<br><span class="hljs-keyword">if</span>                         &#123; <span class="hljs-keyword">return</span> T_IF; &#125;<br><span class="hljs-keyword">extern</span>                     &#123; <span class="hljs-keyword">return</span> T_EXTERN; &#125;<br><span class="hljs-keyword">int</span>                        &#123; <span class="hljs-keyword">return</span> T_INT; &#125;<br><span class="hljs-keyword">for</span>                        &#123; <span class="hljs-keyword">return</span> T_FOR; &#125;<br>package                    &#123; <span class="hljs-keyword">return</span> T_PACKAGE; &#125;<br><span class="hljs-keyword">break</span>                      &#123; <span class="hljs-keyword">return</span> T_BREAK; &#125;<br><span class="hljs-keyword">continue</span>                   &#123; <span class="hljs-keyword">return</span> T_CONTINUE; &#125;<br>,                          &#123; <span class="hljs-keyword">return</span> T_COMMA; &#125;<br><span class="hljs-keyword">else</span>                       &#123; <span class="hljs-keyword">return</span> T_ELSE; &#125;<br><span class="hljs-literal">false</span>                      &#123; <span class="hljs-keyword">return</span> T_FALSE; &#125;<br>==                         &#123; <span class="hljs-keyword">return</span> T_EQ;  &#125;<br>&gt;=                         &#123; <span class="hljs-keyword">return</span> T_GEQ; &#125;<br>&gt;                          &#123; <span class="hljs-keyword">return</span> T_GT;  &#125;<br>\&lt;\&lt;                       &#123; <span class="hljs-keyword">return</span> T_LEFTSHIFT;  &#125;<br>&gt;&gt;                         &#123; <span class="hljs-keyword">return</span> T_RIGHTSHIFT; &#125;<br>\&lt;=                        &#123; <span class="hljs-keyword">return</span> T_LEQ; &#125;<br>\[                         &#123; <span class="hljs-keyword">return</span> T_LSB; &#125;<br>\]                         &#123; <span class="hljs-keyword">return</span> T_RSB; &#125;<br>\&lt;                         &#123; <span class="hljs-keyword">return</span> T_LT; &#125;<br>\-                         &#123; <span class="hljs-keyword">return</span> T_MINUS; &#125;<br>\+                         &#123; <span class="hljs-keyword">return</span> T_PLUS; &#125;<br>\%                         &#123; <span class="hljs-keyword">return</span> T_MOD; &#125;<br>\*                         &#123; <span class="hljs-keyword">return</span> T_MULT; &#125;<br>!=                         &#123; <span class="hljs-keyword">return</span> T_NEQ; &#125;<br>!                          &#123; <span class="hljs-keyword">return</span> T_NOT; &#125;<br>\|\|                       &#123; <span class="hljs-keyword">return</span> T_OR; &#125;<br>;                          &#123; <span class="hljs-keyword">return</span> T_SEMICOLON; &#125;<br>\&quot;([^\n&quot;\\]|\\(a|b|t|n|v|f|r|\\|\&#x27;|\&quot;))*\&quot; &#123; return T_STRINGCONSTANT; &#125;<br><br>([<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+(\.[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+)?)|(<span class="hljs-number">0</span>[xX][<span class="hljs-number">0</span><span class="hljs-number">-9</span>A-Fa-f]+)          &#123; <span class="hljs-keyword">return</span> T_INTCONSTANT; &#125;<br>\&#x27;([^\n&#x27;\\]|\\(a|b|t|n|v|f|r|\\|\&#x27;|\&quot;))\&#x27;        &#123; return T_CHARCONSTANT; &#125;<br><span class="hljs-string">&quot;//&quot;</span>.*<span class="hljs-string">&quot;\n&quot;</span>                 &#123; <span class="hljs-keyword">return</span> T_COMMENT; &#125;<br>\&#123;                         &#123; <span class="hljs-keyword">return</span> T_LCB; &#125;<br>\&#125;                         &#123; <span class="hljs-keyword">return</span> T_RCB; &#125;<br>\(                         &#123; <span class="hljs-keyword">return</span> T_LPAREN; &#125;<br>\)                         &#123; <span class="hljs-keyword">return</span> T_RPAREN; &#125;<br>[a-zA-Z\_][a-zA-Z\_0<span class="hljs-number">-9</span>]*   &#123; <span class="hljs-keyword">return</span> T_ID; &#125;<br>\n+[\t\r\a\v\b ]*          &#123; <span class="hljs-keyword">return</span> T_WHITESPACE_N; &#125;<br>[\t\r\a\v\b ]+             &#123; <span class="hljs-keyword">return</span> T_WHITESPACE; &#125;<br>&amp;&amp;                         &#123; <span class="hljs-keyword">return</span> T_AND; &#125;<br>=                          &#123; <span class="hljs-keyword">return</span> T_ASSIGN; &#125;<br>\/                         &#123; <span class="hljs-keyword">return</span> T_DIV; &#125;<br><span class="hljs-string">&quot;.&quot;</span>                        &#123; <span class="hljs-keyword">return</span> T_DOT; &#125; <br>.                          &#123; <span class="hljs-built_in">cerr</span> &lt;&lt; <span class="hljs-string">&quot;Error: unexpected character in input&quot;</span> &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span>; &#125;<br>%%<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span> <span class="hljs-params">()</span> </span>&#123;<br>  <span class="hljs-keyword">int</span> token;<br>  <span class="hljs-built_in">string</span> lexeme;<br>  <span class="hljs-keyword">while</span> ((token = yylex())) &#123;<br>    <span class="hljs-keyword">if</span> (token &gt; <span class="hljs-number">0</span>) &#123;<br>      lexeme.assign(yytext);<br>      <span class="hljs-keyword">switch</span>(token) &#123;<br>        <span class="hljs-keyword">case</span> T_FUNC: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_FUNC &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_INT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_INT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_PACKAGE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_PACKAGE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LCB: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LCB &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_RCB: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_RCB &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LPAREN: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LPAREN &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_RPAREN: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_RPAREN &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_ID: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_ID &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_WHITESPACE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_WHITESPACE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_WHITESPACE_N:<br>          <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_WHITESPACE &quot;</span>;<br>          <span class="hljs-keyword">for</span>( <span class="hljs-keyword">size_t</span> i = <span class="hljs-number">0</span>; i &lt; lexeme.size(); i++)<br>            <span class="hljs-keyword">if</span>( lexeme[i] == <span class="hljs-string">&#x27;\n&#x27;</span> ) <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;\\n&quot;</span>; <span class="hljs-keyword">else</span> <span class="hljs-built_in">cout</span> &lt;&lt; lexeme[i];<br>          <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-built_in">endl</span>;<br>          <span class="hljs-keyword">break</span>;<br><br>        <span class="hljs-comment">// mycode</span><br>        <span class="hljs-keyword">case</span> T_AND: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_AND &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_ASSIGN: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_ASSIGN &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_BOOLTYPE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_BOOLTYPE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_BREAK: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_BREAK &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_COMMA: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_COMMA &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_CHARCONSTANT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_CHARCONSTANT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_COMMENT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_COMMENT &quot;</span> &lt;&lt; covert_newline(lexeme) &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_CONTINUE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_CONTINUE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_DIV: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_DIV &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_DOT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_DOT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_ELSE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_ELSE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_EQ: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_EQ &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_EXTERN: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_EXTERN &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>; <br>        <span class="hljs-keyword">case</span> T_FALSE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_FALSE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_FOR: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_FOR &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_GEQ: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_GEQ &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_GT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_GT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_IF: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_IF &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_INTCONSTANT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_INTCONSTANT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_INTTYPE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_INTTYPE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LEFTSHIFT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LEFTSHIFT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LEQ: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LEQ &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LSB: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LSB &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_LT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_LT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_MINUS: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_MINUS &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_MOD: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_MOD &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_MULT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_MULT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_NEQ: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_NEQ &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_NOT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_NOT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_NULL: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_NULL &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_OR: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_OR &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_PLUS: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_PLUS &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_RIGHTSHIFT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_RIGHTSHIFT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_RSB: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_RSB &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_SEMICOLON: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_SEMICOLON &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_STRINGCONSTANT: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_STRINGCONSTANT &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_STRINGTYPE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_STRINGTYPE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_TRUE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_TRUE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_VAR: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_VAR &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_VOID: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_VOID &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_WHILE: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_WHILE &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">case</span> T_RETURN: <span class="hljs-built_in">cout</span> &lt;&lt; <span class="hljs-string">&quot;T_RETURN &quot;</span> &lt;&lt; lexeme &lt;&lt; <span class="hljs-built_in">endl</span>; <span class="hljs-keyword">break</span>;<br>        <span class="hljs-keyword">default</span>: <span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>      &#125;<br>    &#125; <span class="hljs-keyword">else</span> &#123;<br>      <span class="hljs-keyword">if</span> (token &lt; <span class="hljs-number">0</span>) &#123;<br>        <span class="hljs-built_in">exit</span>(EXIT_FAILURE);<br>      &#125;<br>    &#125;<br>  &#125;<br>  <span class="hljs-built_in">exit</span>(EXIT_SUCCESS);<br>&#125;<br><br></code></pre></td></tr></table></figure>
+<p>makefile 文件</p>
+<figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs makefile"><br>lexlib=l<br>bindir=.<br>rm=/bin/rm -f<br>targets=<br>cpptargets=decaflex<br><br><span class="hljs-section">all: <span class="hljs-variable">$(targets)</span> <span class="hljs-variable">$(cpptargets)</span></span><br><br><span class="hljs-variable">$(targets)</span>: %: %.lex<br>	@echo <span class="hljs-string">&quot;compiling lex file:&quot;</span> <span class="hljs-variable">$&lt;</span><br>	@echo <span class="hljs-string">&quot;output file:&quot;</span> <span class="hljs-variable">$@</span><br>	flex -o<span class="hljs-variable">$@</span>.c <span class="hljs-variable">$&lt;</span><br>	gcc -o <span class="hljs-variable">$(bindir)</span>/<span class="hljs-variable">$@</span> <span class="hljs-variable">$@</span>.c -l<span class="hljs-variable">$(lexlib)</span><br>	<span class="hljs-variable">$(rm)</span> <span class="hljs-variable">$@</span>.c<br><br><span class="hljs-variable">$(cpptargets)</span>: %: %.lex<br>	@echo <span class="hljs-string">&quot;compiling cpp lex file:&quot;</span> <span class="hljs-variable">$&lt;</span><br>	@echo <span class="hljs-string">&quot;output file:&quot;</span> <span class="hljs-variable">$@</span><br>	flex -o<span class="hljs-variable">$@</span>.cc <span class="hljs-variable">$&lt;</span><br>	g++ -o <span class="hljs-variable">$(bindir)</span>/<span class="hljs-variable">$@</span> <span class="hljs-variable">$@</span>.cc -l<span class="hljs-variable">$(lexlib)</span><br>	<span class="hljs-variable">$(rm)</span> <span class="hljs-variable">$@</span>.cc<br><br><span class="hljs-section">clean:</span><br>	<span class="hljs-variable">$(rm)</span> <span class="hljs-variable">$(targets)</span> <span class="hljs-variable">$(cpptargets)</span><br><br></code></pre></td></tr></table></figure>
+<p>lex 默认从 stdin 获取输入流。<br>我的实现  <a target="_blank" rel="noopener" href="https://github.com/P4nda0s/compilers-class-hw">https://github.com/P4nda0s/compilers-class-hw</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/note/">note</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/02/Yacc-practice/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Yacc practice</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/30/hello-world/">
+                        <span class="hidden-mobile">Hello World</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

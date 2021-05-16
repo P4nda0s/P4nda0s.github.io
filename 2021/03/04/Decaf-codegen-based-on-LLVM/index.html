@@ -1,0 +1,522 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Decaf codegen based on LLVM - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Decaf codegen based on LLVM">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-03-04 14:59" pubdate>
+        March 4, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      28
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Decaf codegen based on LLVM</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Decaf-编译器代码生成"><a href="#Decaf-编译器代码生成" class="headerlink" title="Decaf 编译器代码生成"></a>Decaf 编译器代码生成</h1><p>记录一下使用 llvm api 实现 Decaf 编译器 codegen 过程中的代码片段以及一些基础语法结构实现过程。</p>
+<h2 id="Int-与-Bool"><a href="#Int-与-Bool" class="headerlink" title="Int 与 Bool"></a>Int 与 Bool</h2><p>llvm 里面 Bool 类型其实也是一个 Integer，只不过长度为 1bit.<br>例如如下代码可以判断 xxxx 是否为 bool 变量。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">if</span> (xxxx-&gt;getType()-&gt;isIntegerTy() &amp;&amp; xxxx-&gt;getType()-&gt;getIntegerBitWidth() == <span class="hljs-number">1</span>)<br>	...<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="变量的定义与初始化"><a href="#变量的定义与初始化" class="headerlink" title="变量的定义与初始化"></a>变量的定义与初始化</h2><p>局部变量</p>
+<figure class="highlight reasonml"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs reasonml">llvm::Value<span class="hljs-operator"> * </span>variable = Builder.<span class="hljs-constructor">CreateAlloca(<span class="hljs-params">getLLVMType</span>(<span class="hljs-params">getType</span>()</span>), <span class="hljs-number">0</span>, get<span class="hljs-constructor">Name()</span>);<br></code></pre></td></tr></table></figure>
+<p>全局变量</p>
+<figure class="highlight lasso"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs lasso"><span class="hljs-literal">new</span> llvm<span class="hljs-type">::GlobalVariable</span>(*TheModule, ty, <span class="hljs-literal">false</span>, <br>				llvm<span class="hljs-type">::GlobalVariable</span><span class="hljs-type">::CommonLinkage</span>, decafGetInitalizer(ty), Name);<br></code></pre></td></tr></table></figure>
+
+
+<p><code>CreateAlloca</code> 与 <code>GlobalVariable</code> 申请变量，返回的是变量的<code>指针</code>，处理这些变量时，需要用 <code>load</code> 和 <code>store</code> 来将这些变量的值载入或保存。 </p>
+<p>注意，llvm 中函数的参数 <code>llvm::Argument</code>的类型是真实类型，不是一个指针，不能赋值（store），所以在最好在函数入口时将参数转存到局部变量。</p>
+<h2 id="数组的定义与引用"><a href="#数组的定义与引用" class="headerlink" title="数组的定义与引用"></a>数组的定义与引用</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// 定义一个全局数组</span><br>llvm::ArrayType * arrayType = llvm::ArrayType::get(ty, field_size-&gt;getArraySize());<br>llvm::Constant  *  initializer = llvm::ConstantAggregateZero::get(arrayType);<br>llvm::Value * arr = llvm::GlobalVariable(*TheModule, arrayType, <span class="hljs-literal">false</span>, llvm::GlobalVariable::CommonLinkage, initializer, Name);<br><br><span class="hljs-comment">// 引用数组</span><br>llvm::Value * lvalue = Builder.CreateGEP(arr, &#123;Builder.getInt32(<span class="hljs-number">0</span>), idx&#125;, <span class="hljs-string">&quot;arr&quot;</span>); <span class="hljs-comment">//idx&#x27;s type: llvm::Value *</span><br>Builder.CreateStore(Builder.getInt32(<span class="hljs-number">0</span>), lvalue); <span class="hljs-comment">// arr[idx] = 0</span><br><br></code></pre></td></tr></table></figure>
+<p>CreateGEP 生成的是 getelementptr 指令，这个指令有两个 index，很容易让人误解。这是一个地址计算指令，它不仅能计算数组某元素的偏移，还可以计算结构体中某字段的偏移。</p>
+<p>第一个 index 是传入的顶层指针作为数组的 index</p>
+<p>第二个 index 是单个数据类型内部的偏移 index</p>
+<p>例如下面这段代码</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">S</span>&#123;</span><br><span class="hljs-keyword">int</span> a;<br><span class="hljs-keyword">int</span> b;<br>&#125;<br><br>S * p = <span class="hljs-keyword">new</span> S();<br>p[<span class="hljs-number">0</span>].a = <span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+<p>p 是一个指针，可以当作数组索引，该索引就是 index1；p 指向的结构体是一个 Struct，内部又可以索引（索引a或b字段），这就是第二个索引。</p>
+<p>用 CreateGEP 计算数组中某个元素的地址，只需要将第一个索引设置为0，第二个索引设置为真实下标即可，也就是传入 {Builder.getInt32(0), idx}</p>
+<h2 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h2><p>llvm 中定义函数签名与定义函数代码的过程是分开的，所以函数签名定义后，并不需要立即实现，并且可以在链接阶段静态链接到其它的库。</p>
+<p>声名函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">llvm::Value * <span class="hljs-title">codegen</span><span class="hljs-params">()</span> </span>&#123;<br>		<span class="hljs-comment">// codegen for method declare</span><br>		llvm::Type * returnTy;<br>		<span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;llvm::Type *&gt; args;<br>		<span class="hljs-built_in">list</span>&lt;decafAST *&gt; argumentList;<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> t : argumentList) &#123; <span class="hljs-comment">// 这个阶段只需要指出函数参数的类型即可</span><br>			args.push_back(getLLVMType(t-&gt;getType()));<br>		&#125;<br>		returnTy = getLLVMType(ReturnType-&gt;getType());<br>		declare = llvm::Function::Create(<br>			llvm::FunctionType::get(returnTy, args, <span class="hljs-literal">false</span>),<br>			llvm::Function::ExternalLinkage,<br>			Name,<br>			TheModule);<br>		<span class="hljs-comment">// 给参数设置符号名</span><br>		<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> idx = <span class="hljs-number">0</span>;<br>		<span class="hljs-keyword">auto</span> arg_iter = argumentList.begin();<br>		<span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp; arg : declare-&gt;args()) &#123;<br>			VarDefAST * ty = (VarDefAST *) *arg_iter++;<br>			arg.setName(ty-&gt;getName());<br>		&#125;<br><br>		symbol_enter(Name, SYM_FUNCTION, declare);<br>		<span class="hljs-keyword">return</span> declare;<br>	&#125;<br></code></pre></td></tr></table></figure>
+<p>生成函数代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">llvm::Value * <span class="hljs-title">codegen_body</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">// codegen for method body..</span><br>    llvm::BasicBlock * BB = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;entry&quot;</span>, declare);<br>    Builder.SetInsertPoint(BB);<br><br>    <span class="hljs-comment">// 将参数插入到符号表中</span><br>    scope_enter();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp; Arg : declare-&gt;args()) &#123;<br>        llvm::Value * va_arg = &amp;Arg;<br>        llvm::Value * alloc = Builder.CreateAlloca(va_arg-&gt;getType(), <span class="hljs-number">0</span>, va_arg-&gt;getName());<br>        Builder.CreateStore(va_arg, alloc);<br>        symbol_enter(Arg.getName().str(), SYM_VAR, alloc);<br>    &#125;<br>    <br>    <span class="hljs-comment">// 生成函数块的代码</span><br>    Block-&gt;codegen();<br>    <br>    <span class="hljs-comment">// 检查函数基本块是否正常返回</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp; bb : declare-&gt;getBasicBlockList()) &#123;<br>        llvm::Instruction *Terminator = bb.getTerminator();<br>        <span class="hljs-keyword">if</span> (!Terminator) &#123;<br>            llvm::Type * ty = declare-&gt;getReturnType();<br>            Builder.SetInsertPoint(&amp;bb);<br>            <span class="hljs-keyword">if</span> (ty-&gt;isVoidTy())&#123;<br>                Builder.CreateRetVoid();<br>            &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(ty-&gt;isIntegerTy()) &#123;<br>                <span class="hljs-keyword">if</span>(ty-&gt;getIntegerBitWidth() == <span class="hljs-number">1</span>)<br>                    Builder.CreateRet(Builder.getInt1(<span class="hljs-number">0</span>));<br>                <span class="hljs-keyword">else</span><br>                    Builder.CreateRet(Builder.getInt32(<span class="hljs-number">0</span>));<br>            &#125;<br>        &#125;<br>    &#125;<br>    <br>    scope_leave();<br>    llvm::verifyFunction(*declare);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="布尔表达式短路"><a href="#布尔表达式短路" class="headerlink" title="布尔表达式短路"></a>布尔表达式短路</h2><figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">a <span class="hljs-meta">&amp;&amp; b</span><br></code></pre></td></tr></table></figure>
+<p>若 a 为 false，则不执行 b，返回 a 的值，否则返回 b 的值。</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">a <span class="hljs-string">|| b</span><br></code></pre></td></tr></table></figure>
+<p>若 a 为 false，则执行 b，返回 b 的值，否则返回 a 的值。</p>
+<p>这种实现需要手动插入基本块和 PHI 节点，如下为 &amp;&amp; 的实现代码。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::BasicBlock * bbori = Builder.GetInsertBlock();<br>llvm::Function   * func  = bbori-&gt;getParent();<br>llvm::BasicBlock * bb1   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;And1&quot;</span>, func);<br>llvm::BasicBlock * bb2   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;AndEnd&quot;</span>, func);<br>llvm::BasicBlock * bbcur = <span class="hljs-literal">nullptr</span>;<br>Builder.CreateCondBr(value1, bb1, bb2);<br>Builder.SetInsertPoint(bb1);<br>value2 = RightExpr-&gt;codegen();<br>bbcur  = Builder.GetInsertBlock(); <span class="hljs-comment">// The RHS may create new BBs. </span><br>Builder.CreateBr(bb2);<br>Builder.SetInsertPoint(bb2);<br><br>llvm::PHINode * node = Builder.CreatePHI(getLLVMType(boolTy), <span class="hljs-number">2</span>, <span class="hljs-string">&quot;phiAnd&quot;</span>);<br>node-&gt;addIncoming(value1, bbori);   <span class="hljs-comment">// from original bb.</span><br>node-&gt;addIncoming(value2, bbcur);   <span class="hljs-comment">// from and 2 bb.</span><br><span class="hljs-keyword">return</span> node;<br></code></pre></td></tr></table></figure>
+<p>如下为 || 的实现代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::BasicBlock * bbori = Builder.GetInsertBlock();<br>llvm::Function   * func  = bbori-&gt;getParent();<br>llvm::BasicBlock * bb1   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;Or1&quot;</span>, func);<br>llvm::BasicBlock * bb2   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;OrEnd&quot;</span>, func);<br>llvm::BasicBlock * bbcur = <span class="hljs-literal">nullptr</span>;<br><br>Builder.CreateCondBr(value1, bb2, bb1);<br>Builder.SetInsertPoint(bb1);<br>value2 = RightExpr-&gt;codegen();<br>bbcur  = Builder.GetInsertBlock(); <span class="hljs-comment">// The RHS may create new BBs. </span><br>Builder.CreateBr(bb2);<br>Builder.SetInsertPoint(bb2);<br><br>llvm::PHINode * node = Builder.CreatePHI(getLLVMType(boolTy), <span class="hljs-number">2</span>, <span class="hljs-string">&quot;phiOR&quot;</span>);<br>node-&gt;addIncoming(value1, bbori); <span class="hljs-comment">// from original bb.</span><br>node-&gt;addIncoming(value2, bbcur); <span class="hljs-comment">// from and 2 bb.</span><br><br><span class="hljs-keyword">return</span> node;<br></code></pre></td></tr></table></figure>
+<p>调试过程中发现一个问题，即 a &amp;&amp; b || c 这样的表达式会出现问题，这是因为先计算 a，创建新的BB（bb1） 来放计算 b || c 的代码，而 b || c 又会创建新的BB，addIncoming( , bb1) 这样写就会出问题，因为当前Basic Block 已经不是 bb1 。所以，我在生成 <code>&amp;&amp;</code> /<code> ||</code>运算符右侧表达式后重新获取当前 BB 。</p>
+<h2 id="If-语句"><a href="#If-语句" class="headerlink" title="If 语句"></a>If 语句</h2><p>If 语句的实现要创建3个基本块，<code>ifTrue</code>, <code>ifFalse</code>, <code>ifCont</code> 。 <code>ifCont</code> 就是其余两个基本块的交汇基本块。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">llvm::Value * <span class="hljs-title">codegen</span><span class="hljs-params">()</span> </span>&#123;<br>    llvm::Value      * cond = ConditionExpr-&gt;codegen();<br>    llvm::BasicBlock * BBoriginal = Builder.GetInsertBlock();<br>    llvm::Function   * func    = BBoriginal-&gt;getParent();<br>    llvm::BasicBlock * BBTrue  = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;IfTrue&quot;</span>, func);<br>    llvm::BasicBlock * BBFalse = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;IfFalse&quot;</span>, func);<br>    llvm::BasicBlock * BBCont  = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;IfCont&quot;</span>, func);<br>    Builder.CreateCondBr(cond, BBTrue, BBFalse);<br>    Builder.SetInsertPoint(BBTrue);<br>    IfBlock-&gt;codegen();<br>    <br>    <span class="hljs-comment">// 检查基本块是否有 ret 指令，如果没有才创建 br 跳转到交汇基本块；如果有 ret，则 br 是 unreachable ，没有意义，而且还会导致 llvm 变量序号计算出错.</span><br>    <span class="hljs-keyword">if</span>(!Builder.GetInsertBlock()-&gt;getTerminator())<br>        Builder.CreateBr(BBCont);<br><br>    Builder.SetInsertPoint(BBFalse);<br>    <span class="hljs-keyword">if</span> (ElseBlock) ElseBlock-&gt;codegen();<br>	<br>    <span class="hljs-comment">// 同上</span><br>    <span class="hljs-keyword">if</span>(!Builder.GetInsertBlock()-&gt;getTerminator())<br>        Builder.CreateBr(BBCont);<br><br>    Builder.SetInsertPoint(BBCont);<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="while-语句"><a href="#while-语句" class="headerlink" title="while 语句"></a>while 语句</h2><p>for/while，有两种语法很蛋疼，分别是 <code>break</code> 和 <code>continue</code></p>
+<p>为了实现这两种语法的功能，我们需要将循环开始（条件判断）、循环结束的基本块都添加到符号表中，方便索引。要实现嵌套循环，在 while/for 循环代码生成阶段，我不得不在符号表中创建一个新的 scope。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">llvm::Value * <span class="hljs-title">codegen</span><span class="hljs-params">()</span> </span>&#123;<br>		llvm::BasicBlock * BBori = Builder.GetInsertBlock();<br>		llvm::Function   * func = BBori-&gt;getParent();<br>		llvm::BasicBlock * BBwhileStart = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;whileStart&quot;</span>, func); <span class="hljs-comment">// Create a BB for &#x27;continue&#x27;</span><br>		llvm::BasicBlock * BBwhileBody  = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;whileBody&quot;</span> , func);<br>		llvm::BasicBlock * BBwhileEnd   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;whileEnd&quot;</span>  , func);<br>		<br>    	scope_enter(); <span class="hljs-comment">// 创建新的 scope</span><br>		symbol_enter(<span class="hljs-string">&quot;LoopStart&quot;</span>, SYM_BB, BBwhileStart);  <span class="hljs-comment">//  continue;</span><br>		symbol_enter(<span class="hljs-string">&quot;LoopEnd&quot;</span>,   SYM_BB, BBwhileEnd); <span class="hljs-comment">// break;</span><br>    	Builder.CreateBr(BBwhileStart); <br>    	<span class="hljs-comment">// step 1 条件验证</span><br>		Builder.SetInsertPoint(BBwhileStart); <span class="hljs-comment">//BBori -&gt; BBwhileStart</span><br>		llvm::Value * cond = ConditionExpr-&gt;codegen();<br>		Builder.CreateCondBr(cond, BBwhileBody, BBwhileEnd);<br>    <br>    	<span class="hljs-comment">// step 2 循环体代码生成</span><br>		Builder.SetInsertPoint(BBwhileBody);<br>		WhileBlock-&gt;codegen();<br>		Builder.CreateBr(BBwhileStart);<br>		Builder.SetInsertPoint(BBwhileEnd); <br>		scope_leave(); <span class="hljs-comment">// 退出当前 scope，当前循环的 LoopStart 和 LoopEnd 符号删除..</span><br>		<span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="for-循环"><a href="#for-循环" class="headerlink" title="for 循环"></a>for 循环</h2><p>for 循环稍微麻烦一点，大致可以分为 4 个阶段</p>
+<p>第一个阶段，初始化变量</p>
+<p>第二个阶段，循环条件验证</p>
+<p>第三个阶段，循环体代码生成</p>
+<p>第四个阶段，自增代码生成</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">llvm::Value * <span class="hljs-title">codegen</span><span class="hljs-params">()</span> </span>&#123;<br>    llvm::Function * func = Builder.GetInsertBlock()-&gt;getParent();<br>    llvm::BasicBlock * BBForCond = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;BBForCond&quot;</span>, func);<br>    llvm::BasicBlock * BBForLA   = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;BBForLA&quot;</span>, func);<br>    llvm::BasicBlock * BBForBody = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;BBForBody&quot;</span>, func);<br>    llvm::BasicBlock * BBForEnd  = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;BBForEnd&quot;</span>, func);<br>    <br>    scope_enter();<br>    symbol_enter(<span class="hljs-string">&quot;LoopStart&quot;</span>, SYM_BB, BBForLA); <span class="hljs-comment">// continue</span><br>    symbol_enter(<span class="hljs-string">&quot;LoopEnd&quot;</span>, SYM_BB, BBForEnd); <span class="hljs-comment">// break</span><br>    <span class="hljs-comment">// step 1</span><br>    PreAssignList-&gt;codegen();<br>    Builder.CreateBr(BBForCond);<br>    <br>    <span class="hljs-comment">// step 2</span><br>    Builder.SetInsertPoint(BBForCond);<br>    llvm::Value * cond = Condition-&gt;codegen();<br>    Builder.CreateCondBr(cond, BBForBody, BBForEnd);<br>    <br>    <span class="hljs-comment">// step 3</span><br>    Builder.SetInsertPoint(BBForBody);<br>    ForBlock-&gt;codegen();<br>    <span class="hljs-keyword">if</span>(!Builder.GetInsertBlock()-&gt;getTerminator())<br>        Builder.CreateBr(BBForLA);<br>    <br>    <span class="hljs-comment">// step 4</span><br>    Builder.SetInsertPoint(BBForLA);<br>    LoopAssignList-&gt;codegen();<br>    Builder.CreateBr(BBForCond);<br>    Builder.SetInsertPoint(BBForEnd);<br>    <br>    scope_leave();<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">nullptr</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="debug"><a href="#debug" class="headerlink" title="debug"></a>debug</h2><p>llvm ir 的 api 每个类有一个成员函数 dump() , 可以输出当前对象代表的 ir 文本..</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/homework/">homework</a>
+                    
+                      <a class="hover-with-bg" href="/tags/llvm/">llvm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/03/15/o-llvm-Control-Flow-Flattening/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">o-llvm: Control Flow Flattening</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/27/Exercise-Recognize-hand-written-digits/">
+                        <span class="hidden-mobile">Exercise:Recognize hand-written digits</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

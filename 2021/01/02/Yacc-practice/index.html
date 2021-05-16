@@ -1,0 +1,545 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Yacc practice - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Yacc practice">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-02 19:20" pubdate>
+        January 2, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.9k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Yacc practice</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Yacc-practice"><a href="#Yacc-practice" class="headerlink" title="Yacc practice"></a>Yacc practice</h1><p>Yacc (Yet Another Compiler Compiler) 是一个用于生成语法分析器C代码的程序，一般配合 lex 使用。</p>
+<p> bison 是 GNU 版本的 yacc 实现。</p>
+<h2 id="识别嵌套括号"><a href="#识别嵌套括号" class="headerlink" title="识别嵌套括号"></a>识别嵌套括号</h2><p>lex 代码:  parens.lex</p>
+<figure class="highlight prolog"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs prolog"><span class="hljs-comment">%%</span><br>[ \t]+ &#123; &#125;<br>.  return yytext[<span class="hljs-number">0</span>];<br><span class="hljs-comment">%%</span><br></code></pre></td></tr></table></figure>
+<p>yacc 代码: parens.y</p>
+<figure class="highlight gcode"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs gcode"><span class="hljs-meta">%</span><span class="hljs-meta">%</span><br>S: <span class="hljs-string">&#x27;(&#x27;</span> S <span class="hljs-string">&#x27;)&#x27;</span>|;<br></code></pre></td></tr></table></figure>
+<p>Backus-Naur notation</p>
+<figure class="highlight coq"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs coq">S -&gt; <span class="hljs-string">&quot;(&quot;</span> S <span class="hljs-string">&quot;)&quot;</span> | <span class="hljs-type">&lt;epsilon</span>&gt;<br></code></pre></td></tr></table></figure>
+<p><epsilon> 表示空字符。</p>
+<p>编译方法</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs console">bison -oparens.tab.c -d parens.y<br>flex -oparens.lex.c parens.lex<br>gcc -w -o ./parens parens.tab.c parens.lex.c -ly -ll<br></code></pre></td></tr></table></figure>
+<h2 id="Yacc-actions"><a href="#Yacc-actions" class="headerlink" title="Yacc actions"></a>Yacc actions</h2><p>Yacc 和 Lex 一样，Lex 可以为每一个 regexp 指定 action， yacc 亦可为每一个规则指定 action</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs gams">%%<br>S: <span class="hljs-string">&#x27;(&#x27;</span> S <span class="hljs-string">&#x27;)&#x27;</span> &#123; <span class="hljs-symbol">$</span><span class="hljs-symbol">$</span> = <span class="hljs-symbol">$</span><span class="hljs-number">2</span>+<span class="hljs-number">1</span>; printf(<span class="hljs-string">&quot;%d\n&quot;</span>, <span class="hljs-symbol">$</span><span class="hljs-symbol">$</span>); &#125;<br> | &#123; <span class="hljs-symbol">$</span><span class="hljs-symbol">$</span> = <span class="hljs-number">0</span>; &#125;<br> ;<br></code></pre></td></tr></table></figure>
+<p><code>$$</code> 为左侧 Token 创建的值，用来传递给 parse tree<br><code>$1</code> 右侧第一个 Token 对应的值<br><code>$2</code> 右侧第二个 Token 对应的值, 上面代码中Token S 在 parse tree 中对应的值<br><code>$3</code> 右侧第三个 Token 对应的值</p>
+<p>上面的程序输入 ((())) 输出如下</p>
+<figure class="highlight console"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs console">➜  yacc-practice git:(master) ✗ ./parens <br>((()))<br>1<br>2<br>3<br></code></pre></td></tr></table></figure>
+<h2 id="Simple-Expression-Interpreter"><a href="#Simple-Expression-Interpreter" class="headerlink" title="Simple Expression Interpreter"></a>Simple Expression Interpreter</h2><p>简单的表达式求值例子，只有加减赋值，实现解析 a=1+2+3 。</p>
+<p>yacc 使用 %token 关键字定义 Token 常量，yacc 生成 Token 对应的头文件，lex 可引用 yacc 生成的头文件实现共同分析。</p>
+<p>lex 通过 yylval 变量给 yacc 传递必要的值。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123; <br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt; </span></span><br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">yylex</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> <span class="hljs-title">yyerror</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *)</span></span>;<br>%&#125;<br>%token NAME NUMBER<br><br>%%<br>statement: NAME <span class="hljs-string">&#x27;=&#x27;</span> expression &#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c = %d\n&quot;</span>, $<span class="hljs-number">1</span>, $<span class="hljs-number">3</span>); &#125;<br>     | expression  &#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, $<span class="hljs-number">1</span>); &#125;<br>     ;<br><br>expression: expression <span class="hljs-string">&#x27;+&#x27;</span> NUMBER &#123; $$ = $<span class="hljs-number">1</span> + $<span class="hljs-number">3</span>; &#125;<br>     | expression <span class="hljs-string">&#x27;-&#x27;</span> NUMBER &#123; $$ = $<span class="hljs-number">1</span> - $<span class="hljs-number">3</span>; &#125;<br>     | NUMBER &#123; $$ = $<span class="hljs-number">1</span>; &#125;<br>     ;<br>%%<br></code></pre></td></tr></table></figure>
+<p>lex 文件</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;simple-expr.tab.h&quot;</span> <span class="hljs-comment">// from YACC , USE -d option</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdlib.h&gt;</span></span><br><span class="hljs-keyword">extern</span> <span class="hljs-keyword">int</span> yylval;<br>%&#125;<br>%%<br>[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+   &#123; yylval = atoi(yytext); <span class="hljs-keyword">return</span> NUMBER; &#125;<br>[a-z]    &#123; yylval = yytext[<span class="hljs-number">0</span>]; <span class="hljs-keyword">return</span> NAME; &#125;<br>[ \t\n]  <span class="hljs-comment">/* ignore whitespace */</span><br>.        <span class="hljs-keyword">return</span> yytext[<span class="hljs-number">0</span>];<br>%%<br></code></pre></td></tr></table></figure>
+<p>编译(bison 是 GNU 版本的 YACC 实现，flex 是 GNU 版本的 lex 实现)</p>
+<figure class="highlight nim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs nim">bison -osimple-<span class="hljs-built_in">expr</span>.tab.c -d simple-<span class="hljs-built_in">expr</span>.y<br>flex -osimple-<span class="hljs-built_in">expr</span>.lex.c simple-<span class="hljs-built_in">expr</span>.lex<br>cc -o ./simple-<span class="hljs-built_in">expr</span> simple-<span class="hljs-built_in">expr</span>.tab.c simple-<span class="hljs-built_in">expr</span>.lex.c -ly -lfl<br><br>echo <span class="hljs-string">&quot;a=2+3+5&quot;</span> | ./simple-<span class="hljs-built_in">expr</span><br></code></pre></td></tr></table></figure>
+<p>bison -d 参数指定要输出 <em>simple-expr.tab.h</em> 文件，这个文件包含了必要的定义，可以给 lex 使用，比如 token 的定义。</p>
+<h2 id="simple-varexpr"><a href="#simple-varexpr" class="headerlink" title="simple-varexpr"></a>simple-varexpr</h2><p>上一个例子只求值没有赋值，这个例子是给变量赋值。</p>
+<p>yacc 中数据类型的定义方法如下：</p>
+<p><em>%union</em> 可以改变 yylval 的数据类型。 yylval 默认类型是 int。用 %union 可以将不同类型聚合在一起。</p>
+<p><em>%type</em> 可以为非终结符的附加数据定义数据类型，只能是 <em>%union</em> 中定义的数据类型。</p>
+<p>例如 yacc 中 %union 和 %type 定义如下</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">%<span class="hljs-keyword">union</span> &#123;<br>  <span class="hljs-type">int</span> rvalue; <span class="hljs-comment">/* value of evaluated expression */</span><br>  <span class="hljs-type">int</span> lvalue; <span class="hljs-comment">/* index into symtbl for variable name */</span><br>&#125;<br><br>%token &lt;rvalue&gt; NUMBER<br>%token &lt;lvalue&gt; <span class="hljs-type">NAME</span><br><span class="hljs-meta">%type</span> &lt;rvalue&gt; expression<br></code></pre></td></tr></table></figure>
+<p>非终结符 NUMBER 的类型为 rvalue</p>
+<p>非终结符 NAME 的类型为 lvalue</p>
+<p>非终结符 expression 的类型为  rvalue</p>
+<p>lex 中对 NUMBER 和 NAME 解析赋值方法:yylval.rvalue, yylval.lvalue</p>
+<p>varexpr 完整 yacc 代码如下:</p>
+<figure class="highlight pgsql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs pgsql">%&#123;<br><span class="hljs-meta">#include &lt;stdio.h&gt;</span><br><span class="hljs-meta">#include &lt;stdbool.h&gt;</span><br><span class="hljs-type">int</span> symtbl[<span class="hljs-number">26</span>];<br><span class="hljs-type">bool</span> issym[<span class="hljs-number">26</span>];<br><br><span class="hljs-type">int</span> yylex(<span class="hljs-type">void</span>);<br><span class="hljs-type">int</span> yyerror(<span class="hljs-type">char</span> *);<br>%&#125;<br><br>%<span class="hljs-keyword">union</span> &#123;<br>  <span class="hljs-type">int</span> rvalue; <span class="hljs-comment">/* value of evaluated expression */</span><br>  <span class="hljs-type">int</span> lvalue; <span class="hljs-comment">/* index into symtbl for variable name */</span><br>&#125;<br><br>%token &lt;rvalue&gt; NUMBER<br>%token &lt;lvalue&gt; <span class="hljs-type">NAME</span> <br><br><span class="hljs-meta">%type</span> &lt;rvalue&gt; expression<br><br>%%<br><span class="hljs-keyword">statement</span>: <span class="hljs-type">NAME</span> <span class="hljs-string">&#x27;=&#x27;</span> expression &#123; symtbl[<span class="hljs-meta">$1</span>] = <span class="hljs-meta">$3</span>; issym[<span class="hljs-meta">$1</span>] = <span class="hljs-keyword">true</span>; &#125;<br>         | expression  &#123; printf(&quot;%d\n&quot;, <span class="hljs-meta">$1</span>); &#125;<br>         ;<br><br>expression: expression <span class="hljs-string">&#x27;+&#x27;</span> NUMBER &#123; $$<span class="pgsql"> = <span class="hljs-meta">$1</span> + <span class="hljs-meta">$3</span>; &#125;</span><br><span class="pgsql">         | expression <span class="hljs-string">&#x27;-&#x27;</span> NUMBER &#123; $$</span> = <span class="hljs-meta">$1</span> - <span class="hljs-meta">$3</span>; &#125;<br>         | NUMBER &#123; $$<span class="pgsql"> = <span class="hljs-meta">$1</span>; &#125;</span><br>         ;<br><span class="r">%%</span><br></code></pre></td></tr></table></figure>
+<p>symtbl 用于保存对应符号的值，issym 用于记录对应符号是否定义。</p>
+<p>lex 代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;simple-varexpr.tab.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;math.h&gt;</span></span><br>%&#125;<br><br>%%<br>[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+    &#123; yylval.rvalue = atoi(yytext); <span class="hljs-keyword">return</span> NUMBER; &#125; <span class="hljs-comment">/* convert NUMBER token value to integer */</span><br>[ \t\n]   ;  <span class="hljs-comment">/* ignore whitespace */</span><br>[a-z]     &#123; yylval.lvalue = yytext[<span class="hljs-number">0</span>] - <span class="hljs-string">&#x27;a&#x27;</span>; <span class="hljs-keyword">return</span> NAME; &#125; <span class="hljs-comment">/* convert NAME token into index */</span><br>.         <span class="hljs-keyword">return</span> yytext[<span class="hljs-number">0</span>];<br>%%<br></code></pre></td></tr></table></figure>
+<p>非终结符 NUMBER 的类型是 rvalue，使用 yylval.rvalue 对解析树赋值。</p>
+<p>非终结符 NAME 的类型是 lvalue， 使用 yylval.lvalue 对解析树赋值。</p>
+<h3 id="进一步实现-varexpr"><a href="#进一步实现-varexpr" class="headerlink" title="进一步实现 varexpr"></a>进一步实现 varexpr</h3><p>上面的代码只实现了单行对变量赋值，如何进一步实现多行赋值？如何实现变量引用？实现下面这种输入的解析。</p>
+<figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs jboss-cli"><span class="hljs-keyword">echo</span> <span class="hljs-string">&quot;a=10\nb=a+10&quot;</span> | <span class="hljs-string">./simple-varexpr</span><br></code></pre></td></tr></table></figure>
+<h3 id="实现思路"><a href="#实现思路" class="headerlink" title="实现思路"></a>实现思路</h3><h4 id="多行"><a href="#多行" class="headerlink" title="多行"></a>多行</h4><p>添加一条递归规则:</p>
+<p><code>statementList: statement|statementList statement;</code></p>
+<p>也可以这样写:</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs 1c">statement_list : statement &#x27;\n&#x27; statement_list<br>   <span class="hljs-string">|</span><br>   ;<br></code></pre></td></tr></table></figure>
+<h4 id="符号计算"><a href="#符号计算" class="headerlink" title="符号计算"></a>符号计算</h4><p>添加一条 realNum 规则用来处理值与 NAME，如果是 NAME 则判断是否已经定义。hhh 处理方法可能有点沙雕。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">realNum: NUMBER &#123; $$ = $<span class="hljs-number">1</span>; &#125;<br>      | NAME &#123;<br>        <span class="hljs-keyword">if</span> (!issym[$<span class="hljs-number">1</span>])&#123;<br>          <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Undefined symbol:%c \n&quot;</span>, <span class="hljs-string">&#x27;a&#x27;</span> + $<span class="hljs-number">1</span>);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>          $$ = symtbl[$<span class="hljs-number">1</span>];<br>        &#125;<br>      &#125;<br></code></pre></td></tr></table></figure>
+<p>完整的 yacc 代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdbool.h&gt;</span></span><br><span class="hljs-keyword">int</span> symtbl[<span class="hljs-number">26</span>];<br><span class="hljs-keyword">bool</span> issym[<span class="hljs-number">26</span>];<br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">yylex</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">yyerror</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *)</span></span>;<br>%&#125;<br><br>%<span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>  <span class="hljs-keyword">int</span> rvalue; <span class="hljs-comment">/* value of evaluated expression */</span><br>  <span class="hljs-keyword">int</span> lvalue; <span class="hljs-comment">/* index into symtbl for variable name */</span><br>&#125;<br><br>%token &lt;rvalue&gt; NUMBER<br>%token &lt;lvalue&gt; NAME <br><br>%type &lt;rvalue&gt; expression<br>%type &lt;rvalue&gt; realNum<br><br>%%<br>statementList: statement|statementList statement;<br>statement: NAME <span class="hljs-string">&#x27;=&#x27;</span> expression &#123; symtbl[$<span class="hljs-number">1</span>] = $<span class="hljs-number">3</span>; issym[$<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%c = %d\n&quot;</span>, $<span class="hljs-number">1</span> + <span class="hljs-string">&#x27;a&#x27;</span>, $<span class="hljs-number">3</span>); &#125;<br>         | expression  &#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, $<span class="hljs-number">1</span>);  &#125;<br>         ;<br><br>expression: expression <span class="hljs-string">&#x27;+&#x27;</span> realNum &#123; $$ = $<span class="hljs-number">1</span> + $<span class="hljs-number">3</span>;&#125;<br>         | expression <span class="hljs-string">&#x27;-&#x27;</span> realNum &#123; $$ = $<span class="hljs-number">1</span> - $<span class="hljs-number">3</span>; &#125;<br>         | realNum<br>         ;<br><br>realNum: NUMBER &#123; $$ = $<span class="hljs-number">1</span>; &#125;<br>      | NAME &#123;<br>        <span class="hljs-keyword">if</span> (!issym[$<span class="hljs-number">1</span>])&#123;<br>          <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Undefined symbol:%c \n&quot;</span>, <span class="hljs-string">&#x27;a&#x27;</span> + $<span class="hljs-number">1</span>);<br>        &#125;<span class="hljs-keyword">else</span>&#123;<br>          $$ = symtbl[$<span class="hljs-number">1</span>];<br>        &#125;<br>      &#125;<br>%%<br></code></pre></td></tr></table></figure>
+<h2 id="Adding-Functions-to-your-Expression-Interpreter"><a href="#Adding-Functions-to-your-Expression-Interpreter" class="headerlink" title="Adding Functions to your Expression Interpreter"></a>Adding Functions to your Expression Interpreter</h2><p>实现 exp, sqrt, log 等函数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">a = <span class="hljs-number">2.0</span><br>b = <span class="hljs-built_in">exp</span>(a)<br></code></pre></td></tr></table></figure>
+<p>实现思路很简单，添加 exp, sqrt, log 对应的 token, 语法分析阶段添加对应的规则。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;exprdefs.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdio&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">yylex</span><span class="hljs-params">(<span class="hljs-keyword">void</span>)</span></span>;<br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">yyerror</span><span class="hljs-params">(<span class="hljs-keyword">char</span> *)</span></span>; <br><br> <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br> <span class="hljs-keyword">double</span> symtbl[<span class="hljs-number">26</span>];<br> <span class="hljs-keyword">bool</span> issym[<span class="hljs-number">26</span>];<br><br>%&#125;<br><br>%<span class="hljs-class"><span class="hljs-keyword">union</span> &#123;</span><br>  <span class="hljs-keyword">int</span> rvalue; <span class="hljs-comment">/* int value of evaluated expression */</span><br>  <span class="hljs-keyword">double</span> dbl_rvalue; <span class="hljs-comment">/* value of type double for evaluated expression */</span><br>  <span class="hljs-keyword">int</span> lvalue; <span class="hljs-comment">/* index into symtbl for variable name */</span><br>&#125;<br><br>%token &lt;dbl_rvalue&gt; T_DOUBLE<br>%token &lt;rvalue&gt; T_NUMBER<br>%token &lt;lvalue&gt; T_NAME<br>%token T_EXP T_SQRT T_LOG<br><br>%type &lt;dbl_rvalue&gt; expression<br><br>%%<br>statement_list : statement <span class="hljs-string">&#x27;\n&#x27;</span> statement_list<br>   |<br>   ;<br><br>statement: T_NAME <span class="hljs-string">&#x27;=&#x27;</span> expression &#123; symtbl[$<span class="hljs-number">1</span>] = $<span class="hljs-number">3</span>; issym[$<span class="hljs-number">1</span>] = <span class="hljs-literal">true</span>; &#125;<br>   | expression  &#123; <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%lf\n&quot;</span>, $<span class="hljs-number">1</span>); &#125;<br>   ;<br><br>expression: expression <span class="hljs-string">&#x27;+&#x27;</span> T_NUMBER &#123; $$ = $<span class="hljs-number">1</span> + $<span class="hljs-number">3</span>; &#125;<br>   | expression <span class="hljs-string">&#x27;-&#x27;</span> T_NUMBER &#123; $$ = $<span class="hljs-number">1</span> - $<span class="hljs-number">3</span>; &#125;<br>   | expression <span class="hljs-string">&#x27;+&#x27;</span> T_DOUBLE &#123; $$ = $<span class="hljs-number">1</span> + $<span class="hljs-number">3</span>; &#125;<br>   | expression <span class="hljs-string">&#x27;-&#x27;</span> T_DOUBLE &#123; $$ = $<span class="hljs-number">1</span> - $<span class="hljs-number">3</span>; &#125;<br>   | expression <span class="hljs-string">&#x27;+&#x27;</span> T_NAME <br>	 &#123; <br>	    <span class="hljs-keyword">if</span> (issym[$<span class="hljs-number">3</span>]) &#123; $$ = $<span class="hljs-number">1</span> + symtbl[$<span class="hljs-number">3</span>]; &#125; <br>	    <span class="hljs-keyword">else</span> &#123; <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: variable %c not previously defined\n&quot;</span>, $<span class="hljs-number">3</span>+<span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>); &#125;<br>	 &#125;<br>   | expression <span class="hljs-string">&#x27;-&#x27;</span> T_NAME <br>	 &#123; <br>	    <span class="hljs-keyword">if</span> (issym[$<span class="hljs-number">3</span>]) &#123; $$ = $<span class="hljs-number">1</span> - symtbl[$<span class="hljs-number">3</span>]; &#125; <br>	    <span class="hljs-keyword">else</span> &#123; <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: variable %c not previously defined\n&quot;</span>, $<span class="hljs-number">3</span>+<span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>); &#125;<br>	 &#125;<br>   | T_NUMBER &#123; $$ = $<span class="hljs-number">1</span>; &#125;<br>   | T_DOUBLE &#123; $$ = $<span class="hljs-number">1</span>; &#125;<br>   | T_NAME <br>	 &#123; <br>	    <span class="hljs-keyword">if</span> (issym[$<span class="hljs-number">1</span>]) &#123; $$ = symtbl[$<span class="hljs-number">1</span>]; &#125; <br>	    <span class="hljs-keyword">else</span> &#123; <span class="hljs-built_in">fprintf</span>(<span class="hljs-built_in">stderr</span>, <span class="hljs-string">&quot;Error: variable %c not previously defined\n&quot;</span>, $<span class="hljs-number">1</span>+<span class="hljs-string">&#x27;a&#x27;</span>); <span class="hljs-built_in">exit</span>(<span class="hljs-number">1</span>); &#125;<br>	 &#125;<br>   | T_EXP <span class="hljs-string">&#x27;(&#x27;</span> expression <span class="hljs-string">&#x27;)&#x27;</span> &#123; $$ = <span class="hljs-built_in">exp</span>($<span class="hljs-number">3</span>); &#125;<br>   | T_SQRT <span class="hljs-string">&#x27;(&#x27;</span> expression <span class="hljs-string">&#x27;)&#x27;</span> &#123; $$ = <span class="hljs-built_in">sqrt</span>($<span class="hljs-number">3</span>); &#125;<br>   | T_LOG <span class="hljs-string">&#x27;(&#x27;</span> expression <span class="hljs-string">&#x27;)&#x27;</span> &#123; $$ = <span class="hljs-built_in">log</span>($<span class="hljs-number">3</span>); &#125;<br>   ;<br><br>%%<br></code></pre></td></tr></table></figure>
+<p>lex 代码如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs c++">%&#123;<br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;exprdefs.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;expr-interpreter.tab.h&quot;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span><br><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cstdlib&gt;</span></span><br><br>  <span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;<br><br>  <span class="hljs-keyword">extern</span> <span class="hljs-keyword">double</span> symtbl[<span class="hljs-number">26</span>];<br><br>%&#125;<br><br>%%<br><span class="hljs-built_in">exp</span>       &#123; <span class="hljs-keyword">return</span> T_EXP; &#125;<br><span class="hljs-built_in">sqrt</span>      &#123; <span class="hljs-keyword">return</span> T_SQRT; &#125;<br><span class="hljs-built_in">log</span>       &#123; <span class="hljs-keyword">return</span> T_LOG; &#125;<br>[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]*\.[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+  &#123; yylval.dbl_rvalue = atof(yytext); <span class="hljs-keyword">return</span> T_DOUBLE; &#125; <span class="hljs-comment">/* convert token value to double */</span><br>[<span class="hljs-number">0</span><span class="hljs-number">-9</span>]+    &#123; yylval.rvalue = atoi(yytext); <span class="hljs-keyword">return</span> T_NUMBER; &#125; <span class="hljs-comment">/* convert token value to integer */</span><br>[ \t]     ;  <span class="hljs-comment">/* ignore whitespace */</span><br>[a-z]     &#123; yylval.lvalue = yytext[<span class="hljs-number">0</span>] - <span class="hljs-string">&#x27;a&#x27;</span>; <span class="hljs-keyword">return</span> T_NAME; &#125; <span class="hljs-comment">/* convert token into index */</span><br>\n |<br>.         <span class="hljs-keyword">return</span> yytext[<span class="hljs-number">0</span>];<br>%%<br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="实现优先级和结合性"><a href="#实现优先级和结合性" class="headerlink" title="实现优先级和结合性"></a>实现优先级和结合性</h2><p>参考文章:<a target="_blank" rel="noopener" href="https://www.epaperpress.com/lexandyacc/pry2.html">https://www.epaperpress.com/lexandyacc/pry2.html</a></p>
+<p>添加运算符 * /</p>
+<p>yacc 使用 %left (%right 右结合) 指定运算符优先级</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mel">%left <span class="hljs-string">&#x27;+&#x27;</span> <span class="hljs-string">&#x27;-&#x27;</span><br>%left <span class="hljs-string">&#x27;*&#x27;</span> <span class="hljs-string">&#x27;/&#x27;</span><br>%left UMINUS<br><br></code></pre></td></tr></table></figure>
+<p>改写规则如下</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">expression:realNum<br>         | expression <span class="hljs-string">&#x27;+&#x27;</span> expression &#123; $$ = $<span class="hljs-number">1</span> + $<span class="hljs-number">3</span>; &#125;<br>         | expression <span class="hljs-string">&#x27;-&#x27;</span> expression &#123; $$ = $<span class="hljs-number">1</span> - $<span class="hljs-number">3</span>; &#125;<br>         | expression <span class="hljs-string">&#x27;*&#x27;</span> expression &#123; $$ = $<span class="hljs-number">1</span> * $<span class="hljs-number">3</span>; &#125;<br>         | expression <span class="hljs-string">&#x27;/&#x27;</span> expression &#123; $$ = $<span class="hljs-number">1</span> / $<span class="hljs-number">3</span>; &#125;<br>         | <span class="hljs-string">&#x27;-&#x27;</span> expression %prec UMINUS &#123; $$ = -$<span class="hljs-number">2</span>; &#125;<br>         | <span class="hljs-string">&#x27;(&#x27;</span> expression <span class="hljs-string">&#x27;)&#x27;</span> &#123; $$ = $<span class="hljs-number">2</span>; &#125; <br>         ;<br></code></pre></td></tr></table></figure>
+<p>注意一元运算符比较特殊</p>
+<figure class="highlight mel"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs mel">%left UMINUS<br>.....<br><span class="hljs-string">&#x27;-&#x27;</span> <span class="hljs-keyword">expression</span> %prec UMINUS &#123; $$ = -$2; &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><p><a target="_blank" rel="noopener" href="http://anoopsarkar.github.io/compilers-class/yacc-practice.html">http://anoopsarkar.github.io/compilers-class/yacc-practice.html</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.jianshu.com/p/1fe5a61fd9dc">https://www.jianshu.com/p/1fe5a61fd9dc</a></p>
+<p><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/1853204/yylval-and-union">https://stackoverflow.com/questions/1853204/yylval-and-union</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.epaperpress.com/lexandyacc/calc2.html">https://www.epaperpress.com/lexandyacc/calc2.html</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/homework/">homework</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/03/Context-Free-Grammars/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Context-Free Grammars</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2020/12/31/lexical/">
+                        <span class="hidden-mobile">Lexical Analysis</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

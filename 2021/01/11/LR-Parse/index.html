@@ -1,0 +1,658 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>LR Parse - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LR Parse">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-11 00:12" pubdate>
+        January 11, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LR Parse</h1>
+            
+            <div class="markdown-body">
+              <h1 id="LR-Parse"><a href="#LR-Parse" class="headerlink" title="LR Parse"></a>LR Parse</h1><p>个人学习理解，可能有许多理解或者表达上的错误，若有发现错误，欢迎帮我纠正～</p>
+<p>L: left to right parsing<br>R: rightmost derivation</p>
+<p>LR 分析器结构</p>
+<ul>
+<li>Table-based</li>
+<li>Actions<ul>
+<li>Shift （移进）</li>
+<li>Reduce （归约）</li>
+</ul>
+</li>
+<li>Data Structures<ul>
+<li>Stack of states/symbols {s}</li>
+<li>Action table: action[s, a]; a是终结符</li>
+<li>Goto table: goto[s, X]; X是非终结符</li>
+</ul>
+</li>
+</ul>
+<p>LR(K) 代表: 从左至右分析、最右边推导、超前查看 k 个单词</p>
+<h2 id="Bottom-up-自底向上的分析"><a href="#Bottom-up-自底向上的分析" class="headerlink" title="Bottom-up 自底向上的分析"></a>Bottom-up 自底向上的分析</h2><img src="/2021/01/11/LR-Parse/image-20210109173502058.png" srcset="/img/loading.gif" class="" title="image-20210109173502058">
+
+<p>Bottom-up 方式，最终得到的是开始符号<code>s</code>， 换句话讲，构建语法分析树的时候，从叶子结点得到根，如图</p>
+<img src="/2021/01/11/LR-Parse/Parsing1.png" srcset="/img/loading.gif" class="" title="img">
+
+<p><code>LR</code> 就是一种常见的使用 <code>bottom-up</code>分析的 语法分析器。 </p>
+<p>Bottom-up  语法分析器的分类</p>
+<img src="/2021/01/11/LR-Parse/Parsing2.png" srcset="/img/loading.gif" class="" title="img">
+<p>LR(0) -&gt; SLR(1) -&gt;  LR(1) -&gt; LALR(1)</p>
+<h2 id="Shift-amp-Reduce"><a href="#Shift-amp-Reduce" class="headerlink" title="Shift &amp; Reduce"></a>Shift &amp; Reduce</h2><p>移进（Shift）、归约（Reduce）是 LR 分析器工作中对输入符号进行处理的两种操作。</p>
+<p>移进（Shift）操作：将输入的符号压入到 LR 分析栈。<br>归约 （Reduce）操作：将 LR 分析栈顶部的某一项或多项用某个产生式归约。换句话说，若栈顶的某些项符合某条产生式的右部，则将这几项出栈，然后将产生式的左部入栈。例如，栈顶有 ABC 三项， 有产生式<code>P -&gt; A B C</code>  则将 A B C 出栈，将 P 入栈，最终栈中只剩下 P。</p>
+<p>Action table 和 Goto table 用来指导 LR 分析器进行 Shift 还是 Reduce 操作。</p>
+<h2 id="Action-amp-Goto-Table"><a href="#Action-amp-Goto-Table" class="headerlink" title="Action &amp; Goto Table"></a>Action &amp; Goto Table</h2><p>这就有点像有限自动机了， LR 分析栈中的值实际上是状态的 ID。</p>
+<img src="/2021/01/11/LR-Parse/image-20210110201419029.png" srcset="/img/loading.gif" class="" title="image-20210110201419029">
+<img src="/2021/01/11/LR-Parse/image-20210110201454665.png" srcset="/img/loading.gif" class="" title="image-20210110201454665">
+<h3 id="action-表的说明：-action-s-a"><a href="#action-表的说明：-action-s-a" class="headerlink" title="action 表的说明： action[s, a]"></a>action 表的说明： action[s, a]</h3><p>s: State ，类似 DFA 中的状态，输入符号可以转移状态。<br>a: 符号，类似 DFA 中的符号，输入符号可以转移状态。</p>
+<p>每一行都是一个状态( State ), 列是非终结符和终结符组成，非终结符部分构成 Goto 表，用来记录归约后切换的目标状态。</p>
+<p>action 表的值有 4 种类型:</p>
+<ul>
+<li>SX : Shift X   X代表状态的 ID<ul>
+<li>push state X  把 X 状态压入到分析栈</li>
+<li>read new a 读取一个新的字符 a</li>
+</ul>
+</li>
+<li>RX: Reduce X <ul>
+<li>使用产生式 X: $P-&gt;Y_1Y_2…Y_k$ 归约</li>
+<li>弹出栈中 k 项，后取栈顶状态 u</li>
+<li>压栈：  goto [ u, P ]</li>
+</ul>
+</li>
+<li>A： Accept 识别句子成功</li>
+<li>无值：语法错误</li>
+</ul>
+<h3 id="Goto-表，goto-u-p"><a href="#Goto-表，goto-u-p" class="headerlink" title="Goto 表，goto [ u, p ]"></a>Goto 表，goto [ u, p ]</h3><p>u 是归约后栈顶的状态 ID，P 是非终结符，其实就相当于切换到状态 u 中 P 非终结符的表格的值对应的状态。</p>
+<h2 id="Action-Goto-表的构造算法"><a href="#Action-Goto-表的构造算法" class="headerlink" title="Action/Goto 表的构造算法"></a>Action/Goto 表的构造算法</h2><p>这一块很抽象，涉及到很多离散数学中的理论，目前我还没系统学习离散数学，理解和表达可能有一些偏差和错误。</p>
+<p>构造思路与 NFA 转 DFA 所采用的子集构造法类似。首先找出文法中独立的状态，然后计算每个状态对字母表中每一个字符的转移状态，最后合成一张表。</p>
+<h3 id="Configuration-Set"><a href="#Configuration-Set" class="headerlink" title="Configuration Set"></a>Configuration Set</h3><ul>
+<li>每一个集合代表一个状态</li>
+</ul>
+<h3 id="“点”-记号"><a href="#“点”-记号" class="headerlink" title="“点” 记号"></a>“点” 记号</h3><p>$T-&gt;T·F$</p>
+<p>这里的 <code>·</code>是记号，在 F 的左侧，可以预测所有 F 可以推出的产生式，例如:<br>$T-&gt;T·F$<br>$F-&gt;·(T)$<br>$F-&gt;·id$<br>这些产生式构成的集合就是 Configuration Set</p>
+<h3 id="Closure"><a href="#Closure" class="headerlink" title="Closure"></a>Closure</h3><ul>
+<li><p>Closure 性质<br>如果 $T-&gt;X_1…X_i·X_{i+1}…X_n$ 在集合中，$X_{i+1}$是非终结符，那么$X_{i+1}-&gt;·Y_1Y_2…Y_n$ 也在该集合中。</p>
+<p>若 $Y_1$ 是非终结符，则继续像集合中添加 $Y_1-&gt;·Z_1Z_2Z_3…Z_n$ 直到 <code>·</code>遇到终结符。</p>
+</li>
+<li><p>Configuration 初始： $closure(S’-&gt;·S)$ </p>
+</li>
+<li><p>Compute as fixed point</p>
+</li>
+</ul>
+<p>Closure 计算例子</p>
+<img src="/2021/01/11/LR-Parse/image-20210110224340022.png" srcset="/img/loading.gif" class="" title="image-20210110224340022">
+
+<h3 id="Successor-I-X"><a href="#Successor-I-X" class="headerlink" title="Successor(I, X)"></a>Successor(I, X)</h3><p>移动 Configuration Set 中点的位置。</p>
+<ul>
+<li>保留所有“点”后面是 X 的产生式，$$X \in (N \cup T)$$</li>
+<li>将“点”向右移动一个字符</li>
+<li>重新计算闭包</li>
+</ul>
+<p>例如 Successor(I, ‘(‘) 这里的 I 是 Closure 例子中 I 集合</p>
+<p>I 中只有 $F-&gt;·(T)$ 满足“点”后面的字符是“(” ，将“点”的位置向右移动 1 个字符，计算 $closure({F-&gt;(·T)})$ 作为结果</p>
+<img src="/2021/01/11/LR-Parse/image-20210110231017396.png" srcset="/img/loading.gif" class="" title="image-20210110231017396">
+
+<h3 id="合在一起，求-G-的所有-states"><a href="#合在一起，求-G-的所有-states" class="headerlink" title="合在一起，求 G 的所有 states"></a>合在一起，求 G 的所有 states</h3><img src="/2021/01/11/LR-Parse/image-20210110234117460.png" srcset="/img/loading.gif" class="" title="image-20210110234117460">
+
+<h3 id="构造例子"><a href="#构造例子" class="headerlink" title="构造例子"></a>构造例子</h3><img src="/2021/01/11/LR-Parse/image-20210111000532297.png" srcset="/img/loading.gif" class="" title="image-20210111000532297">
+
+<p>构造的Action/Goto表如下</p>
+<img src="/2021/01/11/LR-Parse/image-20210111000652699.png" srcset="/img/loading.gif" class="" title="image-20210111000652699">
+
+
+
+
+
+
+<h3 id="Viable-Prefix-in-Bottom-up-（不知道这个有什么用，先挂这）"><a href="#Viable-Prefix-in-Bottom-up-（不知道这个有什么用，先挂这）" class="headerlink" title="Viable Prefix in Bottom-up （不知道这个有什么用，先挂这）"></a>Viable Prefix in Bottom-up （不知道这个有什么用，先挂这）</h3><h4 id="两个概念"><a href="#两个概念" class="headerlink" title="两个概念"></a>两个概念</h4><ul>
+<li>Viable Prefix</li>
+<li>Handle</li>
+</ul>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h4><figure class="highlight arcade"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs arcade">A=&gt;B+<span class="hljs-function"><span class="hljs-params">id</span>=&gt;</span>(E)+id  <br>(rightmost derivation) <br></code></pre></td></tr></table></figure>
+<table>
+<thead>
+<tr>
+<th>Operation performed</th>
+<th align="left">Stack</th>
+<th>Comments</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>(.E)+id</td>
+<td align="left">(</td>
+<td>shift (</td>
+</tr>
+<tr>
+<td>(E.)+id</td>
+<td align="left">( E</td>
+<td>shift E</td>
+</tr>
+<tr>
+<td>(E).+id</td>
+<td align="left">( E )</td>
+<td>shift )</td>
+</tr>
+<tr>
+<td>B.+id</td>
+<td align="left">B</td>
+<td>reduce (E) to B</td>
+</tr>
+<tr>
+<td>B+.id</td>
+<td align="left">B +</td>
+<td>shift +</td>
+</tr>
+<tr>
+<td>B+id.</td>
+<td align="left">B + id</td>
+<td>shift id</td>
+</tr>
+<tr>
+<td>A</td>
+<td align="left">A</td>
+<td>reduce B + id to A</td>
+</tr>
+</tbody></table>
+<p>得到 <code>(E).+id</code>  的下一步  <code>(E)+ </code> 不在 Stack 中，取而代之的是 <code>B +</code> , 这是因为 <code>(E)</code> 是一个 <code>handle</code> ,  Stack 中的所有元素不能在 <code>handle</code> 的上入栈。</p>
+<p><code>(</code>,<code>(E</code>,<code>(E)</code> 都是 <code>(E) handle</code> 的 <code>viable prefix</code></p>
+<p><code>Shift Reduce Parser</code> 的 Stack 中只能放 <code>viable prefix</code>, 遇到 <code>handle</code> 要进行 <code>reduce</code> 操作。</p>
+<p>通俗点讲，Parser 在工作的时候，对输入符号序列执行 shift 操作，直到遇到一个 handle。遇到 一个 handle 用相应的产生式(production)把 handle 替换成对应的非终结符，<code>Bottom-up</code> 用 <code>right-side</code> 替换 <code>left-side</code>。</p>
+<p><code>viable prefixes </code> 用来辅助 Parser 决定 shift / reduce 操作。</p>
+<h2 id="Referrence"><a href="#Referrence" class="headerlink" title="Referrence"></a>Referrence</h2><p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/viable-prefix-in-bottom-up-parsing/">https://www.geeksforgeeks.org/viable-prefix-in-bottom-up-parsing/</a></p>
+<p><a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/shift-reduce-parser-compiler/">https://www.geeksforgeeks.org/shift-reduce-parser-compiler/</a></p>
+<p><a target="_blank" rel="noopener" href="http://anoopsarkar.github.io/compilers-class/assets/lectures/lr2-lr_0-parsing.pdf">http://anoopsarkar.github.io/compilers-class/assets/lectures/lr2-lr_0-parsing.pdf</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/note/">note</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/01/18/StarCTF-Reverse-writeUp/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">StarCTF Reverse writeUp</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/03/Context-Free-Grammars/">
+                        <span class="hidden-mobile">Context-Free Grammars</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>LLVM Practice - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="LLVM Practice">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-01-31 20:47" pubdate>
+        January 31, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">LLVM Practice</h1>
+            
+            <div class="markdown-body">
+              <h1 id="LLVM-Practice"><a href="#LLVM-Practice" class="headerlink" title="LLVM Practice"></a>LLVM Practice</h1><p>Decaf 语言要用 LLVM 作为后端，生成机器代码。我本人对 LLVM 相关的 API 也十分感兴趣。这篇文章记录我学习 LLVM 的过程及相关代码片段。</p>
+<h2 id="编译-LLVM"><a href="#编译-LLVM" class="headerlink" title="编译 LLVM"></a>编译 LLVM</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">git clone http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/llvm/llvm-project.git<br><span class="hljs-keyword">cd</span> llvm-project<br><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-keyword">cd</span> build<br>cmake -G <span class="hljs-string">&quot;Unix Makefiles&quot;</span> ../llvm<br><span class="hljs-keyword">make</span> -j16<br></code></pre></td></tr></table></figure>
+<p>编译完成后可以在 build/bin 中找到 llvm 相关的 bin 文件。</p>
+<h2 id="如何运行-LLVM-assembly-代码？"><a href="#如何运行-LLVM-assembly-代码？" class="headerlink" title="如何运行 LLVM assembly 代码？"></a>如何运行 LLVM assembly 代码？</h2><p><code>llvm-as</code> 程序将 LLVM assembly 编译成 LLVM bitcode</p>
+<p><code>llc</code> 程序将 LLVM bitcode 编译成 x86 assembly，得到 .s 文件</p>
+<p>LLVM assembly 运行脚本： run-llvm-code.sh</p>
+<p>decaf-stdlib.c 文件封装了 decaf 语言的相关库函数。</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sh">llvmconfig=/Users/pandaos/llvm-project/build/bin/llvm-config<br>b=`basename -s .ll <span class="hljs-variable">$1</span>`<br>`<span class="hljs-variable">$llvmconfig</span> --bindir`/llvm-as <span class="hljs-variable">$1</span>  <span class="hljs-comment"># convert LLVM assembly to bitcode</span><br>`<span class="hljs-variable">$llvmconfig</span> --bindir`/llc <span class="hljs-variable">$b</span>.bc   <span class="hljs-comment"># convert LLVM bitcode to x86 assembly</span><br>clang <span class="hljs-variable">$b</span>.s decaf-stdlib.c -o <span class="hljs-variable">$b</span><br>./<span class="hljs-variable">$b</span><br>rm -f <span class="hljs-variable">$b</span>.bc <span class="hljs-variable">$b</span>.s <span class="hljs-variable">$b</span><br></code></pre></td></tr></table></figure>
+<p>使用例子: <code>./run-llvm-code.sh helloworld.ll </code></p>
+<figure class="highlight llvm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs llvm"><span class="hljs-comment">; Declare the string constant as a global constant. </span><br><span class="hljs-comment">; run the following command to run this LLVM assembly program:</span><br><span class="hljs-comment">; sh run-llvm-code.sh helloworld.ll </span><br><span class="hljs-title">@LC0</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">internal</span> <span class="hljs-keyword">constant</span> [<span class="hljs-number">13</span> <span class="hljs-keyword">x</span> <span class="hljs-type">i8</span>] <span class="hljs-keyword">c</span><span class="hljs-string">&quot;hello world\0A\00&quot;</span><br><span class="hljs-comment">; note how the newline character is inserted into the string</span><br><br><span class="hljs-comment">; External declaration of the puts function </span><br><span class="hljs-keyword">declare</span> <span class="hljs-type">i32</span> <span class="hljs-title">@puts</span>(<span class="hljs-type">i8</span>*)<br><br><span class="hljs-comment">; Definition of main function</span><br><span class="hljs-keyword">define</span> <span class="hljs-type">i32</span> <span class="hljs-title">@main</span>() &#123;<br>  <span class="hljs-comment">; Convert [13 x i8]* to i8*</span><br>  <span class="hljs-comment">; this is because the function puts takes a char* which is an i8* in LLVM</span><br>  <span class="hljs-variable">%cast</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">getelementptr</span> [<span class="hljs-number">13</span> <span class="hljs-keyword">x</span> <span class="hljs-type">i8</span>]<span class="hljs-punctuation">,</span> [<span class="hljs-number">13</span> <span class="hljs-keyword">x</span> <span class="hljs-type">i8</span>]* <span class="hljs-title">@LC0</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i8</span> <span class="hljs-number">0</span><span class="hljs-punctuation">,</span> <span class="hljs-type">i8</span> <span class="hljs-number">0</span><br>  <span class="hljs-comment">; read up on getelementptr: http://llvm.org/docs/GetElementPtr.html</span><br><br>  <span class="hljs-comment">; Call puts function to write out the char* string to stdout. </span><br>  <span class="hljs-keyword">call</span> <span class="hljs-type">i32</span> <span class="hljs-title">@puts</span>(<span class="hljs-type">i8</span>* <span class="hljs-variable">%cast</span>)<br>  <span class="hljs-keyword">ret</span> <span class="hljs-type">i32</span> <span class="hljs-number">0</span> <br>&#125;<br><br></code></pre></td></tr></table></figure>
+<h2 id="CMake-项目中嵌入-LLVM-库"><a href="#CMake-项目中嵌入-LLVM-库" class="headerlink" title="CMake 项目中嵌入 LLVM 库"></a>CMake 项目中嵌入 LLVM 库</h2><p>Clion 使用 CMake 作为项目的构建工具，使用 CMake 引用 LLVM 非常方便。</p>
+<figure class="highlight cmake"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs cmake"><span class="hljs-comment"># llvm settings.</span><br><span class="hljs-keyword">set</span>(LLVM_DIR /Users/pandaos/llvm-<span class="hljs-keyword">project</span>/build/lib/cmake/llvm) <span class="hljs-comment"># 默认安装则不用设置 LLVM_DIR</span><br><span class="hljs-keyword">find_package</span>(LLVM REQUIRED CONFIG)<br><span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Found LLVM $&#123;LLVM_PACKAGE_VERSION&#125;&quot;</span>)<br><span class="hljs-keyword">message</span>(STATUS <span class="hljs-string">&quot;Using LLVMConfig.cmake in: $&#123;LLVM_DIR&#125;&quot;</span>)<br><span class="hljs-keyword">include_directories</span>(<span class="hljs-variable">$&#123;LLVM_INCLUDE_DIRS&#125;</span>)<br><span class="hljs-keyword">add_definitions</span>(<span class="hljs-variable">$&#123;LLVM_DEFINITIONS&#125;</span>)<br><span class="hljs-keyword">add_executable</span>(llvm_test main.cpp) <span class="hljs-comment"># llvm_test 是 project name</span><br><span class="hljs-comment"># Link against LLVM libraries</span><br><span class="hljs-keyword">target_link_libraries</span>(llvm_test <span class="hljs-variable">$&#123;llvm_libs&#125;</span>)<span class="hljs-comment"># llvm_test 是 project name</span><br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="LLVM-C-API"><a href="#LLVM-C-API" class="headerlink" title="LLVM C++ API"></a>LLVM C++ API</h2><p>这一部分主要是如何利用 LLVM API 生成中间代码。</p>
+<h3 id="头文件"><a href="#头文件" class="headerlink" title="头文件"></a>头文件</h3><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs awk">llvm<span class="hljs-regexp">/IR/</span>DerivedTypes.h<br>llvm<span class="hljs-regexp">/IR/</span>LLVMContext.h<br>llvm<span class="hljs-regexp">/IR/</span>Module.h<br>llvm<span class="hljs-regexp">/IR/</span>Type.h<br>llvm<span class="hljs-regexp">/IR/</span>Verifier.h<br>llvm<span class="hljs-regexp">/IR/</span>IRBuilder.h<br></code></pre></td></tr></table></figure>
+<h3 id="TheModule"><a href="#TheModule" class="headerlink" title="TheModule"></a>TheModule</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// this global variable contains all the generated code</span><br><span class="hljs-keyword">static</span> llvm::Module *TheModule;<br><span class="hljs-keyword">static</span> llvm::LLVMContext TheContext;<br><span class="hljs-comment">// this is the method used to construct the LLVM intermediate code (IR)</span><br><span class="hljs-keyword">static</span> llvm::IRBuilder&lt;&gt; Builder(TheContext);<br><br><br><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span> </span>&#123;<br>    TheModule = <span class="hljs-keyword">new</span> llvm::Module(<span class="hljs-string">&quot;test1&quot;</span>, TheContext);<br>    <span class="hljs-comment">// ......</span><br>    TheModule-&gt;print(llvm::errs(), <span class="hljs-literal">nullptr</span>); <span class="hljs-comment">// standard error</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>TheModule 里面有所有生成的代码，用下面这种方法可以打印</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">TheModule-&gt;print(llvm::outs(), <span class="hljs-literal">nullptr</span>); <span class="hljs-comment">// standard output</span><br>TheModule-&gt;print(llvm::errs(), <span class="hljs-literal">nullptr</span>); <span class="hljs-comment">// standard error</span><br></code></pre></td></tr></table></figure>
+<h3 id="LLVM-Value"><a href="#LLVM-Value" class="headerlink" title="LLVM Value"></a>LLVM Value</h3><p>LLVM 中的 types, constants, functions 这些都是从 <code>llvm:Value</code> 继承而来。yacc 中，action 之间的数据传递可以用 <code>llvm:Value *</code>。具体使用某一个数据时，可以重新转换成具体的类型，例如<code>llvm:Function*</code>。</p>
+<h3 id="LLVM-Types"><a href="#LLVM-Types" class="headerlink" title="LLVM Types"></a>LLVM Types</h3><table>
+<thead>
+<tr>
+<th>Type</th>
+<th><code>llvm::Type*</code></th>
+<th>Explanation</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>void</td>
+<td>Builder.getVoidTy()</td>
+<td>just a void type</td>
+</tr>
+<tr>
+<td>int</td>
+<td>Builder.getInt32Ty()</td>
+<td>assume 32 bit integers</td>
+</tr>
+<tr>
+<td>bool</td>
+<td>Builder.getInt1Ty()</td>
+<td>a one bit integer</td>
+</tr>
+<tr>
+<td>string</td>
+<td>Builder.getInt8PtrTy()</td>
+<td>pointer to array of bytes (int8)</td>
+</tr>
+</tbody></table>
+<h3 id="LLVM-Constant"><a href="#LLVM-Constant" class="headerlink" title="LLVM Constant"></a>LLVM Constant</h3><p><code>llvm::Constant*</code></p>
+<p>Int32: Builder.getInt32(0)</p>
+<p>bool: Builder.getInt1(0)</p>
+<h3 id="Stack-上分配变量"><a href="#Stack-上分配变量" class="headerlink" title="Stack 上分配变量"></a>Stack 上分配变量</h3><p>一般情况，局部变量都是存储在栈上的。<code>CreateAlloca</code> 在当前插入点创建一个变量，而不是在 Block 入口点创建。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::AllocaInst *Alloca;<br><span class="hljs-comment">// unlike CreateEntryBlockAlloca the following will</span><br><span class="hljs-comment">// create the alloca instr at the current insertion point </span><br><span class="hljs-comment">// rather than at the start of the block</span><br>Alloca = llvm::Builder.CreateAlloca(llvm::IntegerType::get(TheContext, <span class="hljs-number">32</span>), <span class="hljs-number">0</span>, <span class="hljs-string">&quot;variable_name&quot;</span>);<br></code></pre></td></tr></table></figure>
+<p><code>Alloca-&gt;getType()</code> 获取类型</p>
+<p>类型检查：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">const</span> llvm::PointerType *ptrTy = rvalue-&gt;getType()-&gt;getPointerTo();<br><span class="hljs-keyword">if</span> (ptrTy == Alloca-&gt;getType()) .... ;<br><br></code></pre></td></tr></table></figure>
+<p>是不是感觉写法很奇怪？这是因为 <code>Alloca</code> 的类型是实际类型的指针类型。比如我在栈上分配一个int变量，CreateAlloca 返回的是一个 int * </p>
+<p>赋值</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::Value *val = Builder.CreateStore(rvalue, Alloca); <span class="hljs-comment">// Alloca := rvalue</span><br></code></pre></td></tr></table></figure>
+<h3 id="算术操作"><a href="#算术操作" class="headerlink" title="算术操作"></a>算术操作</h3><table>
+<thead>
+<tr>
+<th>OP</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>+</code></td>
+<td>Builder.CreateAdd</td>
+</tr>
+<tr>
+<td><code>-</code></td>
+<td>Builder.CreateSub</td>
+</tr>
+<tr>
+<td><code>*</code></td>
+<td>Builder.CreateMul</td>
+</tr>
+<tr>
+<td><code>/</code></td>
+<td>Builder.CreateSDiv</td>
+</tr>
+<tr>
+<td><code>&lt;&lt;</code></td>
+<td>Builder.CreateShl</td>
+</tr>
+<tr>
+<td><code>&gt;&gt;</code></td>
+<td>Builder.CreateLShr</td>
+</tr>
+<tr>
+<td><code>%</code></td>
+<td>Builder.CreateSRem</td>
+</tr>
+<tr>
+<td><code>&lt;</code></td>
+<td>Builder.CreateICmpSLT</td>
+</tr>
+<tr>
+<td><code>&gt;</code></td>
+<td>Builder.CreateICmpSGT</td>
+</tr>
+<tr>
+<td><code>&lt;=</code></td>
+<td>Builder.CreateICmpSLE</td>
+</tr>
+<tr>
+<td><code>&gt;=</code></td>
+<td>Builder.CreateICmpSGE</td>
+</tr>
+<tr>
+<td><code>&amp;&amp;</code></td>
+<td>Builder.CreateAnd</td>
+</tr>
+<tr>
+<td>`</td>
+<td></td>
+</tr>
+<tr>
+<td><code>==</code></td>
+<td>Builder.CreateICmpEQ</td>
+</tr>
+<tr>
+<td><code>!=</code></td>
+<td>Builder.CreateICmpNE</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+<tr>
+<td>-</td>
+<td>Builder.CreateNeg</td>
+</tr>
+<tr>
+<td>!</td>
+<td>Builder.CreateNot</td>
+</tr>
+</tbody></table>
+<h3 id="函数定义"><a href="#函数定义" class="headerlink" title="函数定义"></a>函数定义</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::Type *returnTy;<br><span class="hljs-comment">// assign the correct Type to returnTy</span><br><br><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;llvm::Type *&gt; args;<br><span class="hljs-comment">// fill up the args vector with types</span><br><br>llvm::Function *func = llvm::Function::Create(<br>    llvm::FunctionType::get(returnTy, args, <span class="hljs-literal">false</span>),<br>    llvm::Function::ExternalLinkage,<br>    Name,<br>    TheModule<br>);<br></code></pre></td></tr></table></figure>
+<p>创建 Basic Block</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// Create a new basic block which contains a sequence of LLVM instructions</span><br>llvm::BasicBlock *BB = llvm::BasicBlock::Create(TheContext, <span class="hljs-string">&quot;entry&quot;</span>, func);<br><span class="hljs-comment">// insert &quot;entry&quot; into symbol table (not used in HW3 but useful in HW4)</span><br><span class="hljs-comment">// All subsequent calls to IRBuilder will place instructions in this location</span><br>Builder.SetInsertPoint(BB);<br></code></pre></td></tr></table></figure>
+<p><code>Builder.SetInsertPoint</code> 很重要，设置 Builder 代码插入位置。</p>
+<p>为参数创建对应的局部变量并添加到符号表，这样就可以用符号的形式访问参数。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> &amp;Arg : func-&gt;args()) &#123;<br>  llvm::AllocaInst *Alloca = CreateEntryBlockAlloca(func, Arg.getName());<br>  <span class="hljs-comment">// Store the initial value into the alloca.</span><br>  Builder.CreateStore(&amp;Arg, Alloca);<br>  <span class="hljs-comment">// Add to symbol table</span><br>  syms.enter_symtbl(Arg.getName(), Alloca);<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>一些辅助函数</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::BasicBlock *CurBB = Builder.GetInsertBlock();<br><span class="hljs-comment">// gives you a link to the current basic block</span><br><br>llvm::Function *func = Builder.GetInsertBlock()-&gt;getParent();<br><span class="hljs-comment">// gives you a pointer to the function definition</span><br><br>func-&gt;getReturnType()<br><span class="hljs-comment">// gives you the return type of the function</span><br></code></pre></td></tr></table></figure>
+<p>插入 return 语句</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-comment">// sometimes the return statement is deep inside the method</span><br><span class="hljs-comment">// so it is useful to retrieve the function we are in without</span><br><span class="hljs-comment">// passing it down to all the AST nodes below the method declaration</span><br>Builder.CreateRet(llvm::Value*)<br></code></pre></td></tr></table></figure>
+<h3 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::Function *call;<br><span class="hljs-comment">// assign this to the pointer to the function to call, </span><br><span class="hljs-comment">// usually loaded from the symbol table</span><br><br><span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;llvm::Value *&gt; args;<br><span class="hljs-comment">// argvals are the values in the method call, </span><br><span class="hljs-comment">// e.g. foo(1) would have a vector of size one with value of 1 with type i32.</span><br><br><span class="hljs-keyword">bool</span> isVoid = call-&gt;getReturnType()-&gt;isVoidTy();<br>llvm::Value *val = Builder.CreateCall(<br>    call,<br>    args,<br>    isVoid ? <span class="hljs-string">&quot;&quot;</span> : <span class="hljs-string">&quot;calltmp&quot;</span><br>);<br></code></pre></td></tr></table></figure>
+<h3 id="i1-到-i32-转换"><a href="#i1-到-i32-转换" class="headerlink" title="i1 到 i32 转换"></a>i1 到 i32 转换</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::Value *promo = Builder.CreateZExt(*i, Builder.getInt32Ty(), <span class="hljs-string">&quot;zexttmp&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="全局字符串"><a href="#全局字符串" class="headerlink" title="全局字符串"></a>全局字符串</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs c++">llvm::GlobalVariable *GS = Builder.CreateGlobalString(s, <span class="hljs-string">&quot;globalstring&quot;</span>);<br>llvm::Value *stringConst = Builder.CreateConstGEP2_32(GS-&gt;getValueType(), GS, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-string">&quot;cast&quot;</span>);<br></code></pre></td></tr></table></figure>
+<h3 id="Static-Single-Assignment-in-LLVM"><a href="#Static-Single-Assignment-in-LLVM" class="headerlink" title="Static Single Assignment in LLVM"></a>Static Single Assignment in LLVM</h3><img src="/2021/01/31/LLVM-Practice/image-20210131191819226.png" srcset="/img/loading.gif" class="" title="image-20210131191819226">
+
+<p>一般情况下的使用 <code>CreateBr</code> 和 <code>CreateCondBr</code> 的控制流，不需要 Phi 函数， llvm 会自动处理。</p>
+<p>对于逻辑运算符，拥有短路性质，例如 c = fun1() || fun2(), 这种情况需要自己处理 Phi 函数。</p>
+<img src="/2021/01/31/LLVM-Practice/image-20210131192235012.png" srcset="/img/loading.gif" class="" title="image-20210131192235012">
+
+
+
+<img src="/2021/01/31/LLVM-Practice/image-20210131192329669.png" srcset="/img/loading.gif" class="" title="image-20210131192329669">
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/homework/">homework</a>
+                    
+                      <a class="hover-with-bg" href="/tags/llvm/">llvm</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/01/Semantic-Analysis/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Semantic Analysis</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/01/25/%E7%BC%96%E5%86%99decaf%E8%A7%A3%E6%9E%90%E5%99%A8/">
+                        <span class="hidden-mobile">编写decaf语法解析器</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

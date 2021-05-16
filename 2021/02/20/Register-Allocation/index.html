@@ -1,0 +1,548 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Register Allocation - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Register Allocation">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-20 15:51" pubdate>
+        February 20, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      14
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Register Allocation</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Register-Allocation"><a href="#Register-Allocation" class="headerlink" title="Register Allocation"></a>Register Allocation</h1><p>寄存器分配问题，为变量分配寄存器。变量的数量可以是无限的，CPU 内部寄存器的数量是有限的，这就牵扯到一个问题，如何为变量分配寄存器。</p>
+<p>目前我学习了两种方法，分别是：</p>
+<ul>
+<li>图染色寄存器分配算法</li>
+<li>线性扫描寄存器分配算法</li>
+</ul>
+<h2 id="Liveness-Analysis"><a href="#Liveness-Analysis" class="headerlink" title="Liveness Analysis"></a>Liveness Analysis</h2><p>无论是图染色算法还是线性扫描算法，都涉及到活跃变量分析。变量在某个程序点有两种状态，<code>live</code> 或 <code>dead</code>。对于变量 x 和程序点 p，判断 x 在点 p 上的值是否会在 CFG 中的某条从点 p 出发的路径中使用。如果是，就说 x 在 p 上 <code>live</code>；否则就说x在p上是 <code>dead</code>。</p>
+<p>活跃变量分析的目的是分析程序中每一个程序点的活跃变量。活跃变量的具体过程，我会开一篇新的 blog 来写。</p>
+<p>如图，已经分析了每一个程序点的活跃变量</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220181511694.png" srcset="/img/loading.gif" class="" title="image-20210220181511694">
+
+<p>活跃变量分析应该从底向上地分析，考虑每一条指令的 USE / DEF 变量。</p>
+<p><strong>活跃变量分析与寄存器分配有什么关系呢?</strong></p>
+<p>假设 T1、T2 是程序中的两个变量， 若在任何一个程序点T1 、T2 中最多只有一个变量是 <code>live</code>， 那么 T1 和 T2 可以共用一个寄存器；否则，T1 和 T2 不能共用一个寄存器。 </p>
+<h2 id="图染色寄存器分配算法"><a href="#图染色寄存器分配算法" class="headerlink" title="图染色寄存器分配算法"></a>图染色寄存器分配算法</h2><p>将活跃变量分析的结果构成一个无向图，该图的每个顶点代表一个变量，每一条边代表变量之间的活跃关系，例如某个程序点活跃变量分析结果为：{a, f, c} 则图中 a ，f，c 用边连接起来。考虑所有程序点的活跃变量分析结果，构成一个无向图，这个图叫做推断图(interference graph)</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220183127694.png" srcset="/img/loading.gif" class="" title="image-20210220183127694">
+
+<p>上图中，a 和 b 没有直接连接的边，表示 a 和 b 可以共用一个寄存器；a 和 f 有直连的边，表示 a 和 f 不能共用一个寄存器。</p>
+<p>构造好这个图后，下一步就是对该图的顶点 “染色”。  每一个颜色对应一个寄存器。染色规则与寄存器分配规则一致，因此，下文中的染色等价于寄存器分配。</p>
+<p>如果一个图可以刚好被 k 种颜色，称这个图为 <code>k-colorable</code></p>
+<img src="/2021/02/20/Register-Allocation/image-20210220183928133.png" srcset="/img/loading.gif" class="" title="image-20210220183928133">
+
+<p>在寄存器分配问题中，k 指的是寄存器的数量，通过活跃变量分析构造的无向图是 <code>k-colorable</code>，那么这个程序最多用 k 个寄存器。实际上，并不是所有程序满足这样的需求，超过 k 个寄存器就需要 spilling，后面再讨论。</p>
+<p>上面程序的寄存器分配结果如下</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220184340321.png" srcset="/img/loading.gif" class="" title="image-20210220184340321">
+
+
+
+<h3 id="如何染色"><a href="#如何染色" class="headerlink" title="如何染色"></a>如何染色</h3><ol>
+<li>染色是一个 np-hard 问题，没有一个很高效的算法。（Kempe 启发式算法）</li>
+<li>染色数量不够（就是寄存器数量不够）</li>
+</ol>
+<p>Kempe的启发式算法</p>
+<p>Kempe 提出，若移除图中度小于 k 的顶点，构成的图能够被染色，则原图也可以被染色。</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220191254681.png" srcset="/img/loading.gif" class="" title="image-20210220191254681">
+
+<p>启发式染色算法</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220191355930.png" srcset="/img/loading.gif" class="" title="image-20210220191355930">
+
+<p>简单说，就是利用贪心思想，先处理度数较高的顶点，度数越高对图的影响程度也越大。如下图，先移出度数较低的顶点，直到所有的顶点都被移出，再以逆序对移出的顶点染色。</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220191908548.png" srcset="/img/loading.gif" class="" title="image-20210220191908548">
+
+<h3 id="Spilling"><a href="#Spilling" class="headerlink" title="Spilling"></a>Spilling</h3><p>无法为所有变量分配对应的寄存器，寄存器数量不够怎么办？这种情况下，有一些变量就需要存储在内存。</p>
+<p>例如，假设 k = 3，即寄存器数量为 3</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220193509718.png" srcset="/img/loading.gif" class="" title="image-20210220193509718">
+
+<p>移出 a 顶点后仍不满足 3-coloring，移出 a 顶点后，其余的顶点度数都大于 3，所以这个图不可能只用三个颜色染色。</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220193702009.png" srcset="/img/loading.gif" class="" title="移出a顶点">
+
+<p>如果推断图中的每一个顶点的度都大于 k，则该图不可能用 k 个颜色染色，这时候需要选一个顶点作为存储在内存的候选，从图中移出该顶点。这个例子中选择移出顶点 f，继续做 k 染色。</p>
+<p>最终移出的顺序为: {c,e,d,b,f,a} (左边是栈顶)</p>
+<p>依次为 c， e， d， b 染色</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220194547868.png" srcset="/img/loading.gif" class="" title="image-20210220194547868">
+
+<p>栈中剩余 {f, a}</p>
+<p>当给 f 染色的时候发现，已经没有足够的颜色（寄存器）分配给 f，f 只能分配到内存。读写内存又会涉及到寄存器。我们假设给 f 分配的内存地址为 fa</p>
+<p>读取 f 之前，需要 load f, fa</p>
+<p>修改 f 之后，需要 store f, fa</p>
+<p>接下来修改代码</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220194843485.png" srcset="/img/loading.gif" class="" title="image-20210220194843485">
+
+<img src="/2021/02/20/Register-Allocation/image-20210220194926779.png" srcset="/img/loading.gif" class="" title="image-20210220194926779">
+
+<p>重新计算活跃变量</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220194957943.png" srcset="/img/loading.gif" class="" title="image-20210220194957943">
+
+<p>重新构建推断图</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220195015865.png" srcset="/img/loading.gif" class="" title="image-20210220195015865">
+
+<p>这张图就是 3-colorable，刚好可以分配3个寄存器。</p>
+<h2 id="线性扫描寄存器分配算法"><a href="#线性扫描寄存器分配算法" class="headerlink" title="线性扫描寄存器分配算法"></a>线性扫描寄存器分配算法</h2><p>引入一个新的概念 Live Interval，就是一个变量的大搞作用范围。</p>
+<p>先活跃变量分析</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220202054895.png" srcset="/img/loading.gif" class="" title="image-20210220202054895">
+
+<p>计算变量的 Live Interval，下图中绿色就是变量的 Live Interval</p>
+<img src="/2021/02/20/Register-Allocation/image-20210220202145894.png" srcset="/img/loading.gif" class="" title="image-20210220202145894">
+
+<p>有重叠部分的变量不能用一个寄存器，没有重叠的变量可以用一个寄存器。</p>
+<p>很直观，但是效率没有图染色高。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/compiler/">compiler</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/note/">note</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/21/Ml3-Classification/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Ml3:Classification</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/16/ML2-Octave-Notes/">
+                        <span class="hidden-mobile">Ml2:Octave Notes</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

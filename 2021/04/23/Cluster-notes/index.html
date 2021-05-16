@@ -1,0 +1,541 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Cluster notes - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Cluster notes">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-04-23 16:07" pubdate>
+        April 23, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      911 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      12
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cluster notes</h1>
+            
+            <div class="markdown-body">
+              <h1 id="聚类"><a href="#聚类" class="headerlink" title="聚类"></a>聚类</h1><p>简单记录一下聚类。</p>
+<p>无监督学习：训练集没有标签，聚类就是一个典型的无监督学习应用。</p>
+<img src="/2021/04/23/Cluster-notes/image-20210423162155480.png" srcset="/img/loading.gif" class="" title="image-20210423162155480">
+
+<p>聚类算法可以把上图分类两个簇。</p>
+<h2 id="K-Means-算法"><a href="#K-Means-算法" class="headerlink" title="K-Means 算法"></a>K-Means 算法</h2><p><strong>K-Means</strong> 是最普及的聚类算法，算法接受一个未标记的数据集，然后将数据聚类成不同的组。K-Means算法的思想很简单，对于给定的样本集，按照样本之间的距离大小，将样本集划分为K个簇。让簇内的点尽量紧密的连在一起，而让簇间的距离尽量的大。</p>
+<p>例如我们想将数据分成 k 个分组，k-means 算法首先选择 k 个随机点，这 k 个随机点称为 <strong>聚类中心</strong>（<strong>cluster centroids</strong>）</p>
+<p>每一个聚类中心相当于“分组”的中心，k-means 算法优化目标是最小化所有数据与聚类中心点距离的距离和。</p>
+<p>K-means 算法是一个迭代算法，每一次迭代完成两件事情</p>
+<ul>
+<li>计算每个数据最近的聚类中心，即为聚类中心关联数据（优化目标1）</li>
+<li>用聚类中心关联的数据点平均分布位置更新该聚类中心 （优化目标2）</li>
+</ul>
+<p>k-means 算法优化目标</p>
+<h3 id="优化目标-1"><a href="#优化目标-1" class="headerlink" title="优化目标(1)"></a>优化目标(1)</h3><img src="/2021/04/23/Cluster-notes/image-20210423163657455.png" srcset="/img/loading.gif" class="" title="image-20210423163657455">
+
+<p>$c^{(i)}$ 是第 i 个样本 $x^{(i)}$ 最近的聚类中心的下标,  $\mu_j$ 是第 j 个聚类中心的向量。</p>
+<p>优化目标(1) 的目标是找一个 j 使得 $x^{(i)}$ 到该聚类中心 $\mu_j$ 的距离最短（换句话讲，就是找到离 $x^{(i)}$ 最近的聚类中心, 并将该聚类中心的下标对应的下标赋值给 $c^{(i)}$）</p>
+<p>通俗点讲，为聚类中心关联数据向量</p>
+<p>优化目标(1)的代码实现</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">idx</span> = <span class="hljs-title">findClosestCentroids</span><span class="hljs-params">(X, centroids)</span></span><br><span class="hljs-comment">%FINDCLOSESTCENTROIDS computes the centroid memberships for every example</span><br><span class="hljs-comment">%   idx = FINDCLOSESTCENTROIDS (X, centroids) returns the closest centroids</span><br><span class="hljs-comment">%   in idx for a dataset X where each row is a single example. idx = m x 1 </span><br><span class="hljs-comment">%   vector of centroid assignments (i.e. each entry in range [1..K])</span><br><span class="hljs-comment">%</span><br><br><span class="hljs-comment">% Set K</span><br>K = <span class="hljs-built_in">size</span>(centroids, <span class="hljs-number">1</span>);<br><br><span class="hljs-comment">% You need to return the following variables correctly.</span><br>idx = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(X,<span class="hljs-number">1</span>), <span class="hljs-number">1</span>);<br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span>:<span class="hljs-built_in">size</span>(X, <span class="hljs-number">1</span>)<br>    a = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(centroids));<br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span>:<span class="hljs-built_in">size</span>(centroids, <span class="hljs-number">1</span>)<br>        a(<span class="hljs-built_in">j</span>, :) = X(<span class="hljs-built_in">i</span>, :);<br>    <span class="hljs-keyword">end</span><br>    distance = sum((a - centroids).^<span class="hljs-number">2</span>, <span class="hljs-number">2</span>);<br>    [~, idx(<span class="hljs-built_in">i</span>)] = <span class="hljs-built_in">min</span>(distance);<br><span class="hljs-keyword">end</span><br><br><span class="hljs-comment">% =============================================================</span><br><span class="hljs-keyword">end</span><br><br><br></code></pre></td></tr></table></figure>
+
+
+
+
+<h3 id="优化目标-2"><a href="#优化目标-2" class="headerlink" title="优化目标(2)"></a>优化目标(2)</h3><img src="/2021/04/23/Cluster-notes/image-20210423164317870.png" srcset="/img/loading.gif" class="" title="image-20210423164317870">
+
+<p>优化目标(2) 的作用是优化聚类中心。 $\mu_k$ 表示聚类中心，$C_k$ 是一个集合，用来记录聚类中心 k 对应的关联数据的集合，$|C_k|$ 是集合中元素的个数。</p>
+<p>优化目标(2) 的代码实现</p>
+<figure class="highlight matlab"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs matlab"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">centroids</span> = <span class="hljs-title">computeCentroids</span><span class="hljs-params">(X, idx, K)</span></span><br><span class="hljs-comment">%COMPUTECENTROIDS returns the new centroids by computing the means of the </span><br><span class="hljs-comment">%data points assigned to each centroid.</span><br><span class="hljs-comment">%   centroids = COMPUTECENTROIDS(X, idx, K) returns the new centroids by </span><br><span class="hljs-comment">%   computing the means of the data points assigned to each centroid. It is</span><br><span class="hljs-comment">%   given a dataset X where each row is a single data point, a vector</span><br><span class="hljs-comment">%   idx of centroid assignments (i.e. each entry in range [1..K]) for each</span><br><span class="hljs-comment">%   example, and K, the number of centroids. You should return a matrix</span><br><span class="hljs-comment">%   centroids, where each row of centroids is the mean of the data points</span><br><span class="hljs-comment">%   assigned to it.</span><br><span class="hljs-comment">%</span><br><br><span class="hljs-comment">% Useful variables</span><br>[m n] = <span class="hljs-built_in">size</span>(X);<br><br><span class="hljs-comment">% You need to return the following variables correctly.</span><br>centroids = <span class="hljs-built_in">zeros</span>(K, n);<br><br>sums = <span class="hljs-built_in">zeros</span>(K, n);<br>sums_counter = <span class="hljs-built_in">zeros</span>(<span class="hljs-built_in">size</span>(idx, <span class="hljs-number">1</span>), <span class="hljs-number">1</span>);<br><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">j</span> = <span class="hljs-number">1</span> : <span class="hljs-built_in">size</span>(idx, <span class="hljs-number">1</span>)<br>    sums(idx(<span class="hljs-built_in">j</span>), :) = sums(idx(<span class="hljs-built_in">j</span>), :) + X(<span class="hljs-built_in">j</span>, :);<br>    sums_counter(idx(<span class="hljs-built_in">j</span>)) = sums_counter(idx(<span class="hljs-built_in">j</span>)) + <span class="hljs-number">1</span>;<br><span class="hljs-keyword">end</span><br><br><span class="hljs-keyword">for</span> <span class="hljs-built_in">i</span> = <span class="hljs-number">1</span> : <span class="hljs-built_in">size</span>(sums, <span class="hljs-number">1</span>)<br>    sums(<span class="hljs-built_in">i</span>, :) = sums(<span class="hljs-built_in">i</span>, :) ./ sums_counter(<span class="hljs-built_in">i</span>);<br><span class="hljs-keyword">end</span><br><br>centroids = sums;<br><br><span class="hljs-comment">% =============================================================</span><br><span class="hljs-keyword">end</span><br></code></pre></td></tr></table></figure>
+<h3 id="随机初始化聚类中心"><a href="#随机初始化聚类中心" class="headerlink" title="随机初始化聚类中心"></a>随机初始化聚类中心</h3><p>k-means 结果对于初始的聚类中心选择非常敏感，在运行 k-means 算法之前，我们应该选择随机的聚类中心。一般随机选择 k 个数据点作为聚类中心。多次用随机初始化的聚类中心运行 k-means 算法，选择误差最小的为最优模型。这样可以避免迭代算法达到局部最优解。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/ml/">ml</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/notes/">notes</a>
+                    
+                      <a class="hover-with-bg" href="/tags/homework/">homework</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/06/go-notes/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">go notes</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/">
+                        <span class="hidden-mobile">红明谷杯2021:Reverse</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+  
+
+  
+    <!-- MathJax -->
+    <script>
+      MathJax = {
+        tex: {
+          inlineMath: [['$', '$'], ['\\(', '\\)']]
+        },
+        options: {
+          renderActions: {
+            findScript: [10, doc => {
+              document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
+                const display = !!node.type.match(/; *mode=display/);
+                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
+                const text = document.createTextNode('');
+                node.parentNode.replaceChild(text, node);
+                math.start = { node: text, delim: '', n: 0 };
+                math.end = { node: text, delim: '', n: 0 };
+                doc.math.push(math);
+              });
+            }, '', false],
+            insertedScript: [200, () => {
+              document.querySelectorAll('mjx-container').forEach(node => {
+                let target = node.parentNode;
+                if (target.nodeName.toLowerCase() === 'li') {
+                  target.parentNode.classList.add('has-jax');
+                }
+              });
+            }, '', false]
+          }
+        }
+      };
+    </script>
+
+    <script async src="https://cdn.jsdelivr.net/npm/mathjax@3.1.2/es5/tex-svg.js" ></script>
+
+  
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

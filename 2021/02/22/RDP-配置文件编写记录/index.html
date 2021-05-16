@@ -1,0 +1,544 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>RDP 配置文件编写记录 - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="RDP 配置文件编写记录">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-02-22 17:23" pubdate>
+        February 22, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      455 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      6
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">RDP 配置文件编写记录</h1>
+            
+            <div class="markdown-body">
+              <h1 id="RDP-配置文件编写记录"><a href="#RDP-配置文件编写记录" class="headerlink" title="RDP 配置文件编写记录"></a>RDP 配置文件编写记录</h1><p>RDP Wrapper  官方配置文件只能支持到18年的Win10系统，新版本的系统需要自己编写 INI 文件，当然也可以去 RDP 的官方 github issues 里面寻找相应的配置文件。</p>
+<p>RDP Ini 文件样本 for win10(10.0.19041.789)</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[10.0.19041.789]</span><br><span class="hljs-attr">LocalOnlyPatch.x86</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">LocalOnlyOffset.x86</span>=B59D9<br><span class="hljs-attr">LocalOnlyCode.x86</span>=jmpshort<br><span class="hljs-attr">SingleUserPatch.x86</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">SingleUserOffset.x86</span>=<span class="hljs-number">3</span>BC45<br><span class="hljs-attr">SingleUserCode.x86</span>=nop<br><span class="hljs-attr">DefPolicyPatch.x86</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">DefPolicyOffset.x86</span>=<span class="hljs-number">3</span>E7C9<br><span class="hljs-attr">DefPolicyCode.x86</span>=CDefPolicy_Query_eax_ecx<br><span class="hljs-attr">SLInitHook.x86</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">SLInitOffset.x86</span>=<span class="hljs-number">67</span>BF8<br><span class="hljs-attr">SLInitFunc.x86</span>=New_CSLQuery_Initialize<br><br><span class="hljs-attr">LocalOnlyPatch.x64</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">LocalOnlyOffset.x64</span>=<span class="hljs-number">88</span>F41<br><span class="hljs-attr">LocalOnlyCode.x64</span>=jmpshort<br><span class="hljs-attr">SingleUserPatch.x64</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">SingleUserOffset.x64</span>=<span class="hljs-number">0</span>CA4C<br><span class="hljs-attr">SingleUserCode.x64</span>=Zero<br><span class="hljs-attr">DefPolicyPatch.x64</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">DefPolicyOffset.x64</span>=<span class="hljs-number">18</span>A15<br><span class="hljs-attr">DefPolicyCode.x64</span>=CDefPolicy_Query_eax_rcx<br><span class="hljs-attr">SLInitHook.x64</span>=<span class="hljs-number">1</span><br><span class="hljs-attr">SLInitOffset.x64</span>=<span class="hljs-number">1</span>D5BC<br><span class="hljs-attr">SLInitFunc.x64</span>=New_CSLQuery_Initialize<br><br><span class="hljs-section">[10.0.19041.789-SLInit]</span><br><span class="hljs-attr">bInitialized.x86</span>=D0954<br><span class="hljs-attr">bServerSku.x86</span>=D0958<br><span class="hljs-attr">lMaxUserSessions.x86</span>=D095C<br><span class="hljs-attr">bAppServerAllowed.x86</span>=D0964<br><span class="hljs-attr">bRemoteConnAllowed.x86</span>=D096C<br><span class="hljs-attr">bMultimonAllowed.x86</span>=D0970<br><span class="hljs-attr">ulMaxDebugSessions.x86</span>=D0974<br><span class="hljs-attr">bFUSEnabled.x86</span>=D0978<br><br><span class="hljs-attr">bInitialized.x64</span>=<span class="hljs-number">106028</span><br><span class="hljs-attr">bServerSku.x64</span>=<span class="hljs-number">10602</span>C<br><span class="hljs-attr">lMaxUserSessions.x64</span>=<span class="hljs-number">106030</span><br><span class="hljs-attr">bAppServerAllowed.x64</span>=<span class="hljs-number">106038</span><br><span class="hljs-attr">bRemoteConnAllowed.x64</span>=<span class="hljs-number">106040</span><br><span class="hljs-attr">bMultimonAllowed.x64</span>=<span class="hljs-number">106044</span><br><span class="hljs-attr">ulMaxDebugSessions.x64</span>=<span class="hljs-number">106048</span><br><span class="hljs-attr">bFUSEnabled.x64</span>=<span class="hljs-number">10604</span>C<br></code></pre></td></tr></table></figure>
+<p>RDP 的Patch代码，我可以根据需要添加</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-section">[PatchCodes]</span><br><span class="hljs-attr">nop</span>=<span class="hljs-number">90</span><br><span class="hljs-attr">Zero</span>=<span class="hljs-number">00</span><br><span class="hljs-attr">jmpshort</span>=EB<br><span class="hljs-attr">nopjmp</span>=<span class="hljs-number">90</span>E9<br><span class="hljs-attr">CDefPolicy_Query_edx_ecx</span>=BA000100008991200300005E90<br><span class="hljs-attr">CDefPolicy_Query_eax_rcx_jmp</span>=B80001000089813806000090EB<br><span class="hljs-attr">CDefPolicy_Query_eax_esi</span>=B80001000089862003000090<br><span class="hljs-attr">CDefPolicy_Query_eax_rdi</span>=B80001000089873806000090<br><span class="hljs-attr">CDefPolicy_Query_eax_ecx</span>=B80001000089812003000090<br><span class="hljs-attr">CDefPolicy_Query_eax_ecx_jmp</span>=B800010000898120030000EB0E<br><span class="hljs-attr">CDefPolicy_Query_eax_rcx</span>=B80001000089813806000090<br></code></pre></td></tr></table></figure>
+<p>RDP Wrapper 对 termsrv.dll 有 3 处 Patch，1 处 hook。每个 Patch 后缀 <code>.x86</code> 和 <code>.x64</code> 指定架构。</p>
+<h2 id="Patchs"><a href="#Patchs" class="headerlink" title="Patchs"></a>Patchs</h2><p>需要用 IDA 分析 termsrv.dll，加载的时候需要加载微软的符号表。</p>
+<h3 id="LocalOnlyPatch"><a href="#LocalOnlyPatch" class="headerlink" title="LocalOnlyPatch"></a>LocalOnlyPatch</h3><p>函数: CEnforcementCore::GetInstanceOfTSLicense</p>
+<p>签名:?GetInstanceOfTSLicense@CEnforcementCore@@UEAAJAEAU_GUID@@PEAPEAVITSLicense@@@Z</p>
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162509030.png" srcset="/img/loading.gif" class="" title="image-20210222162509030">
+
+<p>把 jz 改成 jmp： LocalOnlyCode.x64=jmpshort</p>
+<h3 id="SingleUserPatch"><a href="#SingleUserPatch" class="headerlink" title="SingleUserPatch"></a>SingleUserPatch</h3><p>函数: CSessionArbitrationHelperMgr::IsSingleSessionPerUserEnabled</p>
+<p>签名: ?IsSingleSessionPerUserEnabled@CSessionArbitrationHelperMgr@@UEAAJPEAH@Z</p>
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162844238.png" srcset="/img/loading.gif" class="" title="image-20210222162844238">
+
+<p>改成常量1改成0：SingleUserCode.x64=Zero 注意 offset 的位置。</p>
+<h3 id="DefPolicyPatch"><a href="#DefPolicyPatch" class="headerlink" title="DefPolicyPatch"></a>DefPolicyPatch</h3><p>函数: CDefPolicy::Query</p>
+<p>签名: ?Query@CDefPolicy@@UEAAJPEAH@Z</p>
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171012966.png" srcset="/img/loading.gif" class="" title="image-20210222171012966">
+
+<p>改成如下</p>
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171115107.png" srcset="/img/loading.gif" class="" title="image-20210222171115107">
+
+<p>DefPolicyCode.x64=CDefPolicy_Query_eax_rcx</p>
+<p>这里的 [rcx+638h] 是最大的连接数，直接给它赋值一个大数值即可。</p>
+<h3 id="SLInitHook"><a href="#SLInitHook" class="headerlink" title="SLInitHook"></a>SLInitHook</h3><p>hook 的目标函数是: CConnectionHandlerItem::CConnHandlerKeepAliveObject::Cleanup</p>
+<p>签名: ?Cleanup@CConnHandlerKeepAliveObject@CConnectionHandlerItem@@AEAAXXZ</p>
+<p>SLInitOffset.x64 填这个函数的偏移即可。</p>
+<h3 id="其它全局变量"><a href="#其它全局变量" class="headerlink" title="其它全局变量"></a>其它全局变量</h3><p>[x.x.x.x-SLInit] 中的值</p>
+<p> 我只给出这些全局变量的符号, IDA 加载符号表后可以直接定位</p>
+<table>
+<thead>
+<tr>
+<th>属性</th>
+<th>符号</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bInitialized</td>
+<td>?bInitialized@CSLQuery@@0HA</td>
+</tr>
+<tr>
+<td>bServerSku</td>
+<td>?bServerSku@CSLQuery@@0HA</td>
+</tr>
+<tr>
+<td>lMaxUserSessions</td>
+<td>?lMaxUserSessions@CSLQuery@@0JA</td>
+</tr>
+<tr>
+<td>bAppServerAllowed</td>
+<td>?bAppServerAllowed@CSLQuery@@0HA</td>
+</tr>
+<tr>
+<td>bRemoteConnAllowed</td>
+<td>?bRemoteConnAllowed@CSLQuery@@0HA</td>
+</tr>
+<tr>
+<td>bMultimonAllowed</td>
+<td>?bMultimonAllowed@CSLQuery@@0HA</td>
+</tr>
+<tr>
+<td>ulMaxDebugSessions</td>
+<td>?ulMaxDebugSessions@CSLQuery@@0KA</td>
+</tr>
+<tr>
+<td>bFUSEnabled</td>
+<td>?bFUSEnabled@CSLQuery@@0HA</td>
+</tr>
+</tbody></table>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a target="_blank" rel="noopener" href="https://paper.seebug.org/papers/scz/windows/201804121554.txt">https://paper.seebug.org/papers/scz/windows/201804121554.txt</a></p>
+<p><a target="_blank" rel="noopener" href="https://github.com/stascorp/rdpwrap">https://github.com/stascorp/rdpwrap</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/RedTeam/">RedTeam</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Windows/">Windows</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/02/23/Exercise-Logistic-Regression/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">Exercise:Logistic Regression</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/21/Ml3-Classification/">
+                        <span class="hidden-mobile">Ml3:Classification</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>

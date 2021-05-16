@@ -1,0 +1,579 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  <title>Cython Reverse - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Cython Reverse">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-07 19:56" pubdate>
+        May 7, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      40
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Cython Reverse</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Cython-Reverse-notes"><a href="#Cython-Reverse-notes" class="headerlink" title="Cython Reverse notes"></a>Cython Reverse notes</h1><p>Cython 是什么呢？官方给出的解释是 Cython 是一种新的语言，是带类型的 Python [1]。</p>
+<p>Cython 有一个功能叫 <code>Cythonize</code> 这个功能可以将 Python 编译成 C语言实现，再由 GCC/Clang 将 C 编译成动态库。</p>
+<p>setup.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> setuptools <span class="hljs-keyword">import</span> setup<br><span class="hljs-keyword">from</span> Cython.Build <span class="hljs-keyword">import</span> cythonize<br><br>setup(<br>    ext_modules = cythonize(<span class="hljs-string">&quot;hello.pyx&quot;</span>, annotate=<span class="hljs-literal">True</span>)<br>)<br></code></pre></td></tr></table></figure>
+<p>annotate=True 选项可以生成一个 html 页面，用于显示 Py源码与生成的C代码的对应关系。</p>
+<p>build 命令</p>
+<figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs vim"><span class="hljs-keyword">python</span> setup.<span class="hljs-keyword">py</span> build_ext --inplace<br></code></pre></td></tr></table></figure>
+
+
+<p>Build 成功后，可以在当前目录下找到对应的动态库与对应的 xxx.c 源文件。此时可以直接用 python import 导入（就像导入编译之前的那样）</p>
+<p>Cythonize 好处是编译成本地代码后执行效率可以提高，缺点是不太好<code>逆向</code></p>
+<p>本文分析基于 Python 3.7.6，Cython 0.29.21</p>
+<p>本文基于 Hello.py 编译成的动态库分析</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> datetime<br><span class="hljs-keyword">import</span> math<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myfunc1</span>():</span><br>    print(<span class="hljs-string">&quot;This is myfunc1.&quot;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_variables</span>():</span><br>    x = <span class="hljs-number">5</span><br>    y = <span class="hljs-string">&quot;variables test.&quot;</span><br>    print(x)<br>    print(y)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_strVar</span>():</span><br>    x = <span class="hljs-string">&quot;Hello world.&quot;</span><br>    print(x)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_global_var</span>():</span><br>    <span class="hljs-keyword">global</span> gy<br>    print(gy)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_cast</span>():</span><br>    x = <span class="hljs-built_in">int</span>(<span class="hljs-number">5</span>)<br>    y = <span class="hljs-built_in">str</span>(<span class="hljs-number">3</span>)<br>    print(x, y)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_numbers</span>():</span><br>    x = <span class="hljs-number">123</span><br>    y = <span class="hljs-number">12.3</span><br>    z = <span class="hljs-number">0x112233445566778899AABBCCDD</span><br>    print(x, y, z)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_if</span>(<span class="hljs-params">x</span>):</span><br>    <span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">456</span>:<br>        print(<span class="hljs-string">&quot;x &gt; 456&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        print(<span class="hljs-string">&quot;x &lt;= 456&quot;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_string</span>():</span><br>    x = <span class="hljs-string">&quot;I am str.&quot;</span><br>    y = <span class="hljs-built_in">len</span>(x)<br>    z = x[<span class="hljs-number">1</span>]<br>    w = x[<span class="hljs-number">2</span>:]<br>    print(x, y, z, w)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;am&quot;</span> <span class="hljs-keyword">in</span> x:<br>        print(<span class="hljs-string">&quot;yes&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        print(<span class="hljs-string">&quot;wrong&quot;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_list</span>():</span><br>    x = <span class="hljs-built_in">list</span>()<br>    x.append(<span class="hljs-number">1</span>)<br>    x.append(<span class="hljs-number">2</span>)<br>    x.append(<span class="hljs-number">3</span>)<br>    x.append(<span class="hljs-number">4</span>)<br>    x.append(<span class="hljs-string">&quot;five&quot;</span>)<br>    print(x)<br>    print(<span class="hljs-built_in">len</span>(x))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x:<br>        print(i)<br>    x = x[<span class="hljs-number">1</span>:]<br>    x[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>] = [<span class="hljs-number">22</span>, <span class="hljs-number">33</span>]<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_dict</span>():</span><br>    x = &#123;&#125;<br>    x[<span class="hljs-string">&quot;one&quot;</span>] = <span class="hljs-number">1</span><br>    x[<span class="hljs-string">&quot;two&quot;</span>] = <span class="hljs-number">2</span><br>    x[<span class="hljs-string">&quot;three&quot;</span>] = <span class="hljs-number">3</span><br>    y = x[<span class="hljs-string">&quot;one&quot;</span>]<br>    z = x[<span class="hljs-string">&quot;two&quot;</span>]<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;one&quot;</span> <span class="hljs-keyword">in</span> x:<br>        print(y)<br><br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> x:<br>        print(k, x[k])<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_for</span>():</span><br>    s = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">101</span>):<br>        s = s + i<br>    print(s)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_while</span>():</span><br>    s = <span class="hljs-number">0</span><br>    i = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">while</span> i &lt;= <span class="hljs-number">100</span>:<br>        s = s + i<br>        i += <span class="hljs-number">1</span><br>    print(s)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_exception</span>():</span><br>    x = <span class="hljs-number">1</span><br>    <span class="hljs-keyword">try</span>:<br>        x = x + <span class="hljs-string">&quot;1&quot;</span><br>        print(x)<br>    <span class="hljs-keyword">except</span> NameError:<br>        print(<span class="hljs-string">&quot;Variable x is not defined&quot;</span>)<br>    <span class="hljs-keyword">except</span>:<br>        print(<span class="hljs-string">&quot;Something else went wrong&quot;</span>)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_datetime</span>():</span><br>    x = datetime.datetime.now()<br>    print(x)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_format</span>():</span><br>    x = <span class="hljs-number">1</span><br>    y = <span class="hljs-string">&quot;One&quot;</span><br>    z = <span class="hljs-string">&quot;%s is %d&quot;</span> % (y, x)<br>    print(z)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_math</span>():</span><br>    x = math.ceil(<span class="hljs-number">1.4</span>)<br>    y = math.floor(<span class="hljs-number">1.4</span>)<br><br>    print(x) <span class="hljs-comment"># returns 2</span><br>    print(y) <span class="hljs-comment"># returns 1</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_arg</span>(<span class="hljs-params">x, y, z</span>):</span><br>    x = x + <span class="hljs-number">1</span><br>    y = y + <span class="hljs-string">&quot;2&quot;</span><br>    z = z[:]<br>    print(x, y, z)<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test_class</span>:</span><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">__init__</span>(<span class="hljs-params">self</span>):</span><br>        self.aa = <span class="hljs-number">1</span><br><br>    <span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_class_hh</span>(<span class="hljs-params">self</span>):</span><br>        print(self.aa)<br><br>    <br><br>gy = <span class="hljs-number">123</span><br>myfunc1()<br>test_variables()<br>test_strVar()<br>test_global_var()<br>test_cast()<br>test_numbers()<br>test_string()<br>test_list()<br>test_dict()<br>test_for()<br>test_while()<br>test_exception()<br>test_datetime()<br>test_format()<br>test_math()<br>test_arg(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;2&quot;</span>, [<span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">6</span>])<br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+<h2 id="字符串表-pyx-string-tab"><a href="#字符串表-pyx-string-tab" class="headerlink" title="字符串表 __pyx_string_tab"></a>字符串表 __pyx_string_tab</h2><p>字符串表算是 Cython 动态库逆向非常重要的一个入口了，字符串表记录 Python 代码中引用的字符串。</p>
+<p>在 hello.c 源文件中可以找到 __pyx_string_tab</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">typedef</span> <span class="hljs-class"><span class="hljs-keyword">struct</span> &#123;</span>PyObject **p; <br>                <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> *s; <br>                <span class="hljs-keyword">const</span> Py_ssize_t n; <br>                <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* encoding;<br>                <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> is_unicode; <br>                <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> is_str; <br>                <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> intern; <br>               &#125; __Pyx_StringTabEntry;<br><br><span class="hljs-keyword">static</span> PyObject *__pyx_kp_s_1;<br><span class="hljs-keyword">static</span> PyObject *__pyx_kp_s_Hello_world;<br><br><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> __pyx_k_1[] = <span class="hljs-string">&quot;1&quot;</span>;<br><span class="hljs-keyword">static</span> <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span> __pyx_k_Hello_world[] = <span class="hljs-string">&quot;Hello world.&quot;</span>;<br><br><br><span class="hljs-keyword">static</span> __Pyx_StringTabEntry __pyx_string_tab[] = &#123;<br>  &#123;&amp;__pyx_kp_s_1, __pyx_k_1, <span class="hljs-keyword">sizeof</span>(__pyx_k_1), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;,<br>  &#123;&amp;__pyx_kp_s_Hello_world, __pyx_k_Hello_world, <span class="hljs-keyword">sizeof</span>(__pyx_k_Hello_world), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;,<br>  &#123;&amp;__pyx_kp_s_I_am_str, __pyx_k_I_am_str, <span class="hljs-keyword">sizeof</span>(__pyx_k_I_am_str), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">0</span>&#125;,<br>  &#123;&amp;__pyx_n_s_NameError, __pyx_k_NameError, <span class="hljs-keyword">sizeof</span>(__pyx_k_NameError), <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>&#125;,<br>    ......<br>  &#123;<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>&#125;<br>&#125;<br><br>__Pyx_InitStrings(__pyx_string_tab)<br></code></pre></td></tr></table></figure>
+<p><code>__pyx_string_tab</code> 将 <code>PyObject</code> 与对应的字符串关联起来，最后调用 <code>__Pyx_InitStrings</code> 初始化所有字符串对象。</p>
+<p>在 IDA 逆向分析时，查找字符串引用，可以快速定位到<code>__pyx_string_tab</code> ，然后根据 <code>__Pyx_StringTabEntry</code> 定位程序对某个字符串 <code>PyObject</code> 的引用。</p>
+<img src="/2021/05/07/Cython-Reverse/image-20210507215019652.png" srcset="/img/loading.gif" class="" title="image-20210507215019652">
+
+
+
+
+
+<h2 id="整数常量的构造"><a href="#整数常量的构造" class="headerlink" title="整数常量的构造"></a>整数常量的构造</h2><p>整数在 Cython 里面也是 <code>PyObject</code>，整数常量属于全局变量，在 <code>__Pyx_InitGlobals</code> 中初始化</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs c++">__pyx_float_1_4 = PyFloat_FromDouble(<span class="hljs-number">1.4</span>); <br>__pyx_int_0 = PyInt_FromLong(<span class="hljs-number">0</span>);<br>__pyx_int_1 = PyInt_FromLong(<span class="hljs-number">1</span>);<br>__pyx_int_2 = PyInt_FromLong(<span class="hljs-number">2</span>);<br>__pyx_int_3 = PyInt_FromLong(<span class="hljs-number">3</span>);<br>__pyx_int_4 = PyInt_FromLong(<span class="hljs-number">4</span>);<br>__pyx_int_5 = PyInt_FromLong(<span class="hljs-number">5</span>);<br>__pyx_int_6 = PyInt_FromLong(<span class="hljs-number">6</span>);<br>__pyx_int_22 = PyInt_FromLong(<span class="hljs-number">22</span>);<br>__pyx_int_33 = PyInt_FromLong(<span class="hljs-number">33</span>);<br>__pyx_int_100 = PyInt_FromLong(<span class="hljs-number">100</span>);<br>__pyx_int_123 = PyInt_FromLong(<span class="hljs-number">123</span>);<br>__pyx_int_1357463230989497419223659171037 = PyInt_FromString((<span class="hljs-keyword">char</span> *)<span class="hljs-string">&quot;1357463230989497419223659171037&quot;</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>);<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="函数声明"><a href="#函数声明" class="headerlink" title="函数声明"></a>函数声明</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_myfunc1(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_2test_variables(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_4test_strVar(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_6test_global_var(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_8test_cast(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_10test_numbers(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_12test_if(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_14test_string(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_16test_list(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_18test_dict(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_20test_for(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_22test_while(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_24test_exception(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_26test_datetime(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_28test_format(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_30test_math(CYTHON_UNUSED PyObject *__pyx_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_32test_arg(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_x, PyObject *__pyx_v_y, PyObject *__pyx_v_z); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_10test_class___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); <span class="hljs-comment">/* proto */</span><br><span class="hljs-keyword">static</span> PyObject *__pyx_pf_5hello_10test_class_2test_class_hh(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); <span class="hljs-comment">/* proto */</span><br></code></pre></td></tr></table></figure>
+<p>重点看一下 <code>__pyx_pf_5hello_32test_arg</code> 与 <code>__pyx_pf_5hello_10test_class_2test_class_hh</code></p>
+<p><code>__pyx_pf_5hello_32test_arg</code> 的 py 定义是 <code>def test_arg(x, y, z)</code> 因此多了几个参数。</p>
+<p><code>__pyx_pf_5hello_10test_class_2test_class_hh</code> 是类函数 test_class.test_class_hh , 所以有一个 self 参数。</p>
+<h2 id="myfunc1-分析"><a href="#myfunc1-分析" class="headerlink" title="myfunc1() 分析"></a>myfunc1() 分析</h2><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">PyObject *__cdecl <span class="hljs-title">PyObject_Call</span><span class="hljs-params">(PyObject *callable_object, PyObject *args, PyObject *kw)</span></span>;<br><br>v0 = PyTuple_Pack(<span class="hljs-number">1LL</span>, __pyx_kp_s_This_is_myfunc1); <span class="hljs-comment">// args</span><br>v2 = PyObject_GetAttr(__pyx_b, __pyx_n_s_print) <span class="hljs-comment">// __pyx_b -&gt; PyImport_AddModule(&quot;builtins&quot;);</span><br>PyObject_Call(v2, v1, <span class="hljs-number">0LL</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="test-variables-分析"><a href="#test-variables-分析" class="headerlink" title="test_variables() 分析"></a>test_variables() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">myfunc1</span>():</span><br>    print(<span class="hljs-string">&quot;This is myfunc1.&quot;</span>)<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">v0 = __pyx_kp_s_variables_test; <span class="hljs-comment">// 引用字符串</span><br>x = PyLong_FromLong(<span class="hljs-number">5LL</span>);<br><br><span class="hljs-comment">// 调用 print</span><br>args = PyTuple_Pack(<span class="hljs-number">1LL</span>, x);<br>v6 = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);<br>PyObject_Call(v6, args, <span class="hljs-number">0LL</span>);<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-global-var-分析"><a href="#test-global-var-分析" class="headerlink" title="test_global_var() 分析"></a>test_global_var() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_global_var</span>():</span><br>    <span class="hljs-keyword">global</span> gy<br>    print(gy)<br></code></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs c++">v0 = PyObject_GetAttr(__pyx_b, __pyx_n_s_gy); <span class="hljs-comment">// 从当前模块查找globals</span><br><br><span class="hljs-comment">// 调用 print</span><br>v1 = PyTuple_Pack(<span class="hljs-number">1LL</span>, v0);<br>v3 = PyObject_GetAttr(__pyx_b, __pyx_n_s_print);<br>PyObject_Call(v3, v2, <span class="hljs-number">0LL</span>);<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-numbers-分析"><a href="#test-numbers-分析" class="headerlink" title="test_numbers() 分析"></a>test_numbers() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_numbers</span>():</span><br>    x = <span class="hljs-number">123</span><br>    y = <span class="hljs-number">12.3</span><br>    z = <span class="hljs-number">0x112233445566778899AABBCCDD</span><br>    print(x, y, z)<br></code></pre></td></tr></table></figure>
+<p>print 三个参数，构造元组。<br>decompiler 识别出来的数据结构有问题</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">mov     edi, 3          ; size<br>call    _PyTuple_New<br>mov     [rax+18h], r12  ; 123<br>mov     [rax+20h], r15  ; 12.3<br>mov     [rax+28h], r14  ; 0x112233445566778899AABBCCDD<br></code></pre></td></tr></table></figure>
+<p>这段代码也可以看出 Tuple 构造方法</p>
+<h2 id="test-if-分析"><a href="#test-if-分析" class="headerlink" title="test_if() 分析"></a>test_if() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_if</span>(<span class="hljs-params">x</span>):</span><br>    <span class="hljs-keyword">if</span> x &gt; <span class="hljs-number">456</span>:<br>        print(<span class="hljs-string">&quot;x &gt; 456&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        print(<span class="hljs-string">&quot;x &lt;= 456&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs c++">v2 = PyObject_RichCompare(a2, __pyx_int_456, <span class="hljs-number">4</span>);<br>v5 = PyObject_IsTrue(v2);<br><span class="hljs-keyword">if</span> ( v5 )<br>    <span class="hljs-keyword">goto</span> LABEL_8;<br><span class="hljs-keyword">goto</span> LABEL_13;<br><br>LABEL_8 =&gt; 输出  x  &gt; <span class="hljs-number">456</span><br>LABEL_13 =&gt; 输出 x &lt;= <span class="hljs-number">456</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-for-分析"><a href="#test-for-分析" class="headerlink" title="test_for() 分析"></a>test_for() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_for</span>():</span><br>    s = <span class="hljs-number">0</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">101</span>):<br>        s = s + i<br>    print(s)<br></code></pre></td></tr></table></figure>
+<figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs smali">v3 = PyLong_FromLong(0<span class="hljs-class">LL);</span><br>v0 = __pyx_int_0;<br>v2 = 0<br>while ( 1 ) &#123;<br>	v0 = PyNumber_Add(v0, v3);<br>	++v2;<br><span class="hljs-built_in">	if </span>( v2 &gt;= 101 )<br>       break;<br>   v3 = PyLong_FromLong(v2);<br>&#125;<br><span class="hljs-keyword">.</span>.... print 代码忽略 ......<br></code></pre></td></tr></table></figure>
+<p>range(101) 直接翻译成等价最优形式了。</p>
+<h2 id="test-string-分析"><a href="#test-string-分析" class="headerlink" title="test_string() 分析"></a>test_string() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_string</span>():</span><br>    x = <span class="hljs-string">&quot;I am str.&quot;</span><br>    y = <span class="hljs-built_in">len</span>(x)<br>    z = x[<span class="hljs-number">1</span>]<br>    w = x[<span class="hljs-number">2</span>:]<br>    print(x, y, z, w)<br><br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;am&quot;</span> <span class="hljs-keyword">in</span> x:<br>        print(<span class="hljs-string">&quot;yes&quot;</span>)<br>    <span class="hljs-keyword">else</span>:<br>        print(<span class="hljs-string">&quot;wrong&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+<p>下标访问  <code> z = x[1]</code></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs c++">v0 = __pyx_kp_s_I_am_str;<br><br>item = (v4-&gt;sq_item)(v0, <span class="hljs-number">1LL</span>); <span class="hljs-comment">// sq_item 访问下标 PyObject* PySequence_GetItem(PyObject *o, Py_ssize_t i)</span><br>或者<br>v31 = PyLong_FromSsize_t(<span class="hljs-number">1LL</span>);<br>item = PyObject_GetItem(v0, v31);<br><br></code></pre></td></tr></table></figure>
+<p>切片访问  w = x[2:]</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs c++">v0 = __pyx_kp_s_I_am_str;<br>__pyx_slice__2 = PySlice_New(__pyx_int_2, &amp;_Py_NoneStruct, &amp;_Py_NoneStruct);<br>v6 = (v0-&gt;ob_type-&gt;tp_as_mapping-&gt;mp_subscript)(v0, __pyx_slice__2);<br></code></pre></td></tr></table></figure>
+<p><code>in</code> 关键字</p>
+<figure class="highlight ini"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs ini"><span class="hljs-attr">v10</span> = PySequence_Contains(v1, __pyx_n_s_am)<span class="hljs-comment">;</span><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-list-分析"><a href="#test-list-分析" class="headerlink" title="test_list() 分析"></a>test_list() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_list</span>():</span><br>    x = <span class="hljs-built_in">list</span>()<br>    x.append(<span class="hljs-number">1</span>)<br>    x.append(<span class="hljs-number">2</span>)<br>    x.append(<span class="hljs-number">3</span>)<br>    x.append(<span class="hljs-number">4</span>)<br>    x.append(<span class="hljs-string">&quot;five&quot;</span>)<br>    print(x)<br>    print(<span class="hljs-built_in">len</span>(x))<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> x:<br>        print(i)<br>    x = x[<span class="hljs-number">1</span>:]<br>    x[<span class="hljs-number">2</span>:<span class="hljs-number">4</span>] = [<span class="hljs-number">22</span>, <span class="hljs-number">33</span>]<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><code class="hljs asm">v0 &#x3D; PyList_New(0LL);<br>PyList_Append(v1, __pyx_int_1);<br>PyList_Append(v1, __pyx_int_2);<br>......<br>PyList_Append(v1,  __pyx_n_s_five);<br><br>; for i in x: <br>;     print(i)<br>mov     rax, [rbx+18h]    &#x2F;&#x2F; 列表开始<br>mov     r15, [rax+r12*8]  &#x2F;&#x2F; r12 下标<br><br>; x &#x3D; x[1:]<br>call    _PyList_New<br>mov     rcx, rax<br>mov     rax, [rbp+var_38] ; var_38 是原来的 x<br>mov     r12, [rax+18h] ; 第一个 PyObect * 地址<br>lea     rsi, [r12+8] ; [1:] 跳过一个元素<br>mov     rdi, [rcx+18h]  ; __dst<br>lea     r15, [r13-1]<br>lea     rdx, ds:0[r15*8] ; __n r15 复制的元素的个数<br>call    _memcpy<br><br>;x[2:4] &#x3D; [22, 33]<br>;构造 [22, 33]<br>mov     edi, 2<br>call    _PyList_New<br>mov     r13, rax<br>mov     rax, cs:___pyx_int_22<br>mov     rcx, [r13+18h]<br>mov     [rcx], rax<br>mov     rax, cs:___pyx_int_33<br>mov     rcx, [r13+18h]<br>mov     [rcx+8], rax<br>mov     [rbp+var_40], rcx<br>; x[2:4] &#x3D; <br><br>;创建切片<br>mov     edi, 2          ; r12 &#x3D; _PyLong_FromSsize_t(2)<br>call    _PyLong_FromSsize_t<br>mov     r12, rax<br>mov     edi, 4          ; r15 &#x3D; _PyLong_FromSsize_t(4)<br>call    _PyLong_FromSsize_t<br>mov     r15, rax<br>mov     r13, cs:__Py_NoneStruct_ptr<br>mov     rdi, r12        ; start: 2<br>mov     rsi, rax        ; stop : 4<br>mov     rdx, r13        ; step __Py_NoneStruct_ptr<br>call    _PySlice_New<br>mov     [rbp+var_48], rax<br><br>;给切片赋值<br>mov 	r12, [rbp+var_48]<br>mov     rdi, rbx   ;o<br>mov     rsi, r12   ;key, 切片<br>mov     rdx, [rbp+var_38] ;v<br>mov     rax, [rbp+var_40]<br>call    qword ptr [rax+10h] ;mp_ass_subscript int PyObject_SetItem(PyObject *o, PyObject *key, PyObject *v)<br><br><br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-dict-分析"><a href="#test-dict-分析" class="headerlink" title="test_dict() 分析"></a>test_dict() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_dict</span>():</span><br>    x = &#123;&#125;<br>    x[<span class="hljs-string">&quot;one&quot;</span>] = <span class="hljs-number">1</span><br>    x[<span class="hljs-string">&quot;two&quot;</span>] = <span class="hljs-number">2</span><br>    x[<span class="hljs-string">&quot;three&quot;</span>] = <span class="hljs-number">3</span><br>    y = x[<span class="hljs-string">&quot;one&quot;</span>]<br>    z = x[<span class="hljs-string">&quot;two&quot;</span>]<br>    <span class="hljs-keyword">if</span> <span class="hljs-string">&quot;one&quot;</span> <span class="hljs-keyword">in</span> x:<br>        print(y)<br><br>    <span class="hljs-keyword">for</span> k <span class="hljs-keyword">in</span> x:<br>        print(k, x[k])<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><code class="hljs asm">; x &#x3D; &#123;&#125;<br>call    _PyDict_New<br>mov rbx, rax ; rbx &#x3D;&gt; x PyObject *<br><br>;  x[&quot;one&quot;] &#x3D; 1<br>mov     rsi, cs:___pyx_n_s_one ; key<br>mov     rdx, cs:___pyx_int_1 ; v<br>mov     rdi, rbx        ; o<br>call    _PyDict_SetItem ;int PyObject_SetItem(PyObject *o, PyObject *key, PyObject *v)<br><br>; x[&quot;two&quot;] &#x3D; 2<br>mov     rsi, cs:___pyx_n_s_two ; key<br>mov     rdx, cs:___pyx_int_2 ; item<br>mov     rdi, rbx        ; mp<br>call    _PyDict_SetItem<br><br>; x[&quot;three&quot;] &#x3D; 3<br>mov     rsi, cs:___pyx_n_s_three ; key<br>mov     rdx, cs:___pyx_int_3 ; item<br>mov     rdi, rbx        ; mp<br>call    _PyDict_SetItem<br><br>;  y &#x3D; x[&quot;one&quot;]<br>mov     rsi, cs:___pyx_n_s_one<br>mov     rdi, rbx<br>call    ___Pyx_PyDict_GetItem<br>mov     [rbp+var_40], rax<br><br>;  z &#x3D; x[&quot;two&quot;]<br>mov     rsi, cs:___pyx_n_s_two<br>mov     rdi, rbx<br>call    ___Pyx_PyDict_GetItem<br>mov     [rbp+var_38], rax<br><br>; if &quot;one&quot; in x<br>mov     rsi, cs:___pyx_n_s_one ; key<br>mov     rdi, rbx        ; mp<br>call    _PyDict_Contains ; key in mp retrun 1, not in return 0, error: -1<br><br><br>; for k in x<br>loop_start:<br>mov     rdi, rbx        ; o<br>lea     rsi, [rbp+pos]  ; pos<br>lea     rdx, [rbp+key]  ; key<br>lea     rcx, [rbp+value] ; value<br>call    _PyDict_Next ; int PyDict_Next(PyObject *p, Py_ssize_t *ppos, PyObject **pkey, PyObject **pvalue)<br>.......<br>call    ___Pyx_PyDict_GetItem<br>.......<br>call    _PyTuple_New<br>.....<br>call    _PyTuple_Pack<br>....<br>call print.<br>.....<br>call    _PyDict_Size<br>......<br></code></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="test-datetime-分析"><a href="#test-datetime-分析" class="headerlink" title="test_datetime () 分析"></a>test_datetime () 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_datetime</span>():</span><br>    x = datetime.datetime.now()<br>    print(x)<br></code></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs asm">mov     rbx, cs:___pyx_n_s_datetime<br>mov     rdx, [rbx+18h]<br>mov     rsi, rbx<br>call    __PyDict_GetItem_KnownHash<br>mov     r15, rax<br><br>mov     rsi, cs:___pyx_n_s_datetime<br>mov     rdi, r15        ; PyObject *<br>call    _PyObject_GetAttr<br>mov     rbx, rax<br><br>mov     rsi, cs:___pyx_n_s_now ;now<br>mov     rdi, rbx<br>call    _PyObject_GetAttr<br>mov     r15, rax<br><br>mov     rsi, cs:___pyx_empty_tuple<br>mov     rdi, r15        ; callable_object<br>call    ___Pyx_PyObject_Call<br><br>........ print(x) 略 ........<br></code></pre></td></tr></table></figure>
+
+
+<h2 id="test-format-分析"><a href="#test-format-分析" class="headerlink" title="test_format() 分析"></a>test_format() 分析</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">test_format</span>():</span><br>    x = <span class="hljs-number">1</span><br>    y = <span class="hljs-string">&quot;One&quot;</span><br>    z = <span class="hljs-string">&quot;%s is %d&quot;</span> % (y, x)<br>    print(z)<br></code></pre></td></tr></table></figure>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs asm">mov     r14, cs:___pyx_n_s_One<br>mov     edi, 1          ; __int64<br>call    _PyLong_FromLong<br>mov     r15, rax ; r15 &#x3D; _PyLong_FromLong(1)<br>mov     edi, 2          ; size<br>call    _PyTuple_New<br>mov     rbx, rax<br>mov     [rax+18h], r14 ; &quot;One&quot;<br>mov     [rax+20h], r15 ; 1<br><br>mov     rdi, cs:___pyx_kp_s_s_is_d ; %s is %d<br>mov     rsi, rax                   ; Tuple(&quot;One&quot;, 1)<br>call    _PyUnicode_Format<br><br></code></pre></td></tr></table></figure>
+
+
+<h2 id="dump-PyObject"><a href="#dump-PyObject" class="headerlink" title="dump PyObject *"></a>dump PyObject *</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asm">.text:00007FFBC501B615 mov     rcx, rbx<br>.text:00007FFBC501B618 call    python38_PyObject_Str          <br>.text:00007FFBC501B618                                       <br>.text:00007FFBC501B61D mov     rcx, rax<br>.text:00007FFBC501B620 call    python38_PyUnicode_AsUTF8<br></code></pre></td></tr></table></figure>
+<p>这样就可以得到 PyObject * 的字符串 dump 信息。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs js"><span class="hljs-comment">// frida -pid xxx</span><br><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">DumpPyObject</span>(<span class="hljs-params">address</span>) </span>&#123;<br>    <span class="hljs-keyword">if</span> (Process.arch === <span class="hljs-string">&quot;x64&quot;</span>) &#123;<br>        <span class="hljs-keyword">var</span> native_address = <span class="hljs-keyword">new</span> NativePointer(address);<br>        <span class="hljs-keyword">var</span> <span class="hljs-built_in">module</span> = Process.findModuleByName(<span class="hljs-string">&quot;python38.dll&quot;</span>);<br>        <span class="hljs-keyword">var</span> PyObject_Str = <span class="hljs-keyword">new</span> NativeFunction(<span class="hljs-built_in">module</span>.findExportByName(<span class="hljs-string">&quot;PyObject_Str&quot;</span>), <span class="hljs-string">&quot;pointer&quot;</span>, [<span class="hljs-string">&quot;pointer&quot;</span>], <span class="hljs-string">&quot;win64&quot;</span>);<br>        <span class="hljs-keyword">var</span> PyUnicode_AsUTF8 = <span class="hljs-keyword">new</span> NativeFunction(<span class="hljs-built_in">module</span>.findExportByName(<span class="hljs-string">&quot;PyUnicode_AsUTF8&quot;</span>), <span class="hljs-string">&quot;pointer&quot;</span>, [<span class="hljs-string">&quot;pointer&quot;</span>], <span class="hljs-string">&quot;win64&quot;</span>);<br>        <span class="hljs-keyword">var</span> obj = PyObject_Str(native_address);<br>        <span class="hljs-keyword">var</span> p = PyUnicode_AsUTF8(obj);<br>        <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&quot;okkk..&quot;</span>);<br>        <span class="hljs-built_in">console</span>.log(p.readUtf8String());<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p>[1] “The Basics of Cython” <a target="_blank" rel="noopener" href="https://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html">https://cython.readthedocs.io/en/latest/src/tutorial/cython_tutorial.html</a></p>
+<p>[2] “Object Protocol” <a target="_blank" rel="noopener" href="https://docs.python.org/3/c-api/object.html">https://docs.python.org/3/c-api/object.html</a></p>
+<p>[3] “Type Objects” <a target="_blank" rel="noopener" href="https://docs.python.org/3/c-api/typeobj.html#c.PySequenceMethods.sq_item">https://docs.python.org/3/c-api/typeobj.html#c.PySequenceMethods.sq_item</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/PL-Reverse/">PL_Reverse</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Python/">Python</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/05/13/%E7%9C%8B%E9%9B%AACTF2021/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">看雪CTF2021</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/06/go-notes/">
+                        <span class="hidden-mobile">go notes</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
