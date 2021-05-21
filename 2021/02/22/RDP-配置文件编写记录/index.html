@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>RDP 配置文件编写记录 - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -267,20 +268,20 @@
 <h2 id="Patchs"><a href="#Patchs" class="headerlink" title="Patchs"></a>Patchs</h2><p>需要用 IDA 分析 termsrv.dll，加载的时候需要加载微软的符号表。</p>
 <h3 id="LocalOnlyPatch"><a href="#LocalOnlyPatch" class="headerlink" title="LocalOnlyPatch"></a>LocalOnlyPatch</h3><p>函数: CEnforcementCore::GetInstanceOfTSLicense</p>
 <p>签名:?GetInstanceOfTSLicense@CEnforcementCore@@UEAAJAEAU_GUID@@PEAPEAVITSLicense@@@Z</p>
-<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162509030.png" srcset="/img/loading.gif" class="" title="image-20210222162509030">
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162509030.png" srcset="/img/loading.gif" lazyload class="" title="image-20210222162509030">
 
 <p>把 jz 改成 jmp： LocalOnlyCode.x64=jmpshort</p>
 <h3 id="SingleUserPatch"><a href="#SingleUserPatch" class="headerlink" title="SingleUserPatch"></a>SingleUserPatch</h3><p>函数: CSessionArbitrationHelperMgr::IsSingleSessionPerUserEnabled</p>
 <p>签名: ?IsSingleSessionPerUserEnabled@CSessionArbitrationHelperMgr@@UEAAJPEAH@Z</p>
-<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162844238.png" srcset="/img/loading.gif" class="" title="image-20210222162844238">
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222162844238.png" srcset="/img/loading.gif" lazyload class="" title="image-20210222162844238">
 
 <p>改成常量1改成0：SingleUserCode.x64=Zero 注意 offset 的位置。</p>
 <h3 id="DefPolicyPatch"><a href="#DefPolicyPatch" class="headerlink" title="DefPolicyPatch"></a>DefPolicyPatch</h3><p>函数: CDefPolicy::Query</p>
 <p>签名: ?Query@CDefPolicy@@UEAAJPEAH@Z</p>
-<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171012966.png" srcset="/img/loading.gif" class="" title="image-20210222171012966">
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171012966.png" srcset="/img/loading.gif" lazyload class="" title="image-20210222171012966">
 
 <p>改成如下</p>
-<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171115107.png" srcset="/img/loading.gif" class="" title="image-20210222171115107">
+<img src="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/image-20210222171115107.png" srcset="/img/loading.gif" lazyload class="" title="image-20210222171115107">
 
 <p>DefPolicyCode.x64=CDefPolicy_Query_eax_rcx</p>
 <p>这里的 [rcx+638h] 是最大的连接数，直接给它赋值一个大数值即可。</p>
@@ -356,7 +357,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -386,12 +391,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -406,7 +413,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -482,8 +490,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -498,7 +507,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -506,7 +514,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -551,11 +559,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -575,7 +584,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

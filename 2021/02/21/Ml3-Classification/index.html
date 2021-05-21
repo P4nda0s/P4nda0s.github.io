@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>Ml3:Classification - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -266,7 +267,7 @@
 <p>可以理解为 $h_\theta(x)$ 是计算给定输入，输出为 y=1 的可能性。</p>
 <p>其中 g 代表的是逻辑函数，课程中选的逻辑函数叫 <code>Sigmoid function</code>, 该函数的图形是 S 形。</p>
 <p>$g(x) = \frac{1}{1+e^{-x}}$</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221165302648.png" srcset="/img/loading.gif" class="" title="image-20210221165302648">
+<img src="/2021/02/21/Ml3-Classification/image-20210221165302648.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221165302648">
 
 
 
@@ -275,29 +276,29 @@
 <p>根据 Sigmoid 函数性质，可以继续得出:</p>
 <p>$\theta^Tx &gt;= 0$ 时，预测 y = 1<br>$\theta^Tx &lt; 0$ 时，   预测 y = 0</p>
 <p>在图中画出 $y = \theta^Tx$ 的图形，如图</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221171419774.png" srcset="/img/loading.gif" class="" title="image-20210221171419774">
+<img src="/2021/02/21/Ml3-Classification/image-20210221171419774.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221171419774">
 
 
 
 <p>红色的线就是决策边界，将样本分为两类。<strong>所谓决策边界就是能够把样本正确分类的一条边界，主要有线性决策边界(linear decision boundaries)和非线性决策边界(non-linear decision boundaries)。</strong>注意：决策边界是假设函数的属性，由参数决定，而不是由数据集的特征决定。</p>
 <p>非线性的决策边界</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221171637022.png" srcset="/img/loading.gif" class="" title="image-20210221171637022">
+<img src="/2021/02/21/Ml3-Classification/image-20210221171637022.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221171637022">
 
 
 
 <h2 id="代价函数"><a href="#代价函数" class="headerlink" title="代价函数"></a>代价函数</h2><p>逻辑回归假设函数的代价函数如何来选择呢？如果将 $h_\theta(x)=g(\theta^Tx)$直接带入线性回归的代价函数的话，代价函数存在<strong>局部最优解</strong>，将得到一个非凸函数(non-convexfunction)。这种非凸函数会干扰梯度下降算法，使梯度下降算法在某个局部最优解收敛。</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221171932745.png" srcset="/img/loading.gif" class="" title="image-20210221171932745">
+<img src="/2021/02/21/Ml3-Classification/image-20210221171932745.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221171932745">
 
 <p>如何设计代价函数来避免这种情况呢？</p>
 <p>重新定义代价函数 $J(\theta)=\frac{1}{m}\sum\limits_{i=1}^{m}Cost(h_\theta(x^{(i)}),y^{(i)})$，cost的定义如下</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221172653354.png" srcset="/img/loading.gif" class="" title="image-20210221172653354">
+<img src="/2021/02/21/Ml3-Classification/image-20210221172653354.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221172653354">
 
 <p>这个 Cost 可以进一步化简合并一下，很简单，就不写出来了。$h_\theta(x)$ 与 Cost 函数的图像如下。</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221173009527.png" srcset="/img/loading.gif" class="" title="image-20210221173009527">
+<img src="/2021/02/21/Ml3-Classification/image-20210221173009527.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221173009527">
 
 <p>假如训练集中某样本 y = 1，$h_\theta(x)$ 要趋于1 的时候误差才最小，反之亦然。</p>
 <p>这样，定义代价函数后，就可以使用梯度下降算法求最优参数解。</p>
-<img src="/2021/02/21/Ml3-Classification/image-20210221173947726.png" srcset="/img/loading.gif" class="" title="image-20210221173947726">
+<img src="/2021/02/21/Ml3-Classification/image-20210221173947726.png" srcset="/img/loading.gif" lazyload class="" title="image-20210221173947726">
 
 
 
@@ -332,7 +333,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -362,12 +367,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -382,7 +389,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -458,8 +466,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -474,7 +483,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -482,7 +490,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -527,11 +535,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -590,7 +599,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

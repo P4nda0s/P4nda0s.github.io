@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>StarCTF Reverse writeUp - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -274,7 +275,7 @@
 <p>sub_4060D0: malloc</p>
 <p>分析方法</p>
 <p>找一下该函数的子函数，发现如下字符串，说明这个函数可能是 malloc，并且参数是一个数字，返回值是指针。</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118152819348.png" srcset="/img/loading.gif" class="" title="image-20210118152819348">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118152819348.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118152819348">
 
 
 
@@ -284,7 +285,7 @@
 <li>sub_4C7600() % 100 + 101   这种调用方式，自然联想到取某个范围内的随机数</li>
 <li>递归进入分析该函数，发现某个子函数中有随机数方程</li>
 </ol>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118153202919.png" srcset="/img/loading.gif" class="" title="image-20210118153202919">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118153202919.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118153202919">
 
 <p>一般而言，随机数的种子相同，生成的随机数序列也相同。进过初步分析，该程序用的随机数种子为 0</p>
 <p>其它几个函数主要是 C++ string 对象的函数，对于这种，一般可以通过观察调试时的数据确认。</p>
@@ -294,23 +295,23 @@
 <p>在 sub_4052B4 可以分析 Node 的结构体定义如下</p>
 <figure class="highlight crmsh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs crmsh">struct <span class="hljs-keyword">Node</span><span class="hljs-title">&#123;</span><br><span class="hljs-title">	int64</span> data;<br>	struct <span class="hljs-keyword">Node</span> <span class="hljs-title">* next</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 <p>IDA 中支持定义结构体, 手动添加这两个结构体</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118160659890.png" srcset="/img/loading.gif" class="" title="image-20210118160659890">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118160659890.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118160659890">
 
 <p>注意这是一个64位程序， 指针为64位，即 DQ，而不是32位的 DD.</p>
 <p>sub_4052B4(v4, 10);  把第一个参数的类型改成 linklist *, 选中 a1 参数右键</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154327217.png" srcset="/img/loading.gif" class="" title="image-20210118154327217">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154327217.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118154327217">
 
 <p>修改之后的效果如下:</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154444099.png" srcset="/img/loading.gif" class="" title="image-20210118154444099">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154444099.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118154444099">
 
 <p>可见 v3 变量是刚分配的 Node 内存，继续修改 V3 的名字和数据类型为 Node *</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154603480.png" srcset="/img/loading.gif" class="" title="image-20210118154603480">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154603480.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118154603480">
 
 <p>修改之后并没有太大的直观效果，因为该函数中会调用另外一个函数初始化 Node</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154931044.png" srcset="/img/loading.gif" class="" title="image-20210118154931044">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118154931044.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118154931044">
 
 <p>继续把 sub_405288 的第一个参数类型修改为 Node *</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118155026155.png" srcset="/img/loading.gif" class="" title="image-20210118155026155">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118155026155.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118155026155">
 
 <p>其它地方与链表有关的都修复一下结构，逻辑就很清晰了。</p>
 <p>搞清楚链表后，把整个链表抽象理解成数组，初始化函数初始的数组值固定</p>
@@ -329,20 +330,20 @@
 <h2 id="wherekey"><a href="#wherekey" class="headerlink" title="wherekey"></a>wherekey</h2><p>这道题目直接启动可能会不成功，可以采用先运行再附加的方法调试。</p>
 <p>题目结构不是很清晰，可以从找数据流入手，具体思路就是通过调试，找输入数据出现的位置，然后再找输入数据经过的处理代码。</p>
 <p>402072 函数就是输入函数, 逻辑很混乱，若通过调试只观察数据的话，发现这段代码仅仅是简单的接收5字节输入，然后把输入的 flag 数据通过 socket 传递给其它地方。</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118170729252.png" srcset="/img/loading.gif" class="" title="image-20210118170729252">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118170729252.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118170729252">
 
 
 
 <p>输入的 flag 传递到哪里了？经过简单的调试找到了下面这段代码 sub_4022DE 其中 v1 指向输入的字符串，v1的长度为5个字节，是输入的行向量</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118171107725.png" srcset="/img/loading.gif" class="" title="image-20210118171107725">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118171107725.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118171107725">
 
 <p>v4 的计算如下:</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118171511325.png" srcset="/img/loading.gif" class="" title="image-20210118171511325">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118171511325.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118171511325">
 
 <p>通俗讲，这个函数就是返回列向量, v4 就是下面这个矩阵的第 i 列向量，i从0开始。设该矩阵为A矩阵</p>
 <figure class="highlight asciidoc"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs asciidoc">flag&#123;<br>are_y<br>ou_su<br>re_fr<br>iend&#125;<br></code></pre></td></tr></table></figure>
 <p>401E3E 地址上的函数是一个乘法函数( 有简单的花指令)</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118172337067.png" srcset="/img/loading.gif" class="" title="image-20210118172337067">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118172337067.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118172337067">
 
 <p>把上面写的和矩阵乘法联想一下，就能推出如下公式</p>
 <p>(flag * A) % 257 == B</p>
@@ -360,7 +361,7 @@
 <p>flag -&gt; 题目 -&gt; output</p>
 <p>已知 output 求输入flag</p>
 <p>很容易找到如下代码，左侧数据是输入的文件字节流，右侧是一个字节的密钥。</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118173712672.png" srcset="/img/loading.gif" class="" title="image-20210118173712672">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118173712672.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118173712672">
 
 <p>加密次序不是依次加密的，而是按照如下次序加密（target是输入文件）:</p>
 <figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">pos_table</span> =<span class="hljs-meta"> []</span><br><span class="hljs-attribute">v0</span> = <span class="hljs-number">4</span><br><span class="hljs-attribute">for</span> i in range(len(target)):<br>    <span class="hljs-attribute">pos_table</span>.append(v<span class="hljs-number">0</span> % len(target))<br>    <span class="hljs-attribute">v0</span> += <span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
@@ -375,11 +376,11 @@
 <p>例如第一轮的时候，尝试 m = [ENC(‘\x30’) … ENC(‘\x80’) ] 所有取值，并找出满足m[x] ^ x == x 的值作为解。主要解不唯一，因此要DFS遍历所有情况。 确认第一位后，再爆破第二位，依次类推，直到 46 位。</p>
 <p>ENC 实际上是 rust 随机数函数，为了方便，直接 patch 源程序使其能实现 ENC的输入输出。</p>
 <p>patch 方法如下:</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118213539691.png" srcset="/img/loading.gif" class="" title="image-20210118213539691">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118213539691.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118213539691">
 
 <p>V9 就是keybuffer，使这个第二个参数改为输入文件缓冲区</p>
 <p>修改如下代码为赋值语句，可以直接输出 ENC 结果到文件</p>
-<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118213650476.png" srcset="/img/loading.gif" class="" title="image-20210118213650476">
+<img src="/2021/01/18/StarCTF-Reverse-writeUp/image-20210118213650476.png" srcset="/img/loading.gif" lazyload class="" title="image-20210118213650476">
 
 <p>patch 完成后，运行patch之后的程序，flag 文件相当于  ENC 的参数，output 相当于 ENC 的返回值。</p>
 <p>编写爆破脚本如下:</p>
@@ -415,7 +416,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -445,12 +450,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -465,7 +472,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -541,8 +549,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -557,7 +566,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -565,7 +573,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -610,11 +618,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -634,7 +643,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

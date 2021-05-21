@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>Lexical Analysis - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -261,7 +262,7 @@
               <h1 id="Lexical-Analysis"><a href="#Lexical-Analysis" class="headerlink" title="Lexical Analysis"></a>Lexical Analysis</h1><h2 id="序"><a href="#序" class="headerlink" title="序"></a>序</h2><p>我最近在学习 SFU 的 Compiler 课程。由于疫情缘故， SFU 的 Compiler 课程在线上进行，才让我有机会白嫖到这门课程。 这门课程理论与实践结合，课程作业提供了详细的文档、测试程序以及 testcase。</p>
 <p>课程主页地址<br><a target="_blank" rel="noopener" href="http://anoopsarkar.github.io/compilers-class/syllabus.html">http://anoopsarkar.github.io/compilers-class/syllabus.html</a></p>
 <h2 id="Lexical-analysis"><a href="#Lexical-analysis" class="headerlink" title="Lexical analysis"></a>Lexical analysis</h2><p>Lexical analysis （词法分析）是编译的第一个阶段，输入字符串流，输出等价的 Token 列表。关键字、标识符、数字常量、字符串常量等等都是一个 Token。部分 Token 还需要附加值属性才能完整表示。比如一个表示数字的 Token 还应该有对应的值属性。</p>
-<img src="/2020/12/31/lexical/image-20210101234908658.png" srcset="/img/loading.gif" class="" title="image-20210101234908658">
+<img src="/2020/12/31/lexical/image-20210101234908658.png" srcset="/img/loading.gif" lazyload class="" title="image-20210101234908658">
 
 <p>正则表达式能很好地胜任 Token 识别工作，日常开发任务中经常使用正则表达式识别手机号、数字、邮箱等等。编译则利用正则表达式识别 Token。</p>
 <h3 id="词法分析器如何使用正则表达式识别-Token？"><a href="#词法分析器如何使用正则表达式识别-Token？" class="headerlink" title="词法分析器如何使用正则表达式识别 Token？"></a>词法分析器如何使用正则表达式识别 Token？</h3><ol>
@@ -288,13 +289,13 @@
 <li>结束状态</li>
 </ol>
 <h3 id="Example"><a href="#Example" class="headerlink" title="Example"></a>Example</h3><p>双圆圈为结束状态</p>
-<img src="/2020/12/31/lexical/image-20210102001316806.png" srcset="/img/loading.gif" class="" title="image-20210102001316806">
+<img src="/2020/12/31/lexical/image-20210102001316806.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102001316806">
 
-<img src="/2020/12/31/lexical/image-20210102001328480.png" srcset="/img/loading.gif" class="" title="image-20210102001328480">
+<img src="/2020/12/31/lexical/image-20210102001328480.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102001328480">
 
-<img src="/2020/12/31/lexical/image-20210102001401036.png" srcset="/img/loading.gif" class="" title="image-20210102001401036">
+<img src="/2020/12/31/lexical/image-20210102001401036.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102001401036">
 
-<h3 id="特殊的-ε-move"><a href="#特殊的-ε-move" class="headerlink" title="特殊的 ε-move"></a>特殊的 ε-move</h3><img src="/2020/12/31/lexical/image-20210102001546935.png" srcset="/img/loading.gif" class="" title="image-20210102001546935">
+<h3 id="特殊的-ε-move"><a href="#特殊的-ε-move" class="headerlink" title="特殊的 ε-move"></a>特殊的 ε-move</h3><img src="/2020/12/31/lexical/image-20210102001546935.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102001546935">
 
 
 <h2 id="DFA-amp-NFA"><a href="#DFA-amp-NFA" class="headerlink" title="DFA &amp; NFA"></a>DFA &amp; NFA</h2><p>确定有限状态自动机 Deterministic (DFA)<br>遵循两个原则:</p>
@@ -302,28 +303,28 @@
 <li>每个一个状态的每一个输入只有一个对应的转移状态</li>
 <li>没有  ε-move</li>
 </ol>
-<img src="/2020/12/31/lexical/image-20210102002252030.png" srcset="/img/loading.gif" class="" title="image-20210102002252030">
+<img src="/2020/12/31/lexical/image-20210102002252030.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102002252030">
 
 <p>NFA 则支持多个状态转移和ε-move</p>
-<img src="/2020/12/31/lexical/image-20210102002356893.png" srcset="/img/loading.gif" class="" title="image-20210102002356893">
+<img src="/2020/12/31/lexical/image-20210102002356893.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102002356893">
 
 <p>NFA 构造方便，而 DFA 编程方便，效率高。因此，一般操作如下<br>正则 pattern -&gt; NFA -&gt; DFA</p>
-<h2 id="NFA-转-DFA-方法：子集构造法"><a href="#NFA-转-DFA-方法：子集构造法" class="headerlink" title="NFA 转 DFA 方法：子集构造法"></a>NFA 转 DFA 方法：子集构造法</h2><img src="/2020/12/31/lexical/image-20210102003051864.png" srcset="/img/loading.gif" class="" title="image-20210102003051864">
+<h2 id="NFA-转-DFA-方法：子集构造法"><a href="#NFA-转-DFA-方法：子集构造法" class="headerlink" title="NFA 转 DFA 方法：子集构造法"></a>NFA 转 DFA 方法：子集构造法</h2><img src="/2020/12/31/lexical/image-20210102003051864.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102003051864">
 
 <h2 id="正则表达式转-NFA"><a href="#正则表达式转-NFA" class="headerlink" title="正则表达式转 NFA"></a>正则表达式转 NFA</h2><p>方法：Thompson’s construction<br><a target="_blank" rel="noopener" href="https://en.wikipedia.org/wiki/Thompson%27s_construction">https://en.wikipedia.org/wiki/Thompson%27s_construction</a></p>
-<img src="/2020/12/31/lexical/image-20210102004051943.png" srcset="/img/loading.gif" class="" title="image-20210102004051943">
+<img src="/2020/12/31/lexical/image-20210102004051943.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004051943">
 
-<img src="/2020/12/31/lexical/image-20210102004101129.png" srcset="/img/loading.gif" class="" title="image-20210102004101129">
+<img src="/2020/12/31/lexical/image-20210102004101129.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004101129">
 
-<img src="/2020/12/31/lexical/image-20210102004108754.png" srcset="/img/loading.gif" class="" title="image-20210102004108754">
+<img src="/2020/12/31/lexical/image-20210102004108754.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004108754">
 
-<img src="/2020/12/31/lexical/image-20210102004118447.png" srcset="/img/loading.gif" class="" title="image-20210102004118447">
+<img src="/2020/12/31/lexical/image-20210102004118447.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004118447">
 
-<img src="/2020/12/31/lexical/image-20210102004129896.png" srcset="/img/loading.gif" class="" title="image-20210102004129896">
+<img src="/2020/12/31/lexical/image-20210102004129896.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004129896">
 
-<img src="/2020/12/31/lexical/image-20210102004203432.png" srcset="/img/loading.gif" class="" title="image-20210102004203432">
+<img src="/2020/12/31/lexical/image-20210102004203432.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004203432">
 
-<img src="/2020/12/31/lexical/image-20210102004224259.png" srcset="/img/loading.gif" class="" title="image-20210102004224259">
+<img src="/2020/12/31/lexical/image-20210102004224259.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004224259">
 
 
 
@@ -335,7 +336,7 @@
 <li>合并所有 $r_i$ 为一个更大表达式  $R = (r_1 | r_2 | … | r_n)$</li>
 <li>将 R 转换成 NFA，DFA，最后优化</li>
 </ul>
-<img src="/2020/12/31/lexical/image-20210102004532585.png" srcset="/img/loading.gif" class="" title="image-20210102004532585">
+<img src="/2020/12/31/lexical/image-20210102004532585.png" srcset="/img/loading.gif" lazyload class="" title="image-20210102004532585">
 
 <h2 id="编写-Decaf-语言词法分析器"><a href="#编写-Decaf-语言词法分析器" class="headerlink" title="编写 Decaf 语言词法分析器"></a>编写 Decaf 语言词法分析器</h2><p>decaf 语言是为学习这门课程设计的语言，具体信息 PDF 如下</p>
 <a href="/2020/12/31/lexical/Decaf.pdf" title="Decaf.pdf">Decaf.pdf</a>
@@ -390,7 +391,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -420,12 +425,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -440,7 +447,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -516,8 +524,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -532,7 +541,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -540,7 +548,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -585,11 +593,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -648,7 +657,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>LR Parse - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -276,21 +277,21 @@
 </li>
 </ul>
 <p>LR(K) 代表: 从左至右分析、最右边推导、超前查看 k 个单词</p>
-<h2 id="Bottom-up-自底向上的分析"><a href="#Bottom-up-自底向上的分析" class="headerlink" title="Bottom-up 自底向上的分析"></a>Bottom-up 自底向上的分析</h2><img src="/2021/01/11/LR-Parse/image-20210109173502058.png" srcset="/img/loading.gif" class="" title="image-20210109173502058">
+<h2 id="Bottom-up-自底向上的分析"><a href="#Bottom-up-自底向上的分析" class="headerlink" title="Bottom-up 自底向上的分析"></a>Bottom-up 自底向上的分析</h2><img src="/2021/01/11/LR-Parse/image-20210109173502058.png" srcset="/img/loading.gif" lazyload class="" title="image-20210109173502058">
 
 <p>Bottom-up 方式，最终得到的是开始符号<code>s</code>， 换句话讲，构建语法分析树的时候，从叶子结点得到根，如图</p>
-<img src="/2021/01/11/LR-Parse/Parsing1.png" srcset="/img/loading.gif" class="" title="img">
+<img src="/2021/01/11/LR-Parse/Parsing1.png" srcset="/img/loading.gif" lazyload class="" title="img">
 
 <p><code>LR</code> 就是一种常见的使用 <code>bottom-up</code>分析的 语法分析器。 </p>
 <p>Bottom-up  语法分析器的分类</p>
-<img src="/2021/01/11/LR-Parse/Parsing2.png" srcset="/img/loading.gif" class="" title="img">
+<img src="/2021/01/11/LR-Parse/Parsing2.png" srcset="/img/loading.gif" lazyload class="" title="img">
 <p>LR(0) -&gt; SLR(1) -&gt;  LR(1) -&gt; LALR(1)</p>
 <h2 id="Shift-amp-Reduce"><a href="#Shift-amp-Reduce" class="headerlink" title="Shift &amp; Reduce"></a>Shift &amp; Reduce</h2><p>移进（Shift）、归约（Reduce）是 LR 分析器工作中对输入符号进行处理的两种操作。</p>
 <p>移进（Shift）操作：将输入的符号压入到 LR 分析栈。<br>归约 （Reduce）操作：将 LR 分析栈顶部的某一项或多项用某个产生式归约。换句话说，若栈顶的某些项符合某条产生式的右部，则将这几项出栈，然后将产生式的左部入栈。例如，栈顶有 ABC 三项， 有产生式<code>P -&gt; A B C</code>  则将 A B C 出栈，将 P 入栈，最终栈中只剩下 P。</p>
 <p>Action table 和 Goto table 用来指导 LR 分析器进行 Shift 还是 Reduce 操作。</p>
 <h2 id="Action-amp-Goto-Table"><a href="#Action-amp-Goto-Table" class="headerlink" title="Action &amp; Goto Table"></a>Action &amp; Goto Table</h2><p>这就有点像有限自动机了， LR 分析栈中的值实际上是状态的 ID。</p>
-<img src="/2021/01/11/LR-Parse/image-20210110201419029.png" srcset="/img/loading.gif" class="" title="image-20210110201419029">
-<img src="/2021/01/11/LR-Parse/image-20210110201454665.png" srcset="/img/loading.gif" class="" title="image-20210110201454665">
+<img src="/2021/01/11/LR-Parse/image-20210110201419029.png" srcset="/img/loading.gif" lazyload class="" title="image-20210110201419029">
+<img src="/2021/01/11/LR-Parse/image-20210110201454665.png" srcset="/img/loading.gif" lazyload class="" title="image-20210110201454665">
 <h3 id="action-表的说明：-action-s-a"><a href="#action-表的说明：-action-s-a" class="headerlink" title="action 表的说明： action[s, a]"></a>action 表的说明： action[s, a]</h3><p>s: State ，类似 DFA 中的状态，输入符号可以转移状态。<br>a: 符号，类似 DFA 中的符号，输入符号可以转移状态。</p>
 <p>每一行都是一个状态( State ), 列是非终结符和终结符组成，非终结符部分构成 Goto 表，用来记录归约后切换的目标状态。</p>
 <p>action 表的值有 4 种类型:</p>
@@ -327,7 +328,7 @@
 </li>
 </ul>
 <p>Closure 计算例子</p>
-<img src="/2021/01/11/LR-Parse/image-20210110224340022.png" srcset="/img/loading.gif" class="" title="image-20210110224340022">
+<img src="/2021/01/11/LR-Parse/image-20210110224340022.png" srcset="/img/loading.gif" lazyload class="" title="image-20210110224340022">
 
 <h3 id="Successor-I-X"><a href="#Successor-I-X" class="headerlink" title="Successor(I, X)"></a>Successor(I, X)</h3><p>移动 Configuration Set 中点的位置。</p>
 <ul>
@@ -337,14 +338,14 @@
 </ul>
 <p>例如 Successor(I, ‘(‘) 这里的 I 是 Closure 例子中 I 集合</p>
 <p>I 中只有 $F-&gt;·(T)$ 满足“点”后面的字符是“(” ，将“点”的位置向右移动 1 个字符，计算 $closure({F-&gt;(·T)})$ 作为结果</p>
-<img src="/2021/01/11/LR-Parse/image-20210110231017396.png" srcset="/img/loading.gif" class="" title="image-20210110231017396">
+<img src="/2021/01/11/LR-Parse/image-20210110231017396.png" srcset="/img/loading.gif" lazyload class="" title="image-20210110231017396">
 
-<h3 id="合在一起，求-G-的所有-states"><a href="#合在一起，求-G-的所有-states" class="headerlink" title="合在一起，求 G 的所有 states"></a>合在一起，求 G 的所有 states</h3><img src="/2021/01/11/LR-Parse/image-20210110234117460.png" srcset="/img/loading.gif" class="" title="image-20210110234117460">
+<h3 id="合在一起，求-G-的所有-states"><a href="#合在一起，求-G-的所有-states" class="headerlink" title="合在一起，求 G 的所有 states"></a>合在一起，求 G 的所有 states</h3><img src="/2021/01/11/LR-Parse/image-20210110234117460.png" srcset="/img/loading.gif" lazyload class="" title="image-20210110234117460">
 
-<h3 id="构造例子"><a href="#构造例子" class="headerlink" title="构造例子"></a>构造例子</h3><img src="/2021/01/11/LR-Parse/image-20210111000532297.png" srcset="/img/loading.gif" class="" title="image-20210111000532297">
+<h3 id="构造例子"><a href="#构造例子" class="headerlink" title="构造例子"></a>构造例子</h3><img src="/2021/01/11/LR-Parse/image-20210111000532297.png" srcset="/img/loading.gif" lazyload class="" title="image-20210111000532297">
 
 <p>构造的Action/Goto表如下</p>
-<img src="/2021/01/11/LR-Parse/image-20210111000652699.png" srcset="/img/loading.gif" class="" title="image-20210111000652699">
+<img src="/2021/01/11/LR-Parse/image-20210111000652699.png" srcset="/img/loading.gif" lazyload class="" title="image-20210111000652699">
 
 
 
@@ -431,7 +432,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -461,12 +466,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -481,7 +488,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -557,8 +565,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -573,7 +582,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -581,7 +589,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -626,11 +634,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -689,7 +698,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

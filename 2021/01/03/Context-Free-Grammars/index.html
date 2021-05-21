@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>Context-Free Grammars - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -269,7 +270,7 @@
 <h3 id="推导-Derivation"><a href="#推导-Derivation" class="headerlink" title="推导(Derivation)"></a>推导(Derivation)</h3><p>推导 ： (()) </p>
 <figure class="highlight avrasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs avrasm"><span class="hljs-symbol">r1:</span> S -&gt; <span class="hljs-string">&#x27;(&#x27;</span> S <span class="hljs-string">&#x27;)&#x27;</span><br><span class="hljs-symbol">r2:</span> S -&gt; ε<br><br>从开始符 S 开始推导<br>用规则 <span class="hljs-built_in">r1</span> 替换 S     得到（S）<br>用规则 <span class="hljs-built_in">r1</span> 替换 (S)   得到 ((S))<br>用规则 <span class="hljs-built_in">r2</span> 替换 ((S)) 得到 (()) <br>(())  不存在非终结符，推导完成。<br></code></pre></td></tr></table></figure>
 <p>推导可以画成语法解析树（Parse Tree）</p>
-<img src="/2021/01/03/Context-Free-Grammars/image-20210103211637576.png" srcset="/img/loading.gif" class="" title="image-20210103211637576">
+<img src="/2021/01/03/Context-Free-Grammars/image-20210103211637576.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103211637576">
 
 <h3 id="推导方式"><a href="#推导方式" class="headerlink" title="推导方式"></a>推导方式</h3><p>最左推导:<br>每次替换最左侧第一个非终结符</p>
 <p>最右推导:<br>每次替换最右侧第一个非终结符</p>
@@ -283,7 +284,7 @@
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-built_in">E</span> <span class="hljs-operator">+</span> <span class="hljs-built_in">E</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-built_in">E</span> <span class="hljs-operator">*</span> <span class="hljs-built_in">E</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-punctuation">(</span> <span class="hljs-built_in">E</span> <span class="hljs-punctuation">)</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-operator">-</span><span class="hljs-built_in">E</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-variable">id</span><br></code></pre></td></tr></table></figure>
 <p>推导 id + id / id</p>
 <p>可以推导出两种 Parse Tree</p>
-<img src="/2021/01/03/Context-Free-Grammars/image-20210103211830200.png" srcset="/img/loading.gif" class="" title="image-20210103211830200">
+<img src="/2021/01/03/Context-Free-Grammars/image-20210103211830200.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103211830200">
 
 <h3 id="如何解决歧义？"><a href="#如何解决歧义？" class="headerlink" title="如何解决歧义？"></a>如何解决歧义？</h3><ol>
 <li>重新设计文法，使文法没有歧义</li>
@@ -297,10 +298,10 @@
 <p>引入另外一个非终结符，使文法推导 id - id / id  没有歧义</p>
 <figure class="highlight clean"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs clean">E -&gt; E - E      E -&gt; T<br>T -&gt; T / T      T -&gt; F<br>F -&gt; id         F -&gt; (E)<br></code></pre></td></tr></table></figure>
 <p>无论采用最左推导还是最右推导，只能得到一颗 Parse Tree</p>
-<img src="/2021/01/03/Context-Free-Grammars/image-20210103213531813.png" srcset="/img/loading.gif" class="" title="image-20210103213531813">
+<img src="/2021/01/03/Context-Free-Grammars/image-20210103213531813.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103213531813">
 
 <h3 id="如何利用结合性消除歧义？"><a href="#如何利用结合性消除歧义？" class="headerlink" title="如何利用结合性消除歧义？"></a>如何利用结合性消除歧义？</h3><p>引入 T 后消除了 id - id / id 的歧义，但是推导 id - id - id 仍然存在歧义，如图：</p>
-<img src="/2021/01/03/Context-Free-Grammars/image-20210103213616891.png" srcset="/img/loading.gif" class="" title="image-20210103213616891">
+<img src="/2021/01/03/Context-Free-Grammars/image-20210103213616891.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103213616891">
 
 <p>‘-‘ 运算符采用左结合，所以改写为左递归文法</p>
 <figure class="highlight mathematica"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs mathematica"><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-built_in">E</span> <span class="hljs-operator">-</span> <span class="hljs-built_in">E</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-built_in">E</span> <span class="hljs-operator">/</span> <span class="hljs-built_in">E</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-punctuation">(</span> <span class="hljs-built_in">E</span> <span class="hljs-punctuation">)</span><br><span class="hljs-built_in">E</span> <span class="hljs-operator">-&gt;</span> <span class="hljs-variable">id</span><br></code></pre></td></tr></table></figure>
@@ -309,7 +310,7 @@
 <h3 id="YACC-中消除歧义"><a href="#YACC-中消除歧义" class="headerlink" title="YACC 中消除歧义"></a>YACC 中消除歧义</h3><p>参考这篇 <a href="/2021/01/02/Yacc-practice/" title="Yacc practice">Yacc practice</a> 中的 <em>实现优先级和结合性</em></p>
 <h2 id="Pushdown-automata-PDA"><a href="#Pushdown-automata-PDA" class="headerlink" title="Pushdown automata, PDA"></a>Pushdown automata, PDA</h2><p>下推自动机</p>
 <p>正则表达式有一个对应的有限状态自动机，上下文无关文法也有一个对应的下推自动机。pushdown automata 其实就是一个栈 + FSA。</p>
-<h3 id="下推自动机-vs-有限状态自动机"><a href="#下推自动机-vs-有限状态自动机" class="headerlink" title="下推自动机 vs 有限状态自动机"></a>下推自动机 vs 有限状态自动机</h3><img src="/2021/01/03/Context-Free-Grammars/image-20210103222755507.png" srcset="/img/loading.gif" class="" title="image-20210103222755507">
+<h3 id="下推自动机-vs-有限状态自动机"><a href="#下推自动机-vs-有限状态自动机" class="headerlink" title="下推自动机 vs 有限状态自动机"></a>下推自动机 vs 有限状态自动机</h3><img src="/2021/01/03/Context-Free-Grammars/image-20210103222755507.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103222755507">
 
 
 <h3 id="下推自动机的两种操作"><a href="#下推自动机的两种操作" class="headerlink" title="下推自动机的两种操作"></a>下推自动机的两种操作</h3><ul>
@@ -317,7 +318,7 @@
 <li>Reduce 出栈根据合并再入栈</li>
 </ul>
 <p>简单讲，就是将遇到的符号入栈，如果栈顶的某几个元素满足某条规则，则用该规则对这几个元素进行 Reduce。</p>
-<img src="/2021/01/03/Context-Free-Grammars/image-20210103224550944.png" srcset="/img/loading.gif" class="" title="image-20210103224550944">
+<img src="/2021/01/03/Context-Free-Grammars/image-20210103224550944.png" srcset="/img/loading.gif" lazyload class="" title="image-20210103224550944">
 
 
 
@@ -346,7 +347,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -376,12 +381,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -396,7 +403,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -472,8 +480,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -488,7 +497,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -496,7 +504,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -541,11 +549,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -565,7 +574,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>

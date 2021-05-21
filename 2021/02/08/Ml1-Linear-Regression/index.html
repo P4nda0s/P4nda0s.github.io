@@ -8,7 +8,7 @@
 <head>
   <meta charset="UTF-8">
   <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
-  <link rel="icon" type="image/png" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
   <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -17,6 +17,7 @@
   <meta name="description" content="">
   <meta name="author" content="Pandaos">
   <meta name="keywords" content="">
+  
   <title>Ml1: Linear Regression - Pandaos&#39;s blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
@@ -55,7 +56,7 @@
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
-    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
   </script>
   <script  src="/js/utils.js" ></script>
   <script  src="/js/color-schema.js" ></script>
@@ -166,13 +167,13 @@
         
         
           <li class="nav-item" id="search-btn">
-            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
                 class="iconfont icon-search"></i>&nbsp;</a>
           </li>
         
         
           <li class="nav-item" id="color-toggle-btn">
-            <a class="nav-link" href="javascript:">&nbsp;<i
+            <a class="nav-link" target="_self">&nbsp;<i
                 class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
           </li>
         
@@ -263,14 +264,14 @@
 <p>学习机器学习的过程中，第一个要学的算法就是线性回归。通过学习线性回归算法，可以了解到机器学习中的监督学习(Supervised Learning) 基本流程。高中数学课程已经讲过线性回归，但是仅仅是给出了计算公式，其中的原理从没有讲过。</p>
 <h2 id="单变量线性回归-Linear-Regression-with-One-Variable"><a href="#单变量线性回归-Linear-Regression-with-One-Variable" class="headerlink" title="单变量线性回归(Linear Regression with One Variable)"></a>单变量线性回归(Linear Regression with One Variable)</h2><h3 id="模型表示"><a href="#模型表示" class="headerlink" title="模型表示"></a>模型表示</h3><p>课程以预测房子价格为例子，目的是使用给定的数据集训练模型，使该模型能够预测房子价格。该例子只有一个变量即房子的面积。</p>
 <p>训练集如下图：</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208163559117.png" srcset="/img/loading.gif" class="" title="image-20210208163559117">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208163559117.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208163559117">
 
 <p>面积与价格之间存在某种线性关系，如下图</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208164119842.png" srcset="/img/loading.gif" class="" title="image-20210208164119842">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208164119842.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208164119842">
 
 <p>我们把这种线性关系假设为一个<strong>hypothesis</strong> 即 $h_\theta(x) = \theta_0 + \theta_1x$</p>
 <p>模型如下图：</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208163722563.png" srcset="/img/loading.gif" class="" title="image-20210208163722563">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208163722563.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208163722563">
 
 <p>h 代表的是 <strong>hypothesis</strong> ，即 $h_\theta(x) = \theta_0 + \theta_1x$  。 Learning Algorithm 的作用是用 Training Set 中的数据求出满足要求的 $\theta_0$ 和 $\theta_1$</p>
 <h3 id="一些符号定义"><a href="#一些符号定义" class="headerlink" title="一些符号定义"></a>一些符号定义</h3><p> $m$ 代表训练集中实例的数量</p>
@@ -282,12 +283,12 @@
 <p>这时候就引入 cost function 来表示假设函数与真实数据（训练集中的数据）之间的差异。训练的目的就找到合适的参数，使代价函数的值最小化。</p>
 <p>这个例子中代价函数定义 : $J(\theta_1,\theta_2) = \frac{1}{2m}\sum\limits_{i=1}^{m}{(h_\theta(x^{(i)})-y^{(i)})^2}$</p>
 <p>代价函数的图像</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208170439473.png" srcset="/img/loading.gif" class="" title="image-20210208170439473">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208170439473.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208170439473">
 
 <p>通过该图，可以找到一个代价函数的最小点对应的参数值。训练的目的就是找到代价函数最小值对应的参数，这样假设函数计算值与训练集之间的差异就很小。</p>
 <h3 id="梯度下降法-Gradient-Descent-最小化代价函数"><a href="#梯度下降法-Gradient-Descent-最小化代价函数" class="headerlink" title="梯度下降法 (Gradient Descent) 最小化代价函数"></a>梯度下降法 (Gradient Descent) 最小化代价函数</h3><p>类似爬山一样，我可能在山上的任意一个位置，我要如何走才能到山底呢？</p>
 <p>梯度下降法就是一种最小化代价函数的算法，梯度下降背后的思想是：开始时我们随机选择一个参数的组合 $(\theta_1,\theta_2,……,\theta_n)$，计算代价函数，然后我们寻找下一个能让代价函数值下降最多的参数组合。我们持续这么做直到到到一个局部最小值（<strong>local minimum</strong>），因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是全局最小值（<strong>global minimum</strong>），选择不同的初始参数组合，可能会找到不同的局部最小值。</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208171537998.png" srcset="/img/loading.gif" class="" title="image-20210208171537998">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208171537998.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208171537998">
 
 <p>用数学语言表达下降的一步就是</p>
 <p>$\theta_0 := \theta_0 - \alpha\frac{\delta}{\delta\theta_0}J(\theta_0,\theta_1)$</p>
@@ -295,16 +296,16 @@
 <p>其中 $\alpha$ 是学习率，如果学习率太小，下降的速度就太慢了，如果学习率过大，可能就错过最小值。</p>
 <p>每一步下降，参数值减去学习率乘代价函数的导数。</p>
 <p>为了进一步理解下降的过程，考虑代价函数只有一个参数，代价函数的图像类似一个二次函数</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208172952759.png" srcset="/img/loading.gif" class="" title="image-20210208172952759">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208172952759.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208172952759">
 
 <p>如图点 $\theta_1$ 对应函数值点处的导数，是一个正导数，即 $h’(\theta_1) &gt; 0$，为了达到局部最小值，需要向左移动。 因此 $\theta_1$ 应该减去一个正数乘以 $\alpha$。导数项的作用之一就是确定 $\theta_1$ 更新的方向。通过多次迭代更新 $\theta$ 的过程，一直到收敛。</p>
 <p>$\alpha$ 是学习率，作为导数项的系数，控制下降的步伐，如果太小，则迭代次数增加，如果太大，则可能直接错过最优解，甚至无法收敛。</p>
 <p>迭代过程中，越接近 J 的最小值，导数项的值越小，即收敛。</p>
 <p>该例子中的梯度下降完整描述</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208174119804.png" srcset="/img/loading.gif" class="" title="image-20210208174119804">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208174119804.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208174119804">
 
 <p>注意 $\theta$ 参数的更新是<strong>同时</strong>进行，如下图</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208174236545.png" srcset="/img/loading.gif" class="" title="image-20210208174236545">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208174236545.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208174236545">
 
 <h3 id="线性回归中的梯度下降"><a href="#线性回归中的梯度下降" class="headerlink" title="线性回归中的梯度下降"></a>线性回归中的梯度下降</h3><p>主要是要求出代价函数的导数，多个变量求导，就是偏导数</p>
 <p>偏导数学习：</p>
@@ -319,7 +320,7 @@
 <p>涉及到矩阵乘法，维数大了之后运算会很慢。</p>
 <h2 id="多变量线性回归"><a href="#多变量线性回归" class="headerlink" title="多变量线性回归"></a>多变量线性回归</h2><p>我们探讨了单变量/特征的回归模型，现在我们对房价模型增加更多的特征，例如房间数楼层等，构成一个含有多个变量的模型，模型中的特征为 $(x_1,x_2,……,x_n)$ </p>
 <p>如图训练集构成一个特征矩阵。</p>
-<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208184430579.png" srcset="/img/loading.gif" class="" title="image-20210208184430579">
+<img src="/2021/02/08/Ml1-Linear-Regression/image-20210208184430579.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208184430579">
 
 <p>$n$ 代表特征数量</p>
 <p>$x^{(i)}$ 代表第 i 个训练实例，是特征矩阵的第 i 行，是一个列向量</p>
@@ -340,7 +341,7 @@
 <p>over…. 打 latex 太累了。</p>
 <h3 id="梯度下降-特征缩放"><a href="#梯度下降-特征缩放" class="headerlink" title="梯度下降: 特征缩放"></a>梯度下降: 特征缩放</h3><p>就是把特征数据缩放到较小的区间，例如 $[-3, 3]$ 有利于减少迭代次数，更快收敛</p>
 <p>最简单的方法是令 $x_n=\frac{x_n-\mu_n}{s_n}$ 其中 $\mu_n$ 是平均值，$s_n$ 是标准差</p>
-<h3 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h3><img src="/2021/02/08/Ml1-Linear-Regression/image-20210208191303235.png" srcset="/img/loading.gif" class="" title="image-20210208191303235">
+<h3 id="多项式回归"><a href="#多项式回归" class="headerlink" title="多项式回归"></a>多项式回归</h3><img src="/2021/02/08/Ml1-Linear-Regression/image-20210208191303235.png" srcset="/img/loading.gif" lazyload class="" title="image-20210208191303235">
 
 <p>我们可以令</p>
 <p>$x_1=x^0$</p>
@@ -377,7 +378,11 @@
                 
               </div>
               
-                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
               
               
                 <div class="post-prevnext">
@@ -407,12 +412,14 @@
 
             
               <!-- Comments -->
-              <article class="comments" id="comments">
+              <article class="comments" id="comments" lazyload>
+                
+                  
                 
                 
   <div id="gitalk-container"></div>
   <script type="text/javascript">
-    Fluid.utils.waitElementVisible('gitalk-container', function() {
+    Fluid.utils.loadComments('#gitalk-container', function() {
       Fluid.utils.createCssLink('/css/gitalk.css')
       Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
         var gitalk = new Gitalk({
@@ -427,7 +434,8 @@
           perPage: 10,
           pagerDirection: 'last',
           createIssueManually: true,
-          distractionFreeMode: false
+          distractionFreeMode: false,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
         });
         gitalk.render('gitalk-container');
       });
@@ -503,8 +511,9 @@
   
 </footer>
 
-<!-- SCRIPTS -->
 
+  <!-- SCRIPTS -->
+  
   <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
 
@@ -519,7 +528,6 @@
 
 <script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
 <script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
-<script  src="/js/debouncer.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
 
@@ -527,7 +535,7 @@
 
 
   
-    <script  src="/js/lazyload.js" ></script>
+    <script  src="/js/img-lazyload.js" ></script>
   
 
 
@@ -572,11 +580,12 @@
   <script>
     (function () {
       var path = "/local-search.xml";
-      var inputArea = document.querySelector("#local-search-input");
-      inputArea.onclick = function () {
+      $('#local-search-input').on('click', function() {
         searchFunc(path, 'local-search-input', 'local-search-result');
-        this.onclick = null
-      }
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
     })()
   </script>
 
@@ -635,7 +644,6 @@
 
 <!-- 主题的启动项 保持在最底部 -->
 <script  src="/js/boot.js" ></script>
-
 
 
 </body>
