@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">Semantic Analysis</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：3 months ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h2 id="语义分析-Semantic-Analysis"><a href="#语义分析-Semantic-Analysis" class="headerlink" title="语义分析 (Semantic Analysis)"></a>语义分析 (Semantic Analysis)</h2><p>语义分析主要检查程序代码语义是否正确。比如标识符是否定义、二元运算的两个操作数的类型是否合法、定义数组的大小是否大于1、函数调用语句是否传递正确的参数等等。另外，语义分析还需要为代码生成阶段收集程序信息，比如确定每一个标识符对应的意义。</p>
 <img src="/2021/02/01/Semantic-Analysis/image-20210201193140519.png" srcset="/img/loading.gif" class="" title="image-20210201193140519">
@@ -353,6 +359,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '2fe1a444b209d299532a2bffb420ab30',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

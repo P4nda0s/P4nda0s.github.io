@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">编写decaf语法解析器</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：3 months ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="编写-Decaf-语法解析器"><a href="#编写-Decaf-语法解析器" class="headerlink" title="编写 Decaf 语法解析器"></a>编写 Decaf 语法解析器</h1><p>Decaf 是 SFU  Compiler 课程要实现的语言，前一篇 Blog 写了如何编写 Decaf 词法分析器, 这一篇 Blog 则是写 Decaf 编译器的第二个阶段，语法解析。语法解析器的作用是解析程序语法，并生成抽象语法树 (Abstract Syntax Tree)，抽象语法树（AST）是程序结构的一种高抽象层次的表达，有了它我们并再不需要源代码的存在了。它可以认为是源代码等价的一种抽象表达。语法解析依赖许多理论基础，前几篇 Blog 我简单地总结了对 LR Parser 的理解（目前，SLR(1), LR(1), LL(1) 均没有总结）。Parser 的理论知识非常抽象，我只理解一些皮毛，但是我已经理解的语法解析知识足够我利用 Yacc 编写语法解析器了。我在编写 Decaf 过程中，遇到的最大的问题有两个:</p>
 <ol>
@@ -333,6 +339,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '1f0f9f9c274778742c869c4a7599c28e',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

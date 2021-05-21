@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">LLVM Practice</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：2 months ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="LLVM-Practice"><a href="#LLVM-Practice" class="headerlink" title="LLVM Practice"></a>LLVM Practice</h1><p>Decaf 语言要用 LLVM 作为后端，生成机器代码。我本人对 LLVM 相关的 API 也十分感兴趣。这篇文章记录我学习 LLVM 的过程及相关代码片段。</p>
 <h2 id="编译-LLVM"><a href="#编译-LLVM" class="headerlink" title="编译 LLVM"></a>编译 LLVM</h2><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs vim">git clone http<span class="hljs-variable">s:</span>//github.<span class="hljs-keyword">com</span>/llvm/llvm-project.git<br><span class="hljs-keyword">cd</span> llvm-project<br><span class="hljs-built_in">mkdir</span> build<br><span class="hljs-keyword">cd</span> build<br>cmake -G <span class="hljs-string">&quot;Unix Makefiles&quot;</span> ../llvm<br><span class="hljs-keyword">make</span> -j16<br></code></pre></td></tr></table></figure>
@@ -470,6 +476,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: 'e34352c82e5c1729a33273746e575093',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

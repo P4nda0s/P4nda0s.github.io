@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">go notes</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：15 days ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="go-笔记"><a href="#go-笔记" class="headerlink" title="go 笔记"></a>go 笔记</h1><p>开一篇博客页面记录一下学习 go 过程中的一些小笔记, 遇到新的会继续更新</p>
 <p>[TOC]</p>
@@ -312,6 +318,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '3c16a0e5132568aa9590cddbe3378ee2',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">Context-Free Grammars</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：3 months ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="Context-Free-Grammars"><a href="#Context-Free-Grammars" class="headerlink" title="Context-Free Grammars"></a>Context-Free Grammars</h1><h2 id="Brief-Introduction"><a href="#Brief-Introduction" class="headerlink" title="Brief Introduction"></a>Brief Introduction</h2><h3 id="正则文法-VS-上下文无关文法"><a href="#正则文法-VS-上下文无关文法" class="headerlink" title="正则文法 VS 上下文无关文法"></a>正则文法 VS 上下文无关文法</h3><p>正则文法不能表示程序语言的递归结构，递归结构在程序语言中非常常见，比如 if 中可以嵌套 if、括号中可以嵌套括号、表达式中可以嵌套表达式。</p>
 <p>正则文法无法识别 <em>((()))</em> 这种具有递归形式的结构，因为正则文法不具备动态记忆功能，即没有一个正则表达式能识别 n 个 <code>(</code> ，后再识别 n 个 <code>)</code>。</p>
@@ -368,6 +374,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '7d4e6ac976c18dfecdc5bdd33750ab4f',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

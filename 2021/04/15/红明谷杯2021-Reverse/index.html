@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">红明谷杯2021:Reverse</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：a month ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="红明谷杯2021-Reverse"><a href="#红明谷杯2021-Reverse" class="headerlink" title="红明谷杯2021:Reverse"></a>红明谷杯2021:Reverse</h1><h2 id="g0"><a href="#g0" class="headerlink" title="g0"></a>g0</h2><p>golang 逆向题</p>
 <h3 id="1-flag-长度-：-0x14"><a href="#1-flag-长度-：-0x14" class="headerlink" title="1. flag 长度 ： 0x14"></a>1. flag 长度 ： 0x14</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">call    fmt_Fscanf<br>mov     rax, [rsp+0A8h]<br>mov     rcx, [rax]<br>cmp     qword ptr [rax+8], 14h<br></code></pre></td></tr></table></figure>
@@ -333,6 +339,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '3424d8458b3ed3ac42cdba56d3657a6a',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>

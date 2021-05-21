@@ -251,6 +251,12 @@
             <!-- SEO header -->
             <h1 style="display: none">o-llvm: Control Flow Flattening</h1>
             
+              <p class="note note-info">
+                
+                  本文最后更新于：2 months ago
+                
+              </p>
+            
             <div class="markdown-body">
               <h1 id="o-llvm-分析：-控制流平坦化源码分析"><a href="#o-llvm-分析：-控制流平坦化源码分析" class="headerlink" title="o-llvm 分析： 控制流平坦化源码分析"></a>o-llvm 分析： 控制流平坦化源码分析</h1><p>这是本人关于 o-llvm 分析系列文章的第一篇文章，网上已经有很多关于 o-llvm 相关的分析文章了，我写这一系列的文章只是为了督促我仔细分析 o-llvm 的每一个角落，并加深记忆。</p>
 <p>o-llvm 与 llvm 什么关系？ 这个可能是很多菜鸡搞不清楚的问题，我曾经也搞不清楚，一直以为“混淆” 是 llvm 自带的功能，殊不知，ollvm 只是一个基于 llvm 框架实现的插件，llvm 是一套前后端完善的编译框架。</p>
@@ -403,6 +409,38 @@
               
             </div>
 
+            
+              <!-- Comments -->
+              <article class="comments" id="comments">
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.waitElementVisible('gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'https://github.com/P4nda0s/P4nda0s.github.io.git',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: 'c1a3e9f42df5711df9285040e3d2f302',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: false
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
             
           </article>
         </div>
