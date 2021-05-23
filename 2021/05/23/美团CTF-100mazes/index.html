@@ -1,0 +1,529 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  
+  <title>美团CTF: 100mazes - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="美团CTF: 100mazes">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-23 22:27" pubdate>
+        May 23, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">美团CTF: 100mazes</h1>
+            
+              <p class="note note-info">
+                
+                  本文最后更新于：a few seconds ago
+                
+              </p>
+            
+            <div class="markdown-body">
+              <h1 id="美团CTF-100mazes"><a href="#美团CTF-100mazes" class="headerlink" title="美团CTF: 100mazes"></a>美团CTF: 100mazes</h1><p>题目下载:  <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-100mazes/mazes100" title="mazes100">mazes100</a><br>简单地图题，有100张地图，难点是提取地图数据，我采用 Capstone 引擎反汇编解析<br>每一张地图大小为 25 x 25 地图，地图是加密的，realMap = map1 ^ map2<br>除了提取 map1 和 map2 之外，还需要方向字符串，起点坐标</p>
+<h2 id="map1-amp-方向字符串"><a href="#map1-amp-方向字符串" class="headerlink" title="map1 &amp; 方向字符串"></a>map1 &amp; 方向字符串</h2><p>每一个地图函数开头先赋值 map1 , 逐个字节赋值</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span>	<span class="hljs-built_in">byte</span> <span class="hljs-built_in">ptr</span> [<span class="hljs-built_in">rbp</span> - xxx1], xxx2<br></code></pre></td></tr></table></figure>
+<p>一共有 625 条这样的指令。</p>
+<p>紧接着赋值方向指令, 仍然是这个指令格式</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-keyword">mov</span>	<span class="hljs-built_in">byte</span> <span class="hljs-built_in">ptr</span> [<span class="hljs-built_in">rbp</span> - xxx1], xxx2<br></code></pre></td></tr></table></figure>
+<p>因此，连续解析 625 + 4  条 mov    byte ptr 指令</p>
+<h2 id="map2"><a href="#map2" class="headerlink" title="map2"></a>map2</h2><p>map2 怎么解析呢？仔细观察发现 map2 有一条 lea 指令指向，并且是相对 eip 的寻址</p>
+<figure class="highlight x86asm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs x86asm"><span class="hljs-number">0xa4e6c</span>:	<span class="hljs-keyword">lea</span>	<span class="hljs-built_in">rax</span>, [<span class="hljs-built_in">rip</span> + <span class="hljs-number">0x3ed6d</span>]<br></code></pre></td></tr></table></figure>
+<p>map2 的地址为 0xa4e6c + 0x3ed6d, 直接解析 625 个 int 即可</p>
+<h2 id="起点坐标-x-y"><a href="#起点坐标-x-y" class="headerlink" title="起点坐标 x, y"></a>起点坐标 x, y</h2><p>观察发现，有两条 <code>mov    dword ptr [rbp + xxx], xxx</code> 赋值起点坐标，非常好解析</p>
+<h2 id="解析必要的地图数据完整脚本"><a href="#解析必要的地图数据完整脚本" class="headerlink" title="解析必要的地图数据完整脚本"></a>解析必要的地图数据完整脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> capstone <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span>(<span class="hljs-params">offset</span>):</span><br>    data_bin = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;100mazes&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>).read()<br>    data = data_bin[offset: offset + <span class="hljs-number">0x199b</span> + <span class="hljs-number">20</span>]<br>    md = Cs(CS_ARCH_X86, CS_MODE_64)<br>    inscnt = <span class="hljs-number">0</span><br>    inscnt2 = <span class="hljs-number">0</span><br>    map1 = []<br>    map2 = []<br>    map3 = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> md.disasm(data, offset):<br>        ins = <span class="hljs-string">&quot;0x%x:\t%s\t%s&quot;</span> % (i.address, i.mnemonic, i.op_str)<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;mov	byte ptr [rbp&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            <span class="hljs-keyword">if</span> inscnt &lt; <span class="hljs-number">629</span>:<br>                <span class="hljs-comment">#print(ins)</span><br>                map1.append(<span class="hljs-built_in">int</span>(i.op_str.split(<span class="hljs-string">&#x27;, &#x27;</span>)[<span class="hljs-number">1</span>], <span class="hljs-number">16</span>))<br>            inscnt += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;mov	dword ptr [rbp&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            print(ins)<br>            <span class="hljs-keyword">if</span> inscnt2 &lt; <span class="hljs-number">2</span>:<br>                map3.append(<span class="hljs-built_in">int</span>(i.op_str.split(<span class="hljs-string">&#x27;, &#x27;</span>)[<span class="hljs-number">1</span>], <span class="hljs-number">16</span>))<br>            inscnt2 += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;lea	rax, [rip +&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            print(ins)<br>            off1 = i.op_str[<span class="hljs-number">12</span>:-<span class="hljs-number">1</span>]<br>            off1 = <span class="hljs-built_in">int</span>(off1, <span class="hljs-number">16</span>) + i.address + <span class="hljs-number">7</span><br>            map2_data = data_bin[off1: off1 + <span class="hljs-number">4</span> * <span class="hljs-number">625</span>]<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">625</span>):<br>                map2.append(struct.unpack(<span class="hljs-string">&quot;I&quot;</span>, map2_data[i * <span class="hljs-number">4</span>: i * <span class="hljs-number">4</span> + <span class="hljs-number">4</span>])[<span class="hljs-number">0</span>])<br>    data = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">625</span>):<br>        data.append(map1[i] ^ map2[i])<br>    <span class="hljs-keyword">return</span> data, <span class="hljs-built_in">bytearray</span>(map1[-<span class="hljs-number">4</span>:]), map3<br></code></pre></td></tr></table></figure>
+
+<h2 id="地图寻路"><a href="#地图寻路" class="headerlink" title="地图寻路"></a>地图寻路</h2><p>手撕一个 dfs 就出了。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkValid</span>(<span class="hljs-params"><span class="hljs-built_in">map</span>, x, y</span>):</span><br>    <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> y &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> x &gt; <span class="hljs-number">24</span> <span class="hljs-keyword">or</span> y &gt; <span class="hljs-number">24</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>[y * <span class="hljs-number">25</span> + x] == <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;.&#x27;</span>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">solve</span>(<span class="hljs-params"><span class="hljs-built_in">map</span>, startX, startY, direct, path</span>):</span><br>    <span class="hljs-built_in">map</span>[startY * <span class="hljs-number">25</span> + startX] = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;*&#x27;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(path) == <span class="hljs-number">15</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>, path<br><br>    all_dir = []<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX, startY - <span class="hljs-number">1</span>):<br>        all_dir.append((startX, startY - <span class="hljs-number">1</span>, direct[<span class="hljs-number">1</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX, startY + <span class="hljs-number">1</span>):<br>        all_dir.append((startX, startY + <span class="hljs-number">1</span>, direct[<span class="hljs-number">2</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX - <span class="hljs-number">1</span>, startY):<br>        all_dir.append((startX - <span class="hljs-number">1</span>, startY, direct[<span class="hljs-number">3</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX + <span class="hljs-number">1</span>, startY):<br>        all_dir.append((startX + <span class="hljs-number">1</span>, startY, direct[<span class="hljs-number">4</span>]))<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> all_dir:<br>        result = solve(<span class="hljs-built_in">map</span>, <span class="hljs-built_in">dir</span>[<span class="hljs-number">0</span>], <span class="hljs-built_in">dir</span>[<span class="hljs-number">1</span>], direct, path + <span class="hljs-built_in">dir</span>[<span class="hljs-number">2</span>])<br>        <span class="hljs-keyword">if</span> result[<span class="hljs-number">0</span>] == <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">return</span> result<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>, <span class="hljs-string">&#x27;&#x27;</span><br></code></pre></td></tr></table></figure>
+<p>例如对于第一轮</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs python">print(solve(map1, <span class="hljs-number">4</span>, <span class="hljs-number">24</span>, <span class="hljs-string">&#x27;kgMp9&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>))<br></code></pre></td></tr></table></figure>
+
+<h2 id="完整自动化脚本"><a href="#完整自动化脚本" class="headerlink" title="完整自动化脚本"></a>完整自动化脚本</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br></pre></td><td class="code"><pre><code class="hljs python"><br><span class="hljs-keyword">from</span> capstone <span class="hljs-keyword">import</span> Cs<br><span class="hljs-keyword">from</span> capstone <span class="hljs-keyword">import</span> *<br><span class="hljs-keyword">import</span> struct<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode</span>(<span class="hljs-params">offset</span>):</span><br>    data_bin = <span class="hljs-built_in">open</span>(<span class="hljs-string">&#x27;100mazes&#x27;</span>, <span class="hljs-string">&#x27;rb&#x27;</span>).read()<br>    data = data_bin[offset: offset + <span class="hljs-number">0x199b</span> + <span class="hljs-number">20</span>]<br>    md = Cs(CS_ARCH_X86, CS_MODE_64)<br>    inscnt = <span class="hljs-number">0</span><br>    inscnt2 = <span class="hljs-number">0</span><br>    map1 = []<br>    map2 = []<br>    map3 = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> md.disasm(data, offset):<br>        ins = <span class="hljs-string">&quot;0x%x:\t%s\t%s&quot;</span> % (i.address, i.mnemonic, i.op_str)<br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;mov	byte ptr [rbp&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            <span class="hljs-keyword">if</span> inscnt &lt; <span class="hljs-number">629</span>:<br>                <span class="hljs-comment">#print(ins)</span><br>                map1.append(<span class="hljs-built_in">int</span>(i.op_str.split(<span class="hljs-string">&#x27;, &#x27;</span>)[<span class="hljs-number">1</span>], <span class="hljs-number">16</span>))<br>            inscnt += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;mov	dword ptr [rbp&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            <span class="hljs-keyword">if</span> inscnt2 &lt; <span class="hljs-number">2</span>:<br>                map3.append(<span class="hljs-built_in">int</span>(i.op_str.split(<span class="hljs-string">&#x27;, &#x27;</span>)[<span class="hljs-number">1</span>], <span class="hljs-number">16</span>))<br>            inscnt2 += <span class="hljs-number">1</span><br><br>        <span class="hljs-keyword">if</span> <span class="hljs-string">&#x27;lea	rax, [rip +&#x27;</span> <span class="hljs-keyword">in</span> ins:<br>            off1 = i.op_str[<span class="hljs-number">12</span>:-<span class="hljs-number">1</span>]<br>            off1 = <span class="hljs-built_in">int</span>(off1, <span class="hljs-number">16</span>) + i.address + <span class="hljs-number">7</span><br>            map2_data = data_bin[off1: off1 + <span class="hljs-number">4</span> * <span class="hljs-number">625</span>]<br>            <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">625</span>):<br>                map2.append(struct.unpack(<span class="hljs-string">&quot;I&quot;</span>, map2_data[i * <span class="hljs-number">4</span>: i * <span class="hljs-number">4</span> + <span class="hljs-number">4</span>])[<span class="hljs-number">0</span>])<br><br>    data = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">625</span>):<br>        data.append(map1[i] ^ map2[i])<br>    <span class="hljs-keyword">return</span> data, <span class="hljs-built_in">bytearray</span>(map1[-<span class="hljs-number">4</span>:]), map3<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">checkValid</span>(<span class="hljs-params"><span class="hljs-built_in">map</span>, x, y</span>):</span><br>    <span class="hljs-keyword">if</span> x &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> y &lt; <span class="hljs-number">0</span> <span class="hljs-keyword">or</span> x &gt; <span class="hljs-number">24</span> <span class="hljs-keyword">or</span> y &gt; <span class="hljs-number">24</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">map</span>[y * <span class="hljs-number">25</span> + x] == <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;.&#x27;</span>)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">solve</span>(<span class="hljs-params"><span class="hljs-built_in">map</span>, startX, startY, direct, path</span>):</span><br>    <span class="hljs-built_in">map</span>[startY * <span class="hljs-number">25</span> + startX] = <span class="hljs-built_in">ord</span>(<span class="hljs-string">&#x27;*&#x27;</span>)<br>    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(path) == <span class="hljs-number">15</span>:<br>        <span class="hljs-keyword">return</span> <span class="hljs-literal">True</span>, path<br><br>    all_dir = []<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX, startY - <span class="hljs-number">1</span>):<br>        all_dir.append((startX, startY - <span class="hljs-number">1</span>, direct[<span class="hljs-number">1</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX, startY + <span class="hljs-number">1</span>):<br>        all_dir.append((startX, startY + <span class="hljs-number">1</span>, direct[<span class="hljs-number">2</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX - <span class="hljs-number">1</span>, startY):<br>        all_dir.append((startX - <span class="hljs-number">1</span>, startY, direct[<span class="hljs-number">3</span>]))<br>    <span class="hljs-keyword">if</span> checkValid(<span class="hljs-built_in">map</span>, startX + <span class="hljs-number">1</span>, startY):<br>        all_dir.append((startX + <span class="hljs-number">1</span>, startY, direct[<span class="hljs-number">4</span>]))<br><br>    <span class="hljs-keyword">for</span> <span class="hljs-built_in">dir</span> <span class="hljs-keyword">in</span> all_dir:<br>        result = solve(<span class="hljs-built_in">map</span>, <span class="hljs-built_in">dir</span>[<span class="hljs-number">0</span>], <span class="hljs-built_in">dir</span>[<span class="hljs-number">1</span>], direct, path + <span class="hljs-built_in">dir</span>[<span class="hljs-number">2</span>])<br>        <span class="hljs-keyword">if</span> result[<span class="hljs-number">0</span>] == <span class="hljs-literal">True</span>:<br>            <span class="hljs-keyword">return</span> result<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span>, <span class="hljs-string">&#x27;&#x27;</span><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">printMap</span>(<span class="hljs-params"><span class="hljs-built_in">map</span></span>):</span><br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">25</span>):<br>        line = <span class="hljs-string">&#x27;&#x27;</span><br>        <span class="hljs-keyword">for</span> j <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(<span class="hljs-number">25</span>):<br>            line += <span class="hljs-built_in">chr</span>(map1[i * <span class="hljs-number">25</span> + j])<br>        print(line)<br><br>funcs = <span class="hljs-string">&quot;&quot;&quot;maze_1(void)	.text	000000000000078A	00001AC5	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_2(void)	.text	000000000000224F	00001A8F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_3(void)	.text	0000000000003CDE	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_4(void)	.text	000000000000574F	00001A2F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_5(void)	.text	000000000000717E	00001A53	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_6(void)	.text	0000000000008BD1	00001A59	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_7(void)	.text	000000000000A62A	00001A2F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_8(void)	.text	000000000000C059	00001B25	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_9(void)	.text	000000000000DB7E	00001A23	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_10(void)	.text	000000000000F5A1	00001A83	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_11(void)	.text	0000000000011024	000019B1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_12(void)	.text	00000000000129D5	00001A47	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_13(void)	.text	000000000001441C	00001A83	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_14(void)	.text	0000000000015E9F	00001A6B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_15(void)	.text	000000000001790A	00001A7D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_16(void)	.text	0000000000019387	00001AD7	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_17(void)	.text	000000000001AE5E	00001A9B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_18(void)	.text	000000000001C8F9	00001AB3	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_19(void)	.text	000000000001E3AC	00001AAD	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_20(void)	.text	000000000001FE59	00001B2B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_21(void)	.text	0000000000021984	00001A9B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_22(void)	.text	000000000002341F	00001A9B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_23(void)	.text	0000000000024EBA	00001ADD	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_24(void)	.text	0000000000026997	00001A59	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_25(void)	.text	00000000000283F0	00001A35	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_26(void)	.text	0000000000029E25	00001A83	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_27(void)	.text	000000000002B8A8	00001A47	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_28(void)	.text	000000000002D2EF	00001AB9	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_29(void)	.text	000000000002EDA8	00001AB3	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_30(void)	.text	000000000003085B	00001AA1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_31(void)	.text	00000000000322FC	00001A89	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_32(void)	.text	0000000000033D85	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_33(void)	.text	000000000003581A	00001A7D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_34(void)	.text	0000000000037297	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_35(void)	.text	0000000000038D2C	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_36(void)	.text	000000000003A79D	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_37(void)	.text	000000000003C232	00001A7D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_38(void)	.text	000000000003DCAF	00001A8F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_39(void)	.text	000000000003F73E	00001A77	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_40(void)	.text	00000000000411B5	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_41(void)	.text	0000000000042C4A	00001AA1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_42(void)	.text	00000000000446EB	00001A53	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_43(void)	.text	000000000004613E	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_44(void)	.text	0000000000047BD3	00001A6B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_45(void)	.text	000000000004963E	00001B4F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_46(void)	.text	000000000004B18D	00001A53	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_47(void)	.text	000000000004CBE0	00001A65	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_48(void)	.text	000000000004E645	00001A83	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_49(void)	.text	00000000000500C8	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_50(void)	.text	0000000000051B5D	00001B0D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_51(void)	.text	000000000005366A	00001A6B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_52(void)	.text	00000000000550D5	00001ABF	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_53(void)	.text	0000000000056B94	00001AE9	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_54(void)	.text	000000000005867D	00001A3B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_55(void)	.text	000000000005A0B8	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_56(void)	.text	000000000005BB4D	00001A59	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_57(void)	.text	000000000005D5A6	00001AD1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_58(void)	.text	000000000005F077	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_59(void)	.text	0000000000060AE8	00001A35	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_60(void)	.text	000000000006251D	00001A59	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_61(void)	.text	0000000000063F76	00001A4D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_62(void)	.text	00000000000659C3	00001AD7	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_63(void)	.text	000000000006749A	00001AD7	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_64(void)	.text	0000000000068F71	00001AA1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_65(void)	.text	000000000006AA12	00001AD1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_66(void)	.text	000000000006C4E3	00001B25	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_67(void)	.text	000000000006E008	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_68(void)	.text	000000000006FA9D	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_69(void)	.text	000000000007150E	00001AD7	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_70(void)	.text	0000000000072FE5	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_71(void)	.text	0000000000074A56	00001AD7	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_72(void)	.text	000000000007652D	00001AF5	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_73(void)	.text	0000000000078022	00001AFB	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_74(void)	.text	0000000000079B1D	00001AB9	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_75(void)	.text	000000000007B5D6	00001AB9	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_76(void)	.text	000000000007D08F	00001AF5	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_77(void)	.text	000000000007EB84	00001A47	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_78(void)	.text	00000000000805CB	000019FF	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_79(void)	.text	0000000000081FCA	00001AF5	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_80(void)	.text	0000000000083ABF	00001ACB	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_81(void)	.text	000000000008558A	00001A8F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_82(void)	.text	0000000000087019	00001AAD	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_83(void)	.text	0000000000088AC6	00001ABF	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_84(void)	.text	000000000008A585	00001A3B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_85(void)	.text	000000000008BFC0	00001A77	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_86(void)	.text	000000000008DA37	00001AD1	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_87(void)	.text	000000000008F508	00001ACB	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_88(void)	.text	0000000000090FD3	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_89(void)	.text	0000000000092A68	00001B0D	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_90(void)	.text	0000000000094575	00001ABF	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_91(void)	.text	0000000000096034	00001A71	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_92(void)	.text	0000000000097AA5	00001ACB	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_93(void)	.text	0000000000099570	00001A11	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_94(void)	.text	000000000009AF81	00001A9B	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_95(void)	.text	000000000009CA1C	00001B07	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_96(void)	.text	000000000009E523	00001A95	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_97(void)	.text	000000000009FFB8	00001AAD	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_98(void)	.text	00000000000A1A65	00001AF5	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_99(void)	.text	00000000000A355A	00001B1F	00000C78	00000000	R	.	.	.	.	B	T	.</span><br><span class="hljs-string">maze_100(void)	.text	00000000000A5079	00001A2F	00000C78	00000000	R	.	.	.	.	B	T	.&quot;&quot;&quot;</span><br><br>total = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> ll <span class="hljs-keyword">in</span> funcs.splitlines():<br>    ll = ll.split(<span class="hljs-string">&quot;	&quot;</span>)<br>    addr = <span class="hljs-built_in">int</span>(ll[<span class="hljs-number">2</span>], <span class="hljs-number">16</span>)<br>    map1, dirs, target = decode(addr)<br>    print(<span class="hljs-string">&quot;process:&quot;</span> + <span class="hljs-built_in">hex</span>(addr))<br>    rr = solve(map1, target[<span class="hljs-number">0</span>], target[<span class="hljs-number">1</span>], <span class="hljs-string">&#x27;A&#x27;</span> + dirs.decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>), <span class="hljs-string">&#x27;&#x27;</span>)<br>    total += rr[<span class="hljs-number">1</span>]<br><br><br><span class="hljs-keyword">import</span> hashlib<br>mm = hashlib.md5(total.encode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)).hexdigest()<br><br>print(total)<br>print(<span class="hljs-built_in">len</span>(total))<br>d = mm<br>print(<span class="hljs-string">&quot;flag&#123;%s-%s-%s-%s-%s&#125;&quot;</span> % (d[<span class="hljs-number">0</span>:<span class="hljs-number">8</span>],d[<span class="hljs-number">8</span>:<span class="hljs-number">12</span>],d[<span class="hljs-number">12</span>:<span class="hljs-number">16</span>],d[<span class="hljs-number">16</span>:<span class="hljs-number">20</span>],d[<span class="hljs-number">20</span>:<span class="hljs-number">32</span>]))<br></code></pre></td></tr></table></figure>
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Capstone/">Capstone</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-matrix/">
+                        <span class="hidden-mobile">美团CTF: matrix</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'P4nda0s.github.io',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: 'd9bbc227f9d55ab178964da7c9332cf5',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: true,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
