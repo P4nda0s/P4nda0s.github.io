@@ -207,6 +207,70 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
+          ISCC-mobile AES
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
+          
+          
+            
+          
+          ISCC2021 mobile题目下载:  iscc-aes.apk
+这是一道 apk 逆向，核心函数位于 SO 库中并且在 JNI_OnLoad 中动态绑定函数。
+
+反调试
+ JNI_OnLoad 中有 ptrace 反调试，patch 掉即可
+
+签名验证
+ 这道题的密钥由 apk 签名数据决定，因此要获取原始密钥，必须保证 apk 没有更改。但是为了反反调试，必须 patch so 文件。
+ 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-25 00:31" pubdate>
+              2021-05-25
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/Android/">Android</a>
+            
+              <a href="/tags/AES/">AES</a>
+            
+              <a href="/tags/AntiDebug/">AntiDebug</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-100mazes/" target="_self">
           美团CTF: 100mazes
         </a>
@@ -307,6 +371,8 @@ EXCEPTION_ACCESS_VIOLATION
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/AES/">AES</a>
             
           </div>
         
@@ -694,61 +760,6 @@ K-Means 算法K-Means 是最普及的聚类算法，算法接受一个未标记�
               <a href="/tags/notes/">notes</a>
             
               <a href="/tags/homework/">homework</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/" target="_self">
-          红明谷杯2021:Reverse
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/" target="_self">
-          
-          
-            
-          
-          红明谷杯2021:Reverseg0golang 逆向题
-1. flag 长度 ： 0x141234call    fmt_Fscanfmov     rax, [rsp+0A8h]mov     rcx, [rax]cmp     qword ptr [rax+8], 14h
-数据变化  null -&gt; AABBCCDDEEFFGGHHIIJJ
-2. Flag 乱序测试输入：AABBCCD
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-04-15 13:05" pubdate>
-              2021-04-15
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/golang/">golang</a>
             
           </div>
         
