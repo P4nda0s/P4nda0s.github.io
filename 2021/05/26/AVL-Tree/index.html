@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  
+  <title>AVL Tree - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="AVL Tree">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-26 15:08" pubdate>
+        May 26, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      17
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">AVL Tree</h1>
+            
+            <div class="markdown-body">
+              <h1 id="AVL-平衡二叉树"><a href="#AVL-平衡二叉树" class="headerlink" title="AVL 平衡二叉树"></a>AVL 平衡二叉树</h1><p>AVL 平衡二叉树在 BST 的基础上要求左右两子树的高度差不超过 1</p>
+<p>插入新的元素可能影响树的平衡性，为了使插入元素后的树继续满足 AVL 性质，要对树进行一些调整。</p>
+<p>插入新的元素后，有四种情况，分别为 <code>LL</code>, <code>LR</code>,<code>RR</code>,<code>RL</code></p>
+<p>调整的方法是对最小不满足AVL性质的子树进行旋转操作。</p>
+<p>左旋和右旋</p>
+<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs livecodeserver">T1, T2 <span class="hljs-keyword">and</span> T3 are subtrees <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> tree <br>rooted <span class="hljs-keyword">with</span> y (<span class="hljs-keyword">on</span> <span class="hljs-title">the</span> <span class="hljs-title">left</span> <span class="hljs-title">side</span>) <span class="hljs-title">or</span> <span class="hljs-title">x</span> (<span class="hljs-title">on</span> <br><span class="hljs-keyword">the</span> <span class="hljs-literal">right</span> side)           <br>     y                               x<br>    / \     Right Rotation          /  \<br>   x   T3   - - - - - - - &gt;        T1   y <br>  / \       &lt; - - - - - - -            / \<br> T1  T2     Left Rotation            T2  T3<br>Keys <span class="hljs-keyword">in</span> both <span class="hljs-keyword">of</span> <span class="hljs-keyword">the</span> above trees follow <span class="hljs-keyword">the</span> <br>following order <br> <span class="hljs-built_in">keys</span>(T1) &lt; key(x) &lt; <span class="hljs-built_in">keys</span>(T2) &lt; key(y) &lt; <span class="hljs-built_in">keys</span>(T3)<br>So BST property is <span class="hljs-keyword">not</span> violated anywhere.<br></code></pre></td></tr></table></figure>
+
+<p>左旋和右旋操作后，子树仍然满足 BST 的性质，但是某些情况下可以降低子树的高度。</p>
+<p>插入新的元素后，找到最小不满足 AVL 性质的子树，有以下四种情况（左侧） </p>
+<p>主要关注 Z, Y, X</p>
+<ol>
+<li><strong>Left Left Case</strong>  (LL)</li>
+</ol>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs livescript">T1, T2, T3 <span class="hljs-keyword">and</span> T4 are subtrees.<br>         z                                      y <br>        / <span class="hljs-string">\</span>                                   /   <span class="hljs-string">\</span><br>       y   T4      Right Rotate (z)          x      z<br>      / <span class="hljs-string">\</span>          - - - - - - - - -&gt;      /  <span class="hljs-string">\</span>    /  <span class="hljs-string">\</span> <br>     x   T3                               T1  T2  T3  T4<br>    / <span class="hljs-string">\</span><br>  T1   T2<br></code></pre></td></tr></table></figure>
+
+<p>具体例子</p>
+<table>
+<thead>
+<tr>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153058326.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153058326"></th>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526152831752.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526152831752"></th>
+</tr>
+</thead>
+</table>
+<ol start="2">
+<li><strong>Left Right Case</strong> (LR)</li>
+</ol>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">     z                               z                           x<br>    / <span class="hljs-string">\</span>                            /   <span class="hljs-string">\</span>                        /  <span class="hljs-string">\</span> <br>   y   T4  Left Rotate (y)        x    T4  Right Rotate(z)    y      z<br>  / <span class="hljs-string">\</span>      - - - - - - - - -&gt;    /  <span class="hljs-string">\</span>      - - - - - - - -&gt;  / <span class="hljs-string">\</span>    / <span class="hljs-string">\</span><br>T1   x                          y    T3                    T1  T2 T3  T4<br>    / <span class="hljs-string">\</span>                        / <span class="hljs-string">\</span><br>  T2   T3                    T1   T2<br></code></pre></td></tr></table></figure>
+
+<p>具体例子</p>
+<table>
+<thead>
+<tr>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153159164.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153159164"></th>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153213414.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153213414"></th>
+</tr>
+</thead>
+</table>
+<ol start="3">
+<li><strong>Right Right Case</strong> (RR)</li>
+</ol>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">  z                                y<br> /  <span class="hljs-string">\</span>                            /   <span class="hljs-string">\</span> <br>T1   y     Left Rotate(z)       z      x<br>    /  <span class="hljs-string">\</span>   - - - - - - - -&gt;    / <span class="hljs-string">\</span>    / <span class="hljs-string">\</span><br>   T2   x                     T1  T2 T3  T4<br>       / <span class="hljs-string">\</span><br>     T3  T4<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153446889.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153446889"></th>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153454332.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153454332"></th>
+</tr>
+</thead>
+</table>
+<ol start="4">
+<li><strong>Right Left Case</strong></li>
+</ol>
+<figure class="highlight livescript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs livescript">   z                            z                            x<br>  / <span class="hljs-string">\</span>                          / <span class="hljs-string">\</span>                          /  <span class="hljs-string">\</span> <br>T1   y   Right Rotate (y)    T1   x      Left Rotate(z)   z      y<br>    / <span class="hljs-string">\</span>  - - - - - - - - -&gt;     /  <span class="hljs-string">\</span>   - - - - - - - -&gt;  / <span class="hljs-string">\</span>    / <span class="hljs-string">\</span><br>   x   T4                      T2   y                  T1  T2  T3  T4<br>  / <span class="hljs-string">\</span>                              /  <span class="hljs-string">\</span><br>T2   T3                           T3   T4<br></code></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153542945.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153542945"></th>
+<th><img src="/2021/05/26/AVL-Tree/image-20210526153550750.png" srcset="/img/loading.gif" lazyload class="" title="image-20210526153550750"></th>
+</tr>
+</thead>
+</table>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><p>leetcode 题</p>
+<p><a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balance-a-binary-search-tree/">https://leetcode-cn.com/problems/balance-a-binary-search-tree/</a></p>
+<p>非递归版本….xjb 手写能过 leetcode</p>
+<p>插入过程:</p>
+<p>遍历找插入位置 -&gt; 插入 -&gt; 更新高度 -&gt; 发现左右子树高度差大于 2 -&gt; 判断旋转类型 -&gt; 旋转</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(<span class="hljs-keyword">int</span> key)</span> </span>&#123;<br>      <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, key);<br>      AVLTreeNode * new_node = _alloca_node();<br>      new_node-&gt;key = key;<br>      new_node-&gt;height = <span class="hljs-number">1</span>;<br>      <span class="hljs-keyword">if</span> ( root == <span class="hljs-literal">nullptr</span>) &#123;<br>          root = new_node;<br>          <span class="hljs-keyword">return</span>;<br>      &#125;<br><br>      <span class="hljs-comment">// 找到一个合适的插入位置</span><br>      AVLTreeNode * insert_node = root;<br>      <span class="hljs-keyword">while</span> ( (key &lt;= insert_node-&gt;key &amp;&amp; insert_node-&gt;left) || (key &gt; insert_node-&gt;key &amp;&amp; insert_node-&gt;right) ) &#123;<br>          insert_node = key&lt;=insert_node-&gt;key?insert_node-&gt;left:insert_node-&gt;right;<br>      &#125;<br><br>      <span class="hljs-comment">// 插入到找到的位置.</span><br>      new_node-&gt;parent = insert_node;<br>      <span class="hljs-keyword">if</span> ( key &lt;= insert_node-&gt;key )<br>          insert_node-&gt;left = new_node;<br>      <span class="hljs-keyword">else</span><br>          insert_node-&gt;right = new_node;<br><br>      <span class="hljs-comment">// 更新高度</span><br>      AVLTreeNode * travel = new_node-&gt;parent;<br>      AVLTreeNode * lastBugTree = <span class="hljs-literal">nullptr</span>;<br>      <span class="hljs-keyword">int</span> balance;<br>      <span class="hljs-keyword">while</span> (travel) &#123;<br>          <span class="hljs-keyword">int</span> height_r, height_l;<br>          height_l = travel-&gt;left ? travel-&gt;left-&gt;height : <span class="hljs-number">0</span>;<br>          height_r = travel-&gt;right ? travel-&gt;right-&gt;height : <span class="hljs-number">0</span>;<br>          travel-&gt;height = max(height_l, height_r) + <span class="hljs-number">1</span>;<br>          balance = height_l - height_r;<br>          <span class="hljs-keyword">if</span>(<span class="hljs-built_in">abs</span>(balance) &gt; <span class="hljs-number">1</span>) &#123;<br>              lastBugTree = travel;<br>              <span class="hljs-keyword">break</span>;<br>          &#125;<br>          travel = travel-&gt;parent;<br>      &#125;<br><br>      <span class="hljs-comment">// 旋转</span><br>      AVLTreeNode * new_root;<br>      <span class="hljs-keyword">if</span> (lastBugTree) &#123;<br>          AVLTreeNode * lastBugParent;<br>          lastBugParent = lastBugTree-&gt;parent;<br>          <span class="hljs-keyword">if</span>(balance &gt; <span class="hljs-number">1</span> &amp;&amp; new_node-&gt;key &lt; lastBugTree-&gt;left-&gt;key) &#123;<br>              <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Type1\n&quot;</span>);<br>              new_root = right_rotate(lastBugTree);<br>          &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(balance &gt; <span class="hljs-number">1</span> &amp;&amp; new_node-&gt;key &gt; lastBugTree-&gt;left-&gt;key)&#123;<br>              <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Type2\n&quot;</span>);<br>              new_root = left_right_rotate(lastBugTree);<br>          &#125;<span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(balance &lt; <span class="hljs-number">0</span> &amp;&amp; new_node-&gt;key &gt; lastBugTree-&gt;right-&gt;key) &#123;<br>              <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;type3\n&quot;</span>);<br>              new_root = left_rotate(lastBugTree);<br>          &#125; <span class="hljs-keyword">else</span>  <span class="hljs-keyword">if</span>(balance &lt; <span class="hljs-number">0</span> &amp;&amp; new_node-&gt;key &lt; lastBugTree-&gt;right-&gt;key) &#123;<br>              <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Type4\n&quot;</span>);<br>              new_root = right_left_rotate(lastBugTree);<br>          &#125;<br><br>          <span class="hljs-keyword">if</span> (!lastBugParent) &#123;<br>              root = new_root;<br>          &#125;<span class="hljs-keyword">else</span> &#123;<br>              <span class="hljs-keyword">if</span> (lastBugParent-&gt;key &gt; lastBugTree-&gt;key)<br>                  lastBugParent-&gt;left = new_root;<br>              <span class="hljs-keyword">else</span><br>                  lastBugParent-&gt;right = new_root;<br>          &#125;;<br>      &#125;<br>  &#125;<br></code></pre></td></tr></table></figure>
+
+<p>旋转相关的代码</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><code class="hljs c++"><span class="hljs-function">AVLTreeNode * <span class="hljs-title">right_rotate</span><span class="hljs-params">(AVLTreeNode * z)</span> </span>&#123;<br>    AVLTreeNode * y = z-&gt;left;<br>    AVLTreeNode * x = y-&gt;left;<br><br>    y-&gt;parent  = z-&gt;parent;<br>    z-&gt;left = y-&gt;right;<br>    <span class="hljs-keyword">if</span> (z-&gt;left) z-&gt;left-&gt;parent = z;<br>    y-&gt;right = z;<br>    z-&gt;parent = y;<br>    <span class="hljs-comment">// 更新高度</span><br>    z-&gt;height = get_height(z) + <span class="hljs-number">1</span>;<br>    y-&gt;height = get_height(y) + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> y;<br>&#125;<br><br><span class="hljs-function">AVLTreeNode * <span class="hljs-title">left_rotate</span><span class="hljs-params">(AVLTreeNode * z)</span> </span>&#123;<br>    AVLTreeNode * y = z-&gt;right;<br>    AVLTreeNode * x = y-&gt;right;<br><br>    z-&gt;right = y-&gt;left;<br><br>    <span class="hljs-keyword">if</span> (z-&gt;right)<br>        z-&gt;right-&gt;parent = z;<br>    y-&gt;parent = z-&gt;parent;<br>    z-&gt;parent = y;<br>    y-&gt;left = z;<br>    <span class="hljs-comment">// 更新高度</span><br>    z-&gt;height = get_height(z) + <span class="hljs-number">1</span>;<br>    y-&gt;height = get_height(y) + <span class="hljs-number">1</span>;<br>    <span class="hljs-keyword">return</span> y;<br>&#125;<br><br><span class="hljs-function">AVLTreeNode * <span class="hljs-title">left_right_rotate</span><span class="hljs-params">(AVLTreeNode * z)</span> </span>&#123;<br>    AVLTreeNode * y = z-&gt;left;<br>    AVLTreeNode * x = y-&gt;right;<br>    z-&gt;left = left_rotate(y);<br>    <span class="hljs-keyword">return</span> right_rotate(z);<br>&#125;<br><br><br><span class="hljs-function">AVLTreeNode * <span class="hljs-title">right_left_rotate</span><span class="hljs-params">(AVLTreeNode * z)</span> </span>&#123;<br>    AVLTreeNode * y = z-&gt;right;<br>    AVLTreeNode * x = y-&gt;left;<br>    z-&gt;right = right_rotate(y);<br>    <span class="hljs-keyword">return</span> left_rotate(z);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p>[1] AVL 数据可视化 <a target="_blank" rel="noopener" href="https://www.cs.usfca.edu/~galles/visualization/AVLtree.html">https://www.cs.usfca.edu/~galles/visualization/AVLtree.html</a><br>[2] AVL Tree | Set 1 (Insertion) <a target="_blank" rel="noopener" href="https://www.geeksforgeeks.org/avl-tree-set-1-insertion/">https://www.geeksforgeeks.org/avl-tree-set-1-insertion/</a><br>[3] Data Structure and Algorithms - AVL Trees <a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm">https://www.tutorialspoint.com/data_structures_algorithms/avl_tree_algorithm.htm</a></p>
+<p>[4] leetcode 1382. 将二叉搜索树变平衡 <a target="_blank" rel="noopener" href="https://leetcode-cn.com/problems/balance-a-binary-search-tree/">https://leetcode-cn.com/problems/balance-a-binary-search-tree/</a></p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/DataStruct/">DataStruct</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/AVL/">AVL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/25/ISCC-mobile-AES/">
+                        <span class="hidden-mobile">ISCC-mobile AES</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'P4nda0s.github.io',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '5793b54e05bfd8f3ec8f4ca4de58c556',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: true,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

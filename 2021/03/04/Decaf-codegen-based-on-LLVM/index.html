@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">Decaf codegen based on LLVM</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：2 months ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="Decaf-编译器代码生成"><a href="#Decaf-编译器代码生成" class="headerlink" title="Decaf 编译器代码生成"></a>Decaf 编译器代码生成</h1><p>记录一下使用 llvm api 实现 Decaf 编译器 codegen 过程中的代码片段以及一些基础语法结构实现过程。</p>
 <h2 id="Int-与-Bool"><a href="#Int-与-Bool" class="headerlink" title="Int 与 Bool"></a>Int 与 Bool</h2><p>llvm 里面 Bool 类型其实也是一个 Integer，只不过长度为 1bit.<br>例如如下代码可以判断 xxxx 是否为 bool 变量。</p>

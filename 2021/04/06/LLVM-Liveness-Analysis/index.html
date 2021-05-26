@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">LLVM Liveness Analysis</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：2 months ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="基于-llvm-实现活跃变量分析"><a href="#基于-llvm-实现活跃变量分析" class="headerlink" title="基于 llvm 实现活跃变量分析"></a>基于 llvm 实现活跃变量分析</h1><h2 id="活跃变量分析"><a href="#活跃变量分析" class="headerlink" title="活跃变量分析"></a>活跃变量分析</h2><p>活跃变量分析是最典型的数据流分析的算法之一，它的作用是确定变量在程序中的活跃性。</p>
 <p>变量在某个程序点有两种状态，<code>live</code> 或 <code>dead</code>。对于变量 x 和程序点 p，判断 x 在点 p 上的值是否会在 CFG 中的某条从点 p 出发的路径中使用。如果是，就说 x 在 p 上 <code>live</code>；否则就说x在p上是 <code>dead</code>。</p>

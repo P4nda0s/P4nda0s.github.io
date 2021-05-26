@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">WebAssembly Reverse</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：8 days ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="WASM"><a href="#WASM" class="headerlink" title="WASM"></a>WASM</h1><h2 id="WASM-开发环境"><a href="#WASM-开发环境" class="headerlink" title="WASM 开发环境"></a>WASM 开发环境</h2><p><code>Emscripten SDK</code> 主流的 WASM 开发环境, 本文基于 <code>Emscripten</code> 环境编写</p>
 <h3 id="安装-Emscripten"><a href="#安装-Emscripten" class="headerlink" title="安装 Emscripten"></a>安装 Emscripten</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs shell"><span class="hljs-meta">#</span><span class="bash"> Get the emsdk repo</span><br>git clone https://github.com/emscripten-core/emsdk.git<br><br><span class="hljs-meta">#</span><span class="bash"> Enter that directory</span><br>cd emsdk<br><br><span class="hljs-meta">#</span><span class="bash"> Fetch the latest version of the emsdk (not needed the first time you <span class="hljs-built_in">clone</span>)</span><br>git pull<br><br><span class="hljs-meta">#</span><span class="bash"> Download and install the latest SDK tools.</span><br>./emsdk install latest<br><br><span class="hljs-meta">#</span><span class="bash"> Make the <span class="hljs-string">&quot;latest&quot;</span> SDK <span class="hljs-string">&quot;active&quot;</span> <span class="hljs-keyword">for</span> the current user. (writes .emscripten file)</span><br>./emsdk activate latest<br><br><span class="hljs-meta">#</span><span class="bash"> Activate PATH and other environment variables <span class="hljs-keyword">in</span> the current terminal</span><br>source ./emsdk_env.sh<br></code></pre></td></tr></table></figure>

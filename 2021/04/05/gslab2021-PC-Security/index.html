@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">gslab2021: PC Security</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：2 months ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="2021腾讯游戏安全-初赛PC题"><a href="#2021腾讯游戏安全-初赛PC题" class="headerlink" title="2021腾讯游戏安全 初赛PC题"></a>2021腾讯游戏安全 初赛PC题</h1><p>flag:dogod<br>非常好的一道题，短短的一天时间内，已经简单入门 OpenGL </p>
 <h2 id="1-vertex-shader"><a href="#1-vertex-shader" class="headerlink" title="1. vertex shader"></a>1. vertex shader</h2><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs c"><span class="hljs-meta">#version 330 core</span><br>layout (location = <span class="hljs-number">0</span>) in vec3 aPos;<br>layout (location = <span class="hljs-number">1</span>) in vec2 aTexCoord;<br>out vec2 TexCoord;<br>uniform mat4 model;<br>uniform mat4 view;<br>uniform mat4 projection;<br><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>	gl_Position = projection * view * model * vec4(aPos, <span class="hljs-number">1.0f</span>);<br>	TexCoord = vec2(aTexCoord.x, aTexCoord.y);<br>&#125;<br></code></pre></td></tr></table></figure>

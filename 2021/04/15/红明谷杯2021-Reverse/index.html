@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">红明谷杯2021:Reverse</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：a month ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="红明谷杯2021-Reverse"><a href="#红明谷杯2021-Reverse" class="headerlink" title="红明谷杯2021:Reverse"></a>红明谷杯2021:Reverse</h1><h2 id="g0"><a href="#g0" class="headerlink" title="g0"></a>g0</h2><p>golang 逆向题</p>
 <h3 id="1-flag-长度-：-0x14"><a href="#1-flag-长度-：-0x14" class="headerlink" title="1. flag 长度 ： 0x14"></a>1. flag 长度 ： 0x14</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs asm">call    fmt_Fscanf<br>mov     rax, [rsp+0A8h]<br>mov     rcx, [rax]<br>cmp     qword ptr [rax+8], 14h<br></code></pre></td></tr></table></figure>

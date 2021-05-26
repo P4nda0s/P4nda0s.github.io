@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">美团CTF: 100mazes</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：a day ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="美团CTF-100mazes"><a href="#美团CTF-100mazes" class="headerlink" title="美团CTF: 100mazes"></a>美团CTF: 100mazes</h1><p>题目下载:  <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-100mazes/mazes100" title="mazes100">mazes100</a><br>简单地图题，有100张地图，难点是提取地图数据，我采用 Capstone 引擎反汇编解析<br>每一张地图大小为 25 x 25 地图，地图是加密的，realMap = map1 ^ map2<br>除了提取 map1 和 map2 之外，还需要方向字符串，起点坐标</p>
 <h2 id="map1-amp-方向字符串"><a href="#map1-amp-方向字符串" class="headerlink" title="map1 &amp; 方向字符串"></a>map1 &amp; 方向字符串</h2><p>每一个地图函数开头先赋值 map1 , 逐个字节赋值</p>

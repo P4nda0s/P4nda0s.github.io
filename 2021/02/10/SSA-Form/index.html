@@ -252,12 +252,6 @@
             <!-- SEO header -->
             <h1 style="display: none">SSA Form</h1>
             
-              <p class="note note-info">
-                
-                  本文最后更新于：3 months ago
-                
-              </p>
-            
             <div class="markdown-body">
               <h1 id="SSA-Form"><a href="#SSA-Form" class="headerlink" title="SSA Form"></a>SSA Form</h1><p>SSA 全称是 Static Single Assignment Form 即静态单赋值形式，LLVM 就采用了 SSA Form，当然 LLVM 处理 SSA 的过程是透明的，生成 LLVM IR 的时候只需要处理好 Basic Block 之间的关系，LLVM 就会自动将 IR 转换成 SSA Form。然而对于布尔短路，则需要自己实现 SSA 过程。</p>
 <p>简单讲，SSA 形式只允许一个变量被赋值一次，这叫单赋值。程序中存在循环结构，循环结构可能被动态执行多次，循环结构中的变量仍然可能被重新赋值，所以称为“静态单赋值”而不是简单的“单赋值”。</p>
