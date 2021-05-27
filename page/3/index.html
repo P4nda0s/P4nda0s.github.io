@@ -207,6 +207,60 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/03/04/Decaf-codegen-based-on-LLVM/" target="_self">
+          Decaf codegen based on LLVM
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/03/04/Decaf-codegen-based-on-LLVM/" target="_self">
+          
+          
+            
+          
+          Decaf 编译器代码生成记录一下使用 llvm api 实现 Decaf 编译器 codegen 过程中的代码片段以及一些基础语法结构实现过程。
+Int 与 Boolllvm 里面 Bool 类型其实也是一个 Integer，只不过长度为 1bit.例如如下代码可以判断 xxxx 是否为 bool 变量。
+12if (xxxx-&gt;getType()-&gt;isIntegerTy() &a
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-03-04 14:59" pubdate>
+              2021-03-04
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/compiler/">compiler</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/homework/">homework</a>
+            
+              <a href="/tags/llvm/">llvm</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/02/27/Exercise-Recognize-hand-written-digits/" target="_self">
           Exercise:Recognize hand-written digits
         </a>
@@ -694,59 +748,6 @@ Attribute Grammars
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/note/">note</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/01/31/LLVM-Practice/" target="_self">
-          LLVM Practice
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/01/31/LLVM-Practice/" target="_self">
-          
-          
-            
-          
-          LLVM PracticeDecaf 语言要用 LLVM 作为后端，生成机器代码。我本人对 LLVM 相关的 API 也十分感兴趣。这篇文章记录我学习 LLVM 的过程及相关代码片段。
-编译 LLVM123456git clone https://github.com/llvm/llvm-project.gitcd llvm-projectmkdir buildcd buildcmake -G &
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-01-31 20:47" pubdate>
-              2021-01-31
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/compiler/">compiler</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/homework/">homework</a>
-            
-              <a href="/tags/llvm/">llvm</a>
             
           </div>
         

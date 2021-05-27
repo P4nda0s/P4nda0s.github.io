@@ -207,6 +207,64 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/05/06/go-notes/" target="_self">
+          go notes
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/05/06/go-notes/" target="_self">
+          
+          
+            
+          
+          go 笔记开一篇博客页面记录一下学习 go 过程中的一些小笔记, 遇到新的会继续更新
+[TOC]
+1. 编译时删除源码路径
+
+12go.exe build -trimpathstrip xxx
+
+
+2. 关闭编译优化有时候想逆向一些语言特性的时候，最好关掉编译优化
+12-gcflags &quot;-N -l&quot;比如: go build -o hw.exe -gcflags &quot;-
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-05-06 16:26" pubdate>
+              2021-05-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/develop/">develop</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/golang/">golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/04/23/Cluster-notes/" target="_self">
           Cluster notes
         </a>
@@ -695,60 +753,6 @@ o-llvm 与 llvm 什么关系？ 这个可能是很多菜鸡搞不清楚的问题
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/obfuscator/">obfuscator</a>
-            
-              <a href="/tags/llvm/">llvm</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/03/04/Decaf-codegen-based-on-LLVM/" target="_self">
-          Decaf codegen based on LLVM
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/03/04/Decaf-codegen-based-on-LLVM/" target="_self">
-          
-          
-            
-          
-          Decaf 编译器代码生成记录一下使用 llvm api 实现 Decaf 编译器 codegen 过程中的代码片段以及一些基础语法结构实现过程。
-Int 与 Boolllvm 里面 Bool 类型其实也是一个 Integer，只不过长度为 1bit.例如如下代码可以判断 xxxx 是否为 bool 变量。
-12if (xxxx-&gt;getType()-&gt;isIntegerTy() &a
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-03-04 14:59" pubdate>
-              2021-03-04
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/compiler/">compiler</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/homework/">homework</a>
             
               <a href="/tags/llvm/">llvm</a>
             

@@ -1,0 +1,592 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  
+  <title>Redhat-filestore - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Redhat-filestore">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-05-28 02:08" pubdate>
+        May 28, 2021 am
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      18
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Redhat-filestore</h1>
+            
+            <div class="markdown-body">
+              <h1 id="红帽杯2021-file-store"><a href="#红帽杯2021-file-store" class="headerlink" title="红帽杯2021 file_store"></a>红帽杯2021 file_store</h1><p>题目下载: <a href="/2021/05/28/Redhat-filestore/file_store.zip" title="file_store.zip">file_store.zip</a></p>
+<p>做这道题之前可以先学习一下 Huffman 编码，同时这道题还涉及到大量的 stl 使用，可以锻炼 stl 逆向分析能力。Huffman 一般用于数据压缩，与题目名比较吻合。这道题其实是利用 Huffman 编码对 flag 文件进行编码，解题方法是解压 Huffman 编码过的文件即可。</p>
+<p>这道题压缩方案是利用传统 Huffman 树构造方法，统计词频并根据词频高低构造 Huffman 树，用 01 串表示词在 Huffman 树中的位置，最后将 01 串转换成字节流。</p>
+<p>要解压缩某个数据，必须要有该数据文件对应的 Huffman 树的结构，因此题目提供了 flag.txt.shuffled 文件，该文件打乱了 flag.txt 的顺序，但是词频没有变，使用该文件构造 Huffman 树，即可对 flag.bin 解压。</p>
+<p>⚠️这道题中，词 = 字符，词频就是字符出现的次数</p>
+<h2 id="Huffman-树的构造"><a href="#Huffman-树的构造" class="headerlink" title="Huffman 树的构造"></a>Huffman 树的构造</h2><p>函数地址: 40184A</p>
+<ol>
+<li>词频统计 </li>
+</ol>
+<p>Huffman 树中节点的构造依赖于词频分析，“词”的含义不是一个单词，而是一个字节。词频越高意味使用次数越多，就越靠近跟节点，01 串表示的路径就跟短，有利于压缩。</p>
+<img src="/2021/05/28/Redhat-filestore/image-20210528022418649.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528022418649">
+
+<p>逆向 stl 的时候经常遇到 “迭代器” </p>
+<ol start="2">
+<li>为每一个不重复的字符创建 Huffman 节点，高度为1，并将新创建的节点加入到 Huffman 森林（arrayResult 数组）</li>
+</ol>
+<img src="/2021/05/28/Redhat-filestore/image-20210528022544914.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528022544914">
+
+
+
+
+
+<ol start="3">
+<li>从 Huffman 森林中选出某些树合并</li>
+</ol>
+<p>标准 Huffman 树是选出权制最小的两棵子树合并，但是这道题似乎并不是这样</p>
+<img src="/2021/05/28/Redhat-filestore/image-20210528022925031.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528022925031">
+
+<p>循环退出的条件是 Huffman 森林中只有一颗🌲</p>
+<ol start="4">
+<li>遍历计算路径 函数地址: 4016D6</li>
+</ol>
+<p>0 代表走左，1代表走右</p>
+<img src="/2021/05/28/Redhat-filestore/image-20210528023701996.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528023701996">
+
+<p>遍历函数到达叶子结点的时候，将 01 路径串与字符通过 stl map 建立关联。</p>
+<p>输入文件 flag.txt.shuffled ，并在此处尝试 dump 关联的键值对即可获取 01串与真实数据之间的编码关系.</p>
+<p>dump ida 脚本如下, 该脚本使用方法是在 <code>40171D call    find</code> 处设置条件断点为 bp_dumper() 即可.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">import</span> idaapi<br><span class="hljs-keyword">import</span> idc<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">decode_stl_str</span>(<span class="hljs-params">p</span>):</span><br>    size = idc.read_dbg_qword(p + <span class="hljs-number">0x8</span>)<br>    dataPtr = idc.read_dbg_qword(p)<br>    buf = []<br>    <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> <span class="hljs-built_in">range</span>(size):<br>        buf.append(idc.read_dbg_byte(dataPtr + i))<br>    <span class="hljs-keyword">return</span> <span class="hljs-built_in">bytearray</span>(buf)<br><br><span class="hljs-comment"># bp 40171D</span><br>reverseMap = &#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bp_dumper</span>():</span><br>    <span class="hljs-keyword">global</span> reverseMap<br>    pNodeVal = idc.get_reg_value(<span class="hljs-string">&#x27;rsi&#x27;</span>)<br>    nodeVal = idc.read_dbg_byte(pNodeVal)<br>    rbp = idc.get_reg_value(<span class="hljs-string">&#x27;rbp&#x27;</span>)<br>    pStr = idc.read_dbg_qword(rbp - <span class="hljs-number">0x58</span>)<br>    huffmanCode = decode_stl_str(pStr).decode(<span class="hljs-string">&#x27;utf-8&#x27;</span>)<br>    print(<span class="hljs-built_in">chr</span>(nodeVal), huffmanCode)<br>    reverseMap[huffmanCode] = <span class="hljs-built_in">chr</span>(nodeVal)<br>    <span class="hljs-keyword">return</span> <span class="hljs-literal">False</span><br><br></code></pre></td></tr></table></figure>
+
+<p>当所有的键值队都记录之后，print(reverseMap) 就可以得到对应关系, 我得到的数据如下</p>
+<figure class="highlight 1c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs 1c">huffman = &#123;&#x27;<span class="hljs-number">00000000</span>&#x27;: &#x27;T&#x27;, &#x27;<span class="hljs-number">00000001</span>&#x27;: &#x27;6&#x27;, &#x27;<span class="hljs-number">000000</span>1&#x27;: &#x27;1&#x27;, &#x27;<span class="hljs-number">0000010000</span>&#x27;: &#x27;L&#x27;, &#x27;<span class="hljs-number">0000010001</span>&#x27;: &#x27;R&#x27;, &#x27;<span class="hljs-number">0000010010</span>&#x27;: &#x27;&#125;&#x27;, &#x27;<span class="hljs-number">0000010011</span>&#x27;: &#x27;M&#x27;, &#x27;<span class="hljs-number">0000010100</span>&#x27;: &#x27;;&#x27;, &#x27;<span class="hljs-number">0000010101</span>&#x27;: &#x27;C&#x27;, &#x27;<span class="hljs-number">0000010110</span>&#x27;: &#x27;&#123;&#x27;, &#x27;<span class="hljs-number">0000010111</span>&#x27;: &#x27;x&#x27;, &#x27;<span class="hljs-number">0000011000</span>&#x27;: &#x27;F&#x27;, &#x27;<span class="hljs-number">0000011001</span>&#x27;: &#x27;J&#x27;, &#x27;<span class="hljs-number">0000011010</span>&#x27;: &#x27;q&#x27;, &#x27;<span class="hljs-number">0000011011</span>&#x27;: &#x27;9&#x27;, &#x27;<span class="hljs-number">00000111</span>0&#x27;: &#x27;G&#x27;, &#x27;<span class="hljs-number">00000111</span>1&#x27;: &#x27;4&#x27;, &#x27;<span class="hljs-number">00001000</span>0&#x27;: &#x27;2&#x27;, &#x27;<span class="hljs-number">00001000</span>1&#x27;: <span class="hljs-string">&quot;&#x27;&quot;</span>, &#x27;<span class="hljs-number">00001001</span>0&#x27;: &#x27;7&#x27;, &#x27;<span class="hljs-number">00001001</span>1&#x27;: &#x27;W&#x27;, &#x27;<span class="hljs-number">000010</span>1&#x27;: &#x27;-&#x27;, &#x27;<span class="hljs-number">00001100</span>&#x27;: &#x27;k&#x27;, &#x27;<span class="hljs-number">00001101</span>&#x27;: &#x27;3&#x27;, &#x27;<span class="hljs-number">000011</span>1&#x27;: &#x27;b&#x27;, &#x27;<span class="hljs-number">0001</span>&#x27;: &#x27;i&#x27;, &#x27;001&#x27;: &#x27;e&#x27;, &#x27;<span class="hljs-number">0100</span>&#x27;: &#x27;n&#x27;, &#x27;<span class="hljs-number">0101</span>0&#x27;: &#x27;f&#x27;, &#x27;<span class="hljs-number">010110</span>&#x27;: &#x27;y&#x27;, &#x27;<span class="hljs-number">010111</span>&#x27;: &#x27;u&#x27;, &#x27;<span class="hljs-number">0110</span>&#x27;: &#x27;o&#x27;, &#x27;<span class="hljs-number">0111</span>&#x27;: &#x27;r&#x27;, &#x27;<span class="hljs-number">1000</span>0&#x27;: &#x27;l&#x27;, &#x27;<span class="hljs-number">100010</span>0&#x27;: &#x27;S&#x27;, &#x27;<span class="hljs-number">100010</span>1&#x27;: &#x27;v&#x27;, &#x27;<span class="hljs-number">100011</span>&#x27;: &#x27;g&#x27;, &#x27;<span class="hljs-number">1001</span>0&#x27;: &#x27;d&#x27;, &#x27;<span class="hljs-number">100110</span>0&#x27;: &#x27;H&#x27;, &#x27;<span class="hljs-number">100110</span>1&#x27;: &#x27;p&#x27;, &#x27;<span class="hljs-number">10011100</span>&#x27;: &#x27;A&#x27;, &#x27;<span class="hljs-number">10011101</span>0&#x27;: &#x27;8&#x27;, &#x27;<span class="hljs-number">10011101</span>1&#x27;: &#x27;\r&#x27;, &#x27;<span class="hljs-number">10011110</span>0&#x27;: &#x27;5&#x27;, &#x27;<span class="hljs-number">1001111010</span>&#x27;: &#x27;:&#x27;, &#x27;<span class="hljs-number">1001111011</span>0&#x27;: &#x27;(&#x27;, &#x27;<span class="hljs-number">1001111011</span>1&#x27;: &#x27;)&#x27;, &#x27;<span class="hljs-number">10011111</span>0&#x27;: &#x27;\n&#x27;, &#x27;<span class="hljs-number">10011111</span>1&#x27;: &#x27;B&#x27;, &#x27;<span class="hljs-number">1010</span>&#x27;: &#x27;t&#x27;, &#x27;<span class="hljs-number">101100</span>&#x27;: &#x27;w&#x27;, &#x27;<span class="hljs-number">101101</span>&#x27;: &#x27;m&#x27;, &#x27;<span class="hljs-number">101110</span>0&#x27;: &#x27;,&#x27;, &#x27;<span class="hljs-number">101110</span>1&#x27;: &#x27;.&#x27;, &#x27;<span class="hljs-number">101111</span>&#x27;: &#x27;c&#x27;, &#x27;<span class="hljs-number">1100</span>&#x27;: &#x27;a&#x27;, &#x27;<span class="hljs-number">1101</span>0&#x27;: &#x27;h&#x27;, &#x27;<span class="hljs-number">1101</span>1&#x27;: &#x27;s&#x27;, &#x27;111&#x27;: &#x27; &#x27;&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="二叉树数据结构"><a href="#二叉树数据结构" class="headerlink" title="二叉树数据结构"></a>二叉树数据结构</h2><ol>
+<li>叶结点</li>
+</ol>
+<p>叶结点才是带数据的结点</p>
+<img src="/2021/05/28/Redhat-filestore/image-20210528024828578.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528024828578">
+
+
+
+<ol start="2">
+<li>非叶子节点</li>
+</ol>
+<img src="/2021/05/28/Redhat-filestore/image-20210528025054776.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528025054776">
+
+<p>这两种结构的第二个 dd 的数据可以用来区分叶节点或者非叶子节点，区分值 0FFFFFFFF</p>
+<p>叶子节点和非叶子节点的数据类型结构不一样，但是却通过非叶子节点中同一个指针字段指向，很少见。</p>
+<h2 id="后续小细节"><a href="#后续小细节" class="headerlink" title="后续小细节"></a>后续小细节</h2><ol>
+<li>01 字符串转字节流  40878C</li>
+</ol>
+<img src="/2021/05/28/Redhat-filestore/image-20210528025352961.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528025352961">
+
+<p>下断点观察数据即可</p>
+<ol start="2">
+<li>最后一步输出还有一个加密算法</li>
+</ol>
+<img src="/2021/05/28/Redhat-filestore/image-20210528025426509.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528025426509">
+
+<p>这是一种类似rc4 带入密文即可得到明文的加密算法, 动态调试修改数据即可解密。</p>
+<ol start="3">
+<li>解压过程</li>
+</ol>
+<p>我直接暴力匹配 01串前缀，匹配成功的则删除待解压数据的前缀，最终删除所有待解压数据，得到已经解压的数据</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs python">data = <span class="hljs-built_in">bytearray</span>(data)<br>s = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> data:<br>    s += <span class="hljs-built_in">bin</span>(i)[<span class="hljs-number">2</span>:].zfille(<span class="hljs-number">8</span>)<br><br>flag = <span class="hljs-string">&#x27;&#x27;</span><br><span class="hljs-keyword">while</span> s != <span class="hljs-string">&#x27;&#x27;</span>:<br>    <span class="hljs-keyword">for</span> prefix <span class="hljs-keyword">in</span> huffman:<br>        <span class="hljs-keyword">if</span> s.startswith(prefix):<br>            flag += huffman[prefix]<br>            s = s[<span class="hljs-built_in">len</span>(prefix): ]<br></code></pre></td></tr></table></figure>
+
+
+
+<p>最后得到 flag</p>
+<img src="/2021/05/28/Redhat-filestore/image-20210528025802761.png" srcset="/img/loading.gif" lazyload class="" title="image-20210528025802761">
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/Reverse/">Reverse</a>
+                    
+                      <a class="hover-with-bg" href="/tags/Huffman/">Huffman</a>
+                    
+                      <a class="hover-with-bg" href="/tags/STL/">STL</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/05/26/AVL-Tree/">
+                        <span class="hidden-mobile">AVL Tree</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'P4nda0s.github.io',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '10bc89b5331bcc3c3459e5166bd848f7',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: true,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
