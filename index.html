@@ -207,6 +207,319 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/14/%E5%BC%BA%E7%BD%91%E6%9D%AF-unicorn-like-a-pro/" target="_self">
+          强网杯: unicorn_like_a_pro
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/14/%E5%BC%BA%E7%BD%91%E6%9D%AF-unicorn-like-a-pro/" target="_self">
+          
+          
+            
+          
+          强网杯: unicorn_like_a_prounicorn framework 是一个基于 qemu 的模拟执行框架
+GitHub链接: https://github.com/unicorn-engine/unicorn
+这道题目内部就调用了 unicorn 框架模拟执行一段 x64代码，最开始以为出题人魔改了 unicorn 框架，用 bindiff 分析了一段时间，发现并没有魔改 unico
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-14 21:11" pubdate>
+              2021-06-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/Capstone/">Capstone</a>
+            
+              <a href="/tags/Unicorn/">Unicorn</a>
+            
+              <a href="/tags/Keystone/">Keystone</a>
+            
+              <a href="/tags/Recompile/">Recompile</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
+          Unlink 与 fastbin dup consolidate 利用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          Unlink 与 fastbin dup consolidate 利用malloc 在分配 large chunk 的时候，会调用 malloc_consolidate 函数。
+malloc_consolidate 函数将 fastbin 中的 chunk 与相邻 free chunk 合并，合并后放入 unsorted bin。
+若 chunk 的 next chunk 不是 free chun
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-11 14:01" pubdate>
+              2021-06-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/fastbin/">fastbin</a>
+            
+              <a href="/tags/unlink/">unlink</a>
+            
+              <a href="/tags/fastbin-dup-consolidate/">fastbin_dup_consolidate</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/11/unlink/" target="_self">
+          unlink
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/11/unlink/" target="_self">
+          
+          
+            
+          
+          Unlink 攻击Unlink 也是一种很常见的堆溢出利用手段
+我认为 unlink 攻击的本质是利用 free 中 unlink 操作修改指向堆块的指针变量 p，使其指向 p-3 处，修改 p[3] 即可修改 p 自身，从而达到任意地址读写的能力。
+利用条件：
+
+指针变量 p 指向堆分配的地址，且对该地址可读可写
+p 指向的 chunk 的前一个 chunk 可溢出到下一个 chunk 的 si
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-11 01:34" pubdate>
+              2021-06-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/unlink/">unlink</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/10/house-of-spirit/" target="_self">
+          house of spirit
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/10/house-of-spirit/" target="_self">
+          
+          
+            
+          
+          house of spirit这种利用方式主要是在栈上构造 fake chunk，从而更好的控制栈，修改返回地址。
+利用条件： 
+
+free(p) 中的 p 可控
+可以泄漏栈地址
+不可控区域前后都有区域可控（如图）
+
+
+
+利用思路：
+在栈中构造 fake chunk，大小覆盖掉函数的返回地址，再次分配得到返回地址控制，写入 one_gadget 或者 shellcode 地址。
+注意如果构造 fa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-10 22:04" pubdate>
+              2021-06-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/fastbin/">fastbin</a>
+            
+              <a href="/tags/house-of-spirit/">house_of_spirit</a>
+            
+              <a href="/tags/shellcode/">shellcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/10/0cft2017-babyheap/" target="_self">
+          0cft2017 babyheap
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/10/0cft2017-babyheap/" target="_self">
+          
+          
+            
+          
+          0ctf2017 babyheap复现了一道非常经典简单的堆题
+分两步: 
+
+泄漏 libc 地址
+fastbin attack 修改 _malloc_hook
+
+有一个堆溢出洞，写内存时没有做长度限制。观察一下，虽然开启了地址随机化，但是 Chunk 地址的最后一字节总是固定的，这意味着修改低位字节能在不泄漏地址的情况下指向其它 chunk。
+可以构造两个 fastbin 中的 chunk1 和
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-10 19:19" pubdate>
+              2021-06-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/fastbin/">fastbin</a>
+            
+              <a href="/tags/one-gadget/">one_gadget</a>
+            
+              <a href="/tags/overlap/">overlap</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/05/28/Redhat-filestore/" target="_self">
           Redhat-filestore
         </a>
@@ -491,282 +804,11 @@ EXCEPTION_ACCESS_VIOLATION
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/16/CISCN-gift/" target="_self">
-          CISCN gift
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/16/CISCN-gift/" target="_self">
-          
-          
-            
-          
-          CISCN gift题目下载: CISCN_gift.exe
-golang 写的程序，要优化一个内置算法
-程序逻辑如下（不是解题脚本）
-12345678910111213141516171819202122232425262728293031tab1 = [0x0000000000000001, 0x0000000000000003, 0x0000000000000006, 0x000000000
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-16 15:41" pubdate>
-              2021-05-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Revserse/">Revserse</a>
-            
-              <a href="/tags/golang/">golang</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/16/CISCN-Little-evil/" target="_self">
-          CISCN Little_evil
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/16/CISCN-Little-evil/" target="_self">
-          
-          
-            
-          
-          CISCN little_evil比赛的时候差一点点出，非常可惜
-第一次做 ruby 的逆向题，学到很多东西。这道题总体来说，要进行两种不同策略的反混淆，最后还有一层是类似于 brainfuck 的 vm，需要写 decompiler
-题目: littile_evil
-提取 out.rb题目的 elf 文件是典型的 ruby 解释器。问题是源码在哪里？ 最开始，我以为是内存加载，分析源码过程中发现
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-16 14:41" pubdate>
-              2021-05-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Ruby/">Ruby</a>
-            
-              <a href="/tags/obfuscator/">obfuscator</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/14/WebAssembly-Reverse/" target="_self">
-          WebAssembly Reverse
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/14/WebAssembly-Reverse/" target="_self">
-          
-          
-            
-          
-          WASMWASM 开发环境Emscripten SDK 主流的 WASM 开发环境, 本文基于 Emscripten 环境编写
-安装 Emscripten1234567891011121314151617# Get the emsdk repogit clone https://github.com/emscripten-core/emsdk.git# Enter that directorycd
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-14 10:50" pubdate>
-              2021-05-14
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/PL-Reverse/">PL_Reverse</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Wasm/">Wasm</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/13/%E7%9C%8B%E9%9B%AACTF2021/" target="_self">
-          看雪CTF2021
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/13/%E7%9C%8B%E9%9B%AACTF2021/" target="_self">
-          
-          
-            
-          
-          看雪CTF2021第二题 南冥神功简单迷宫题
-map1 = [0x0, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-13 22:09" pubdate>
-              2021-05-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/07/Cython-Reverse/" target="_self">
-          Cython Reverse
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/07/Cython-Reverse/" target="_self">
-          
-          
-            
-          
-          Cython Reverse notesCython 是什么呢？官方给出的解释是 Cython 是一种新的语言，是带类型的 Python [1]。
-Cython 有一个功能叫 Cythonize 这个功能可以将 Python 编译成 C语言实现，再由 GCC/Clang 将 C 编译成动态库。
-setup.py
-123456from setuptools import setupfrom Cyth
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-07 19:56" pubdate>
-              2021-05-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/PL-Reverse/">PL_Reverse</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Python/">Python</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

