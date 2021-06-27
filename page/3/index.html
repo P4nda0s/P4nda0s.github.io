@@ -207,6 +207,172 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/" target="_self">
+          红明谷杯2021:Reverse
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/15/%E7%BA%A2%E6%98%8E%E8%B0%B7%E6%9D%AF2021-Reverse/" target="_self">
+          
+          
+            
+          
+          红明谷杯2021:Reverseg0golang 逆向题
+1. flag 长度 ： 0x141234call    fmt_Fscanfmov     rax, [rsp+0A8h]mov     rcx, [rax]cmp     qword ptr [rax+8], 14h
+数据变化  null -&gt; AABBCCDDEEFFGGHHIIJJ
+2. Flag 乱序测试输入：AABBCCD
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-15 13:05" pubdate>
+              2021-04-15
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/golang/">golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/14/Golang-underlying-data-representaion/" target="_self">
+          Golang underlying data representaion
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/14/Golang-underlying-data-representaion/" target="_self">
+          
+          
+            
+          
+          Golang underlying data representaion有些沙雕出题人就是喜欢用 go 来恶心人，做个总结
+简单记录一下 Golang 各种数据类型的存储形式、参数传递、返回值传递等等
+本文的数据均在 64位 环境下得出.
+为了方便观察代码，关掉编译优化
+123-gcflags &quot;-N -l&quot;go build -o hw.exe -gcflags &quot;-
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-14 13:09" pubdate>
+              2021-04-14
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/PL-Reverse/">PL_Reverse</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/golang/">golang</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/04/12/SSE-Instructions/" target="_self">
+          SSE Instructions
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/12/SSE-Instructions/" target="_self">
+          
+          
+            
+          
+          SSE Instructions记录一些 SSE 指令集最基础的东西，经常容易忘。
+一些比较混的概念 SSE、MMX、XMM、SIMD
+SIMD:  Single instruction, multiple data 就是一条指令处理一组数据，描述指令集性质的一个缩写。
+SSE 是 SIMD 指令集，支持同时处理多组数据（整数/浮点），属于 SIMD 指令集。 SSE 进一步升级还有SSE2,SS
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-12 00:46" pubdate>
+              2021-04-12
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Asm/">Asm</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/x86/">x86</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/04/06/LLVM-Liveness-Analysis/" target="_self">
           LLVM Liveness Analysis
         </a>
@@ -583,165 +749,6 @@ Int 与 Boolllvm 里面 Bool 类型其实也是一个 Integer，只不过长度�
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/homework/">homework</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/23/Exercise-Logistic-Regression/" target="_self">
-          Exercise:Logistic Regression
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/23/Exercise-Logistic-Regression/" target="_self">
-          
-          
-            
-          
-          Exercise:Logistic Regression记录一下逻辑回归作业代码
-Task1 假设函数: $h_\theta(x)=sigmoid(\theta^Tx)$
-代价函数: $J(\theta)=\frac{1}{m}\sum\limits_{i=1}^{m}[-y^{(i)}log(h_\theta(x^{(i)}))-(1-y^{(i)})log(1-h_\theta(x^{(i)}
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-23 19:46" pubdate>
-              2021-02-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/ml/">ml</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/homework/">homework</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/" target="_self">
-          RDP 配置文件编写记录
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/22/RDP-%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E8%AE%B0%E5%BD%95/" target="_self">
-          
-          
-            
-          
-          RDP 配置文件编写记录RDP Wrapper  官方配置文件只能支持到18年的Win10系统，新版本的系统需要自己编写 INI 文件，当然也可以去 RDP 的官方 github issues 里面寻找相应的配置文件。
-RDP Ini 文件样本 for win10(10.0.19041.789)
-123456789101112131415161718192021222324252627282930
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-22 17:23" pubdate>
-              2021-02-22
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/RedTeam/">RedTeam</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Windows/">Windows</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/21/Ml3-Classification/" target="_self">
-          Ml3:Classification
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/21/Ml3-Classification/" target="_self">
-          
-          
-            
-          
-          Classification模型分类问题中，预测的变量  y 为离散值，以前学习的线性回归模型就不适用了。分类将用到的算法是逻辑回归( Logistic Regression )。
-我们先讨论二元的分类算法，即把输入分成两类，也就是说 y 的值为 0 或 1.
-逻辑回归假设函数：$h_\theta(x)=g(\theta^Tx)$ 该函数值的范围始终是 0 到 1 之间。
-当 $h_\theta(
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-21 16:41" pubdate>
-              2021-02-21
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/ml/">ml</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/note/">note</a>
             
           </div>
         

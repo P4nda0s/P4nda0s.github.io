@@ -207,6 +207,190 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/27/house-of-einherjar/" target="_self">
+          house of einherjar
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/27/house-of-einherjar/" target="_self">
+          
+          
+            
+          
+          house of einherjar这个利用手段可以将 top chunk 移动到任意内存，然后通过分配的内存取得对任意内存读写的权限。
+利用条件：
+
+可以修改 top chunk 相邻 chunk 的 size 域低字节（通常是 off by one ）
+需要泄漏堆地址、目标 fake_chunk 地址用于计算 prev_size
+
+利用方法： 修改物理相邻 top chunk 的 chunk 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-27 13:27" pubdate>
+              2021-06-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/one-gadget/">one_gadget</a>
+            
+              <a href="/tags/off-by-one/">off_by_one</a>
+            
+              <a href="/tags/einherjar/">einherjar</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/26/gkctf-KillerAid/" target="_self">
+          gkctf KillerAid
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/26/gkctf-KillerAid/" target="_self">
+          
+          
+            
+          
+          挂科CTF KillerAid题目下载: KillerAid.zip
+C# 逆向，DLL做核心验证，DLL 里面有反调试，简单 patch 即可
+然后有一个极其恶心的 AES 魔改算法
+行移位
+123456789101112131415161718192021222324252627282930void myshift(int pArray[4][4])&#123;    int tmpArr[4
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-26 17:26" pubdate>
+              2021-06-26
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/AES/">AES</a>
+            
+              <a href="/tags/AntiDebug/">AntiDebug</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/06/23/poison-null-byte/" target="_self">
+          poison null byte
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/23/poison-null-byte/" target="_self">
+          
+          
+            
+          
+          poison null byteoff by null 改小已经释放的 chunk 的 size 域，而该 chunk 的物理下一个 chunk 的 prev_size 域没有被修改。
+当前 chunk 的 size 域被改小，意味着定位下一个 chunk 会出问题，无法正确修改原来物理相邻 chunk 的 prev_size 域，释放原来物理相邻 chunk ，利用合并机制产生堆叠。
+
+
+如图 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-23 09:56" pubdate>
+              2021-06-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/overlap/">overlap</a>
+            
+              <a href="/tags/poison-null-byte/">poison_null_byte</a>
+            
+              <a href="/tags/off-by-null/">off_by_null</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/14/%E5%BC%BA%E7%BD%91%E6%9D%AF-unicorn-like-a-pro/" target="_self">
           强网杯: unicorn_like_a_pro
         </a>
@@ -618,185 +802,6 @@ fastbin attack 修改 _malloc_hook
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/AVL/">AVL</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
-          ISCC-mobile AES
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
-          
-          
-            
-          
-          ISCC2021 mobile题目下载:  iscc-aes.apk
-这是一道 apk 逆向，核心函数位于 SO 库中并且在 JNI_OnLoad 中动态绑定函数。
-
-反调试
- JNI_OnLoad 中有 ptrace 反调试，patch 掉即可
-
-签名验证
- 这道题的密钥由 apk 签名数据决定，因此要获取原始密钥，必须保证 apk 没有更改。但是为了反反调试，必须 patch so 文件。
- 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-25 00:31" pubdate>
-              2021-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Android/">Android</a>
-            
-              <a href="/tags/AES/">AES</a>
-            
-              <a href="/tags/AntiDebug/">AntiDebug</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-100mazes/" target="_self">
-          美团CTF: 100mazes
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-100mazes/" target="_self">
-          
-          
-            
-          
-          美团CTF: 100mazes题目下载:  mazes100简单地图题，有100张地图，难点是提取地图数据，我采用 Capstone 引擎反汇编解析每一张地图大小为 25 x 25 地图，地图是加密的，realMap = map1 ^ map2除了提取 map1 和 map2 之外，还需要方向字符串，起点坐标
-map1 &amp; 方向字符串每一个地图函数开头先赋值 map1 , 逐个字节赋值
-1
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-23 22:27" pubdate>
-              2021-05-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Capstone/">Capstone</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-matrix/" target="_self">
-          美团CTF: matrix
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-matrix/" target="_self">
-          
-          
-            
-          
-          美团 CTF 2021 matrix题目下载: matrix.exe
-整体上来说就是 AES 一轮运算部分函数的魔改
-输入数据转换成 4 x 4 矩阵，记做 Input
-main 函数有 3 处异常异常依次发生:
-
-EXCEPTION_BREAKPOINT
-EXCEPTION_ILLEGAL_INSTRUCTION
-EXCEPTION_ACCESS_VIOLATION
-
-每次异常处理都会对输入的数
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-23 21:52" pubdate>
-              2021-05-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/AES/">AES</a>
             
           </div>
         
