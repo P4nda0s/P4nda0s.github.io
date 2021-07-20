@@ -207,6 +207,63 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/07/20/Lambda-Calculus/" target="_self">
+          Lambda Calculus
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/20/Lambda-Calculus/" target="_self">
+          
+          
+            
+          
+          Lambda Calculus最近比赛经常遇到 lambda 出的题，于是记录一下 lambda 学习记录。
+Lambda abstraction定义函数的意思
+12(λ &lt;variable&gt;.&lt;expr&gt;)λx.x中λ为固定标记，标示着这是一个函数(function)，紧随其后的x为这个函数的形式参数(formal parameters)，.之后的x为这个函数的函数体。
+
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-20 11:39" pubdate>
+              2021-07-20
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+              <a href="/categories/CTF/math/">math</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/math/">math</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/07/19/Google-CTF-2021/" target="_self">
           Google CTF 2021
         </a>
@@ -743,71 +800,6 @@ free(p) 中的 p 可控
               <a href="/tags/house-of-spirit/">house_of_spirit</a>
             
               <a href="/tags/shellcode/">shellcode</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/10/0cft2017-babyheap/" target="_self">
-          0cft2017 babyheap
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/10/0cft2017-babyheap/" target="_self">
-          
-          
-            
-          
-          0ctf2017 babyheap复现了一道非常经典简单的堆题
-分两步: 
-
-泄漏 libc 地址
-fastbin attack 修改 _malloc_hook
-
-有一个堆溢出洞，写内存时没有做长度限制。观察一下，虽然开启了地址随机化，但是 Chunk 地址的最后一字节总是固定的，这意味着修改低位字节能在不泄漏地址的情况下指向其它 chunk。
-可以构造两个 fastbin 中的 chunk1 和
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-10 19:19" pubdate>
-              2021-06-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PWN/">PWN</a>
-            
-              <a href="/tags/heap/">heap</a>
-            
-              <a href="/tags/fastbin/">fastbin</a>
-            
-              <a href="/tags/one-gadget/">one_gadget</a>
-            
-              <a href="/tags/overlap/">overlap</a>
             
           </div>
         
