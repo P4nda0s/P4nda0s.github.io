@@ -207,6 +207,59 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/16/InCTF2021/" target="_self">
+          InCTF2021
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/16/InCTF2021/" target="_self">
+          
+          
+            
+          
+          InCTF 2021find_plut0 find_plut0.txt
+12345678910111213141516171819202122232425262728import angrimport claripyfrom z3 import *flag = claripy.BVS(&quot;flag&quot;, 8 * 30)p = angr.Project(&quot;binaries/
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-16 00:30" pubdate>
+              2021-08-16
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/MISC/">MISC</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/07/20/Lambda-Calculus/" target="_self">
           Lambda Calculus
         </a>
@@ -731,75 +784,6 @@ p 指向的 chunk 的前一个 chunk 可溢出到下一个 chunk 的 si
               <a href="/tags/heap/">heap</a>
             
               <a href="/tags/unlink/">unlink</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/10/house-of-spirit/" target="_self">
-          house of spirit
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/10/house-of-spirit/" target="_self">
-          
-          
-            
-          
-          house of spirit这种利用方式主要是在栈上构造 fake chunk，从而更好的控制栈，修改返回地址。
-利用条件： 
-
-free(p) 中的 p 可控
-可以泄漏栈地址
-不可控区域前后都有区域可控（如图）
-
-
-
-利用思路：
-在栈中构造 fake chunk，大小覆盖掉函数的返回地址，再次分配得到返回地址控制，写入 one_gadget 或者 shellcode 地址。
-注意如果构造 fa
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-10 22:04" pubdate>
-              2021-06-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PWN/">PWN</a>
-            
-              <a href="/tags/heap/">heap</a>
-            
-              <a href="/tags/fastbin/">fastbin</a>
-            
-              <a href="/tags/house-of-spirit/">house_of_spirit</a>
-            
-              <a href="/tags/shellcode/">shellcode</a>
             
           </div>
         

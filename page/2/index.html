@@ -207,6 +207,75 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/10/house-of-spirit/" target="_self">
+          house of spirit
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/10/house-of-spirit/" target="_self">
+          
+          
+            
+          
+          house of spirit这种利用方式主要是在栈上构造 fake chunk，从而更好的控制栈，修改返回地址。
+利用条件： 
+
+free(p) 中的 p 可控
+可以泄漏栈地址
+不可控区域前后都有区域可控（如图）
+
+
+
+利用思路：
+在栈中构造 fake chunk，大小覆盖掉函数的返回地址，再次分配得到返回地址控制，写入 one_gadget 或者 shellcode 地址。
+注意如果构造 fa
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-10 22:04" pubdate>
+              2021-06-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/fastbin/">fastbin</a>
+            
+              <a href="/tags/house-of-spirit/">house_of_spirit</a>
+            
+              <a href="/tags/shellcode/">shellcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/10/0cft2017-babyheap/" target="_self">
           0cft2017 babyheap
         </a>
@@ -714,57 +783,6 @@ golang 写的程序，要优化一个内置算法
               <a href="/tags/Reverse/">Reverse</a>
             
               <a href="/tags/Wasm/">Wasm</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/13/%E7%9C%8B%E9%9B%AACTF2021/" target="_self">
-          看雪CTF2021
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/13/%E7%9C%8B%E9%9B%AACTF2021/" target="_self">
-          
-          
-            
-          
-          看雪CTF2021第二题 南冥神功简单迷宫题
-map1 = [0x0, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x01, 0x01, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x01, 0x00, 0x00, 0x00, 0x00, 0x01, 0x00, 0x01, 0x01, 0x01, 0x01, 0x
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-13 22:09" pubdate>
-              2021-05-13
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
             
           </div>
         
