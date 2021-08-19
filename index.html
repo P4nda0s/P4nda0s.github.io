@@ -207,6 +207,63 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/19/Microcode-%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0/" target="_self">
+          Microcode 插件学习
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/19/Microcode-%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0/" target="_self">
+          
+          
+            
+          
+          Microcode 插件学习笔记plugins\hexrays_sdk\plugins 目录下有很多 demo 值得学习
+20 个 demo 程序，断断续续分析了大概一个月的样子，最后还是发出来吧，毕竟这方面的资料太少了。
+一些基本的概念Microcode 是 IDA 内部的一种介于机器语言与伪代码的之间的中间语言，用于抽象机器代码，便于后面的优化。
+Microcode 展示插件: https:/
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-19 23:40" pubdate>
+              2021-08-19
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/Microcode/">Microcode</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+              <a href="/tags/IDA/">IDA</a>
+            
+              <a href="/tags/Microcode/">Microcode</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/16/InCTF2021/" target="_self">
           InCTF2021
         </a>
@@ -732,70 +789,11 @@ malloc_consolidate 函数将 fastbin 中的 chunk 与相邻 free chunk 合并，
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/11/unlink/" target="_self">
-          unlink
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/11/unlink/" target="_self">
-          
-          
-            
-          
-          Unlink 攻击Unlink 也是一种很常见的堆溢出利用手段
-我认为 unlink 攻击的本质是利用 free 中 unlink 操作修改指向堆块的指针变量 p，使其指向 p-3 处，修改 p[3] 即可修改 p 自身，从而达到任意地址读写的能力。
-利用条件：
-
-指针变量 p 指向堆分配的地址，且对该地址可读可写
-p 指向的 chunk 的前一个 chunk 可溢出到下一个 chunk 的 si
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-11 01:34" pubdate>
-              2021-06-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PWN/">PWN</a>
-            
-              <a href="/tags/heap/">heap</a>
-            
-              <a href="/tags/unlink/">unlink</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/5/#board">5</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
