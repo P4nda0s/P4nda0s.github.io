@@ -207,6 +207,61 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/08/24/LightningSystem/" target="_self">
+          LightningSystem
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/08/24/LightningSystem/" target="_self">
+          
+          
+            
+          
+          LightningSystem祥云杯
+这道题比赛的时候没整出来，原因是写 vm 的反汇编器的时候写错了一条指令，没有及时发现，导致最后一步没有解出flag，非常遗憾。。又让我想起了国赛 little_evil 也是同样的情况。。
+总的来说是一道非常有意思的题目，题目给出了 stm32 固件代码以及电路图。
+
+
+w25q16 是 flash 芯片，可以存储数据，类似于硬盘，可以在 github 找到
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-08-24 00:14" pubdate>
+              2021-08-24
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Reverse/">Reverse</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/08/19/Microcode-%E6%8F%92%E4%BB%B6%E5%AD%A6%E4%B9%A0/" target="_self">
           Microcode 插件学习
         </a>
@@ -722,66 +777,6 @@ GitHub链接: https://github.com/unicorn-engine/unicorn
               <a href="/tags/Keystone/">Keystone</a>
             
               <a href="/tags/Recompile/">Recompile</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
-          Unlink 与 fastbin dup consolidate 利用
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
-          
-          
-            
-          
-          Unlink 与 fastbin dup consolidate 利用malloc 在分配 large chunk 的时候，会调用 malloc_consolidate 函数。
-malloc_consolidate 函数将 fastbin 中的 chunk 与相邻 free chunk 合并，合并后放入 unsorted bin。
-若 chunk 的 next chunk 不是 free chun
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-11 14:01" pubdate>
-              2021-06-11
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PWN/">PWN</a>
-            
-              <a href="/tags/heap/">heap</a>
-            
-              <a href="/tags/fastbin/">fastbin</a>
-            
-              <a href="/tags/unlink/">unlink</a>
-            
-              <a href="/tags/fastbin-dup-consolidate/">fastbin_dup_consolidate</a>
             
           </div>
         

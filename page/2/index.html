@@ -207,6 +207,66 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
+          Unlink 与 fastbin dup consolidate 利用
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/11/Unlink-%E4%B8%8E-fastbin-dup-consolidate-%E5%88%A9%E7%94%A8/" target="_self">
+          
+          
+            
+          
+          Unlink 与 fastbin dup consolidate 利用malloc 在分配 large chunk 的时候，会调用 malloc_consolidate 函数。
+malloc_consolidate 函数将 fastbin 中的 chunk 与相邻 free chunk 合并，合并后放入 unsorted bin。
+若 chunk 的 next chunk 不是 free chun
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-11 14:01" pubdate>
+              2021-06-11
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/fastbin/">fastbin</a>
+            
+              <a href="/tags/unlink/">unlink</a>
+            
+              <a href="/tags/fastbin-dup-consolidate/">fastbin_dup_consolidate</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/11/unlink/" target="_self">
           unlink
         </a>
@@ -732,63 +792,6 @@ golang 写的程序，要优化一个内置算法
               <a href="/tags/Reverse/">Reverse</a>
             
               <a href="/tags/golang/">golang</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/16/CISCN-Little-evil/" target="_self">
-          CISCN Little_evil
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/16/CISCN-Little-evil/" target="_self">
-          
-          
-            
-          
-          CISCN little_evil比赛的时候差一点点出，非常可惜
-第一次做 ruby 的逆向题，学到很多东西。这道题总体来说，要进行两种不同策略的反混淆，最后还有一层是类似于 brainfuck 的 vm，需要写 decompiler
-题目: littile_evil
-提取 out.rb题目的 elf 文件是典型的 ruby 解释器。问题是源码在哪里？ 最开始，我以为是内存加载，分析源码过程中发现
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-16 14:41" pubdate>
-              2021-05-16
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Ruby/">Ruby</a>
-            
-              <a href="/tags/obfuscator/">obfuscator</a>
             
           </div>
         
