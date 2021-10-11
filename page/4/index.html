@@ -207,6 +207,63 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/04/06/LLVM-Liveness-Analysis/" target="_self">
+          LLVM Liveness Analysis
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/04/06/LLVM-Liveness-Analysis/" target="_self">
+          
+          
+            
+          
+          基于 llvm 实现活跃变量分析活跃变量分析活跃变量分析是最典型的数据流分析的算法之一，它的作用是确定变量在程序中的活跃性。
+变量在某个程序点有两种状态，live 或 dead。对于变量 x 和程序点 p，判断 x 在点 p 上的值是否会在 CFG 中的某条从点 p 出发的路径中使用。如果是，就说 x 在 p 上 live；否则就说x在p上是 dead。
+活跃变量分析主要作用
+
+寄存器分配
+死代码
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-04-06 15:38" pubdate>
+              2021-04-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/compiler/">compiler</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/llvm/">llvm</a>
+            
+              <a href="/tags/DataFlow/">DataFlow</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/04/05/gslab2021-PC-Security/" target="_self">
           gslab2021: PC Security
         </a>
@@ -677,62 +734,6 @@ RDP Ini 文件样本 for win10(10.0.19041.789)
             <i class="iconfont icon-category"></i>
             
               <a href="/categories/ml/">ml</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/note/">note</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/02/20/Register-Allocation/" target="_self">
-          Register Allocation
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/02/20/Register-Allocation/" target="_self">
-          
-          
-            
-          
-          Register Allocation寄存器分配问题，为变量分配寄存器。变量的数量可以是无限的，CPU 内部寄存器的数量是有限的，这就牵扯到一个问题，如何为变量分配寄存器。
-目前我学习了两种方法，分别是：
-
-图染色寄存器分配算法
-线性扫描寄存器分配算法
-
-Liveness Analysis无论是图染色算法还是线性扫描算法，都涉及到活跃变量分析。变量在某个程序点有两种状态，live 或 dead。对
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-02-20 15:51" pubdate>
-              2021-02-20
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/compiler/">compiler</a>
             
           </div>
         
