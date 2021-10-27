@@ -207,6 +207,68 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/23/poison-null-byte/" target="_self">
+          poison null byte
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/23/poison-null-byte/" target="_self">
+          
+          
+            
+          
+          poison null byteoff by null 改小已经释放的 chunk 的 size 域，而该 chunk 的物理下一个 chunk 的 prev_size 域没有被修改。
+当前 chunk 的 size 域被改小，意味着定位下一个 chunk 会出问题，无法正确修改原来物理相邻 chunk 的 prev_size 域，释放原来物理相邻 chunk ，利用合并机制产生堆叠。
+
+
+如图 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-23 09:56" pubdate>
+              2021-06-23
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/overlap/">overlap</a>
+            
+              <a href="/tags/poison-null-byte/">poison_null_byte</a>
+            
+              <a href="/tags/off-by-null/">off_by_null</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/14/%E5%BC%BA%E7%BD%91%E6%9D%AF-unicorn-like-a-pro/" target="_self">
           强网杯: unicorn_like_a_pro
         </a>
@@ -736,67 +798,6 @@ map1 &amp; 方向字符串每一个地图函数开头先赋值 map1 , 逐个字�
               <a href="/tags/Reverse/">Reverse</a>
             
               <a href="/tags/Capstone/">Capstone</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-matrix/" target="_self">
-          美团CTF: matrix
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/23/%E7%BE%8E%E5%9B%A2CTF-matrix/" target="_self">
-          
-          
-            
-          
-          美团 CTF 2021 matrix题目下载: matrix.exe
-整体上来说就是 AES 一轮运算部分函数的魔改
-输入数据转换成 4 x 4 矩阵，记做 Input
-main 函数有 3 处异常异常依次发生:
-
-EXCEPTION_BREAKPOINT
-EXCEPTION_ILLEGAL_INSTRUCTION
-EXCEPTION_ACCESS_VIOLATION
-
-每次异常处理都会对输入的数
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-23 21:52" pubdate>
-              2021-05-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/AES/">AES</a>
             
           </div>
         

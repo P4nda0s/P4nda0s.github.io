@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://panda0s.top/2021/10/28/codeql-lab/</loc>
+    
+    <lastmod>2021-10-27</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://panda0s.top/2021/10/11/PBCTF2021-Binary-Tree/</loc>
     
     <lastmod>2021-10-11</lastmod>
@@ -389,7 +396,7 @@
 
   <url>
     <loc>https://panda0s.top/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
   </url>
@@ -397,357 +404,364 @@
   
   <url>
     <loc>https://panda0s.top/tags/Reverse/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Ruby/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/obfuscator/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/golang/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/notes/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/homework/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/note/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Python/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/llvm/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/android/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/reverse/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/frida/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/tool/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/DataFlow/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/ml/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/NN/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Windows/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/x86/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/wp/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Wasm/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Capstone/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Android/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/AES/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/AntiDebug/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/AVL/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Huffman/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/STL/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/PWN/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/heap/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/fastbin/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/one-gadget/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/overlap/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/house-of-spirit/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/shellcode/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/unlink/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/fastbin-dup-consolidate/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Unicorn/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Keystone/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Recompile/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/poison-null-byte/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/off-by-null/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/off-by-one/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/einherjar/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/AutoRE/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Sandbox/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/VM/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/angr/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/math/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/MISC/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/IDA/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/tags/Microcode/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://panda0s.top/tags/codeql/</loc>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
@@ -756,84 +770,91 @@
   
   <url>
     <loc>https://panda0s.top/categories/CTF/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/ml/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/compiler/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/PL-Reverse/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/showcase/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/RedTeam/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/Asm/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/develop/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/obfuscator/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/DataStruct/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/CTF/math/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
   
   <url>
     <loc>https://panda0s.top/categories/Microcode/</loc>
-    <lastmod>2021-10-11</lastmod>
+    <lastmod>2021-10-27</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.6</priority>
+  </url>
+  
+  <url>
+    <loc>https://panda0s.top/categories/codeql/</loc>
+    <lastmod>2021-10-27</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.6</priority>
   </url>
