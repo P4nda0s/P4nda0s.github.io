@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://panda0s.top/2021/10/28/Writeup-for-GitHub-Security-Lab-CTF-1-SEGV-hunt/</loc>
+    <lastmod>2021-10-28</lastmod>
+  </url>
+  <url>
     <loc>https://panda0s.top/2021/10/28/codeql-lab/</loc>
     <lastmod>2021-10-27</lastmod>
   </url>
