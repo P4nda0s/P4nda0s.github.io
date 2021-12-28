@@ -207,6 +207,63 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/12/28/SCTF2021-ret2text-%E5%87%BA%E9%A2%98%E6%80%9D%E8%B7%AF/" target="_self">
+          SCTF2021: ret2text 出题思路
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/12/28/SCTF2021-ret2text-%E5%87%BA%E9%A2%98%E6%80%9D%E8%B7%AF/" target="_self">
+          
+          
+            
+          
+          SCTF2021: ret2text 出题思路前几个月打过一次 RHG 比赛（自动化 pwn AEG），当时被 Angr 折腾得快不行了，现在回想起来又觉得很有意思，于是就模仿出了一道 AEG 题目。
+第一次出这种题，糟点很多，比如随机规则太明显，很多师傅选择直接用一些启发式算法解析程序。
+这道题有两个点需要自动化：
+
+找到漏洞溢出点
+求解能使程序到达溢出点的输入
+
+找到漏洞溢出点：对输入符号化 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-12-28 14:59" pubdate>
+              2021-12-28
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/MyChallenge/">MyChallenge</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/10/28/Writeup-for-GitHub-Security-Lab-CTF-1-SEGV-hunt/" target="_self">
           Writeup for GitHub Security Lab CTF 1: SEGV hunt
         </a>
@@ -689,70 +746,6 @@ ROM 定义123...#define ROM_01000010_4 1...
               <a href="/tags/Unicorn/">Unicorn</a>
             
               <a href="/tags/AutoRE/">AutoRE</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/06/27/house-of-einherjar/" target="_self">
-          house of einherjar
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/06/27/house-of-einherjar/" target="_self">
-          
-          
-            
-          
-          house of einherjar这个利用手段可以将 top chunk 移动到任意内存，然后通过分配的内存取得对任意内存读写的权限。
-利用条件：
-
-可以修改 top chunk 相邻 chunk 的 size 域低字节（通常是 off by one ）
-需要泄漏堆地址、目标 fake_chunk 地址用于计算 prev_size
-
-利用方法： 修改物理相邻 top chunk 的 chunk 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-27 13:27" pubdate>
-              2021-06-27
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/PWN/">PWN</a>
-            
-              <a href="/tags/heap/">heap</a>
-            
-              <a href="/tags/one-gadget/">one_gadget</a>
-            
-              <a href="/tags/off-by-one/">off_by_one</a>
-            
-              <a href="/tags/einherjar/">einherjar</a>
             
           </div>
         

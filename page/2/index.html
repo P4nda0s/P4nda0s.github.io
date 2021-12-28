@@ -207,6 +207,70 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
+        <a href="/2021/06/27/house-of-einherjar/" target="_self">
+          house of einherjar
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/06/27/house-of-einherjar/" target="_self">
+          
+          
+            
+          
+          house of einherjar这个利用手段可以将 top chunk 移动到任意内存，然后通过分配的内存取得对任意内存读写的权限。
+利用条件：
+
+可以修改 top chunk 相邻 chunk 的 size 域低字节（通常是 off by one ）
+需要泄漏堆地址、目标 fake_chunk 地址用于计算 prev_size
+
+利用方法： 修改物理相邻 top chunk 的 chunk 
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-06-27 13:27" pubdate>
+              2021-06-27
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/CTF/">CTF</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/PWN/">PWN</a>
+            
+              <a href="/tags/heap/">heap</a>
+            
+              <a href="/tags/one-gadget/">one_gadget</a>
+            
+              <a href="/tags/off-by-one/">off_by_one</a>
+            
+              <a href="/tags/einherjar/">einherjar</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
         <a href="/2021/06/26/gkctf-KillerAid/" target="_self">
           gkctf KillerAid
         </a>
@@ -738,70 +802,6 @@ fastbin attack 修改 _malloc_hook
             <i class="iconfont icon-tags"></i>
             
               <a href="/tags/AVL/">AVL</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
-          ISCC-mobile AES
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/05/25/ISCC-mobile-AES/" target="_self">
-          
-          
-            
-          
-          ISCC2021 mobile题目下载:  iscc-aes.apk
-这是一道 apk 逆向，核心函数位于 SO 库中并且在 JNI_OnLoad 中动态绑定函数。
-
-反调试
- JNI_OnLoad 中有 ptrace 反调试，patch 掉即可
-
-签名验证
- 这道题的密钥由 apk 签名数据决定，因此要获取原始密钥，必须保证 apk 没有更改。但是为了反反调试，必须 patch so 文件。
- 
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-05-25 00:31" pubdate>
-              2021-05-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CTF/">CTF</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/Reverse/">Reverse</a>
-            
-              <a href="/tags/Android/">Android</a>
-            
-              <a href="/tags/AES/">AES</a>
-            
-              <a href="/tags/AntiDebug/">AntiDebug</a>
             
           </div>
         
